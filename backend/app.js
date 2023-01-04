@@ -27,6 +27,18 @@ app.use(
   })
 );
 
+/* FILE STORAGE */
+const storage = multer.diskStorage({ 
+  destination: (req, file, cb) => { 
+    cb(null, 'public/assets'); 
+  }, 
+  filname: (req, file, cb) => { 
+    cb(null, file.originalname); 
+  }
+}); 
+
+const upload = multer({ storage }); 
+
 /* ERROR HANDLING */
 // catch unhandled requests and forward to error handler
 app.use((_req, _res, next) => { 
