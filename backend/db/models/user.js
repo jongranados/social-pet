@@ -12,7 +12,60 @@ module.exports = (sequelize, DataTypes) => {
     impressions: DataTypes.INTEGER
   }, {});
   User.associate = function(models) {
-    // associations can be defined here
+    // association with Post model: 
+    User.hasMany(
+      models.Post,
+      { 
+        foreignKey: { name: 'userId', allowNull: false }, 
+        onDelete: 'CASCADE',
+        hooks: true
+      }
+    ); 
+
+    // association with Comment model
+    User.hasMany(
+      models.Comment,
+      { 
+        foreignKey: { name: 'userId', allowNull: false }, 
+        onDelete: 'CASCADE',
+        hooks: true
+      }
+    ); 
+
+    // association with Like model
+    User.hasMany(
+      models.Like,
+      { 
+        foreignKey: { name: 'userId', allowNull: false }, 
+        onDelete: 'CASCADE',
+        hooks: true
+      }
+    ); 
+
+    // association with self (for user-to-user relationship modeling):
+    User.belongsToMany(
+      models.User, 
+      { 
+        through: models.Follow,
+        as: 'followers', // sequelize alias required b/c of defacto ambiguity by this kinds of association - see: https://sequelize.org/docs/v6/core-concepts/assocs/#defining-an-alias
+        foreignKey: { name: 'followerId', allowNull: false }, 
+        otherKey: { name: 'followeeId', allowNull: false },
+        onDelete: 'CASCADE',
+        hooks: true
+      }
+    ) 
+
+    User.belongsToMany(
+      models.User, 
+      { 
+        through: models.Follow,
+        as: 'followees', // sequelize alias required b/c of defacto ambiguity by this kinds of association - see: https://sequelize.org/docs/v6/core-concepts/assocs/#defining-an-alias
+        foreignKey: { name: 'followeeId', allowNull: false }, 
+        otherKey: { name: 'followerId', allowNull: false },
+        onDelete: 'CASCADE',
+        hooks: true
+      }
+    ) 
   };
   return User;
 };
