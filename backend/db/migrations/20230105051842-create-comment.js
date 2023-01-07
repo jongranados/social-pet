@@ -9,7 +9,8 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       postId: {
-        type: Sequelize.INTEGER, 
+        type: Sequelize.INTEGER,
+        allowNull: false,  
         references: { 
           model: 'Posts', 
           key: 'id'
@@ -18,6 +19,7 @@ module.exports = {
       },
       userId: {
         type: Sequelize.INTEGER, 
+        allowNull: false,  
         references: { 
           model: 'Users', 
           key: 'id'
@@ -25,7 +27,8 @@ module.exports = {
         onDelete: 'cascade'
       },
       description: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING, 
+        allowNull: false,          
       },
       createdAt: {
         allowNull: false,

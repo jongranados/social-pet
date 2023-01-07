@@ -1,9 +1,22 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Post = sequelize.define('Post', {
-    userId: DataTypes.INTEGER,
-    picturePath: DataTypes.STRING,
-    likes: DataTypes.INTEGER
+    userId: { 
+      type: DataTypes.INTEGER, 
+      allowNull: false,  
+    },
+    description: { 
+      type: DataTypes.STRING, 
+      allowNull: false,  
+    }, 
+    picturePath: { 
+      type: DataTypes.STRING, 
+      allowNull: false,  
+    },
+    likes: { 
+      type: DataTypes.INTEGER, 
+      allowNull: false,  
+    }
   }, {});
   Post.associate = function(models) {
     // association with User model: 

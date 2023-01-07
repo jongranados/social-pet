@@ -1,8 +1,14 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Comment = sequelize.define('Comment', {
-    postId: DataTypes.INTEGER,
-    description: DataTypes.STRING
+    postId: { 
+      type: DataTypes.INTEGER, 
+      allowNull: false,  
+    },
+    description: { 
+      type: DataTypes.STRING, 
+      allowNull: false,  
+    },
   }, {});
   Comment.associate = function(models) {
     // association with User model: 

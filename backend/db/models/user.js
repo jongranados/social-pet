@@ -1,15 +1,69 @@
 'use strict';
+const { Validator } = require('sequelize'); 
+
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
-    firstName: DataTypes.STRING,
-    lastName: DataTypes.STRING,
-    email: DataTypes.STRING,
-    hashedPassword: DataTypes.STRING,
-    picturePath: DataTypes.STRING,
-    location: DataTypes.STRING,
-    occupation: DataTypes.STRING,
-    viewedProfile: DataTypes.INTEGER,
-    impressions: DataTypes.INTEGER
+    firstName: { 
+      type: DataTypes.STRING, 
+      allowNull: false,  
+      validate: { 
+        isAlpha(value) { 
+          if (!Validator.isAlpha(value)) { 
+            throw new Error('Must be a valid name.')
+          }
+        }
+      },
+    },
+    lastName: { 
+      type: DataTypes.STRING, 
+      allowNull: false, 
+      validate: { 
+        isAlpha(value) { 
+          if (!Validator.isAlpha(value)) { 
+            throw new Error('Must be a valid last name.')
+          }
+        }
+      },
+    },
+    email: { 
+      type: DataTypes.STRING, 
+      allowNull: false, 
+      validate: { 
+        len: [3, 256], 
+        isEmail(value) { 
+          if (!Validator.isEmail(value)) { 
+            throw new Error('Must be a valid email.')
+          }
+        }
+      },
+    },
+    hashedPassword: {
+      type: DataTypes.STRING.BINARY,
+      allowNull: false,
+      validate: {
+        len: [60, 60]
+      },
+    },
+    picturePath: { 
+      type: DataTypes.STRING, 
+      allowNull: false,
+    },
+    location: { 
+      type: DataTypes.STRING, 
+      allowNull: false,  
+    },
+    occupation: { 
+      type: DataTypes.STRING, 
+      allowNull: false,  
+    },
+    viewedProfile: { 
+      type: DataTypes.INTEGER, 
+      allowNull: false,  
+    },
+    impressions: { 
+      type: DataTypes.INTEGER, 
+      allowNull: false,  
+    }
   }, {});
   User.associate = function(models) {
     // association with Post model: 
