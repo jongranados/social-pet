@@ -1,5 +1,6 @@
 'use strict';
 const { Validator } = require('sequelize'); 
+const bcrypt = require('bcrypt'); 
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
@@ -68,7 +69,7 @@ module.exports = (sequelize, DataTypes) => {
   {
     defaultScope: { 
       attributes: { 
-        exclude: ['hashedPassword', 'email', 'createdAd', 'updatedAt']
+        exclude: ['hashedPassword', 'email', 'picturePath', 'location', 'occupation', 'viewedProfile', 'impressions', 'createdAt', 'updatedAt']
       }
     }, 
     scopes: { 
@@ -139,5 +140,53 @@ module.exports = (sequelize, DataTypes) => {
       }
     ) 
   };
+
+  // model methods - implemented to limit and segment the logic that explicitly interacts with the Users table
+  User.prototype.toSafeObject = function() { 
+    const { id, username, email } = this; 
+    return { 
+      id, 
+      username, 
+      email,
+    }
+  };
+
+  User.prototype.validatePassword = function(password) { 
+    return bcrypt.compareSync(password, this.hashedPassword.toString()); 
+  };
+
+  User.getCurrentUserById = function(id) { 
+    return User.scope('currentUser').findByPk(id); 
+  };
+
+  User.login = async function({ email, password }) { 
+    // note: this is the only time we request information from the db using the widest scope - 'loginUser'
+    const user = await User.scope('loginUser').findOne({ 
+      where: { email: email }
+    }); 
+
+    if (user && user.validatePassword(password)) {
+      // note: data sent back is scoped much more tightly
+      return await User.scope('currentUser').findByPk(user.id);
+    }; 
+  };
+
+  User.signup = async function({ firstName, lastName, email, password, picturePath, location, occupation, viewedProfile, impressions }) { 
+    const hashedPassword = bcrypt.hashSync(password); 
+    const user = await User.create({ 
+      firstName, 
+      lastName, 
+      email, 
+      hashedPassword, 
+      picturePath, 
+      location, 
+      occupation, 
+      viewedProfile, 
+      impressions
+    });
+    
+    return await User.scope('currentUser').findByPk(user.id); 
+  }; 
+
   return User;
 };
