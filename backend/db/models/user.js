@@ -64,7 +64,25 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER, 
       allowNull: false,  
     }
-  }, {});
+  }, 
+  {
+    defaultScope: { 
+      attributes: { 
+        exclude: ['hashedPassword', 'email', 'createdAd', 'updatedAt']
+      }
+    }, 
+    scopes: { 
+      currentUser: { 
+        attributes: { 
+          exclude: ['hashedPassword'] 
+        }
+      }, 
+      loginUser: {
+        attributes: {}
+      }
+    }
+  });
+
   User.associate = function(models) {
     // association with Post model: 
     User.hasMany(
