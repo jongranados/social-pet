@@ -42,22 +42,38 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING.BINARY,
       allowNull: false,
       validate: {
-        len: [60, 60]
+        len: [8, 100]
       },
     },
     picturePath: { 
       type: DataTypes.STRING, 
       allowNull: false,
     },
+    gotchaDate: {
+      type: DataTypes.DATE,
+      allowNull: false
+    },
+    breed: {
+      type: DataTypes.STRING, 
+      allowNull: false
+    }, 
     location: { 
       type: DataTypes.STRING, 
       allowNull: false,  
     },
     occupation: { 
-      type: DataTypes.STRING, 
+      type: DataTypes.STRING,  
       allowNull: false,  
     },
-    viewedProfile: { 
+    indulgence: { 
+      type: DataTypes.STRING, 
+      allowNull: false
+    },
+    relationshipStatus: { 
+      type: DataTypes.STRING, 
+      allowNull: false
+    },
+    profileViews: { 
       type: DataTypes.INTEGER, 
       allowNull: false,  
     },
@@ -69,7 +85,7 @@ module.exports = (sequelize, DataTypes) => {
   {
     defaultScope: { 
       attributes: { 
-        exclude: ['hashedPassword', 'email', 'picturePath', 'location', 'occupation', 'viewedProfile', 'impressions', 'createdAt', 'updatedAt']
+        exclude: ['hashedPassword', 'email', 'picturePath', 'gotchaDate', 'breed', 'location', 'occupation', 'indulgence', 'relationshipStatus', 'profileViews', 'impressions', 'createdAt', 'updatedAt']
       }
     }, 
     scopes: { 

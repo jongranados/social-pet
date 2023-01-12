@@ -29,6 +29,14 @@ module.exports = {
         type: Sequelize.STRING, 
         allowNull: false
       },
+      gotchaDate: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
+      breed: {
+        type: Sequelize.STRING, 
+        allowNull: false
+      }, 
       location: {
         type: Sequelize.STRING, 
         allowNull: false
@@ -37,7 +45,15 @@ module.exports = {
         type: Sequelize.STRING, 
         allowNull: false
       },
-      viewedProfile: {
+      indulgence: { 
+        type: Sequelize.STRING, 
+        allowNull: false
+      },
+      relationshipStatus: { 
+        type: Sequelize.STRING, 
+        allowNull: false
+      },
+      profileViews: {
         type: Sequelize.INTEGER,
         defaultValue: 0
       },
