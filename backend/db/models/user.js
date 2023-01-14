@@ -26,6 +26,18 @@ module.exports = (sequelize, DataTypes) => {
         }
       },
     },
+    username: { 
+      type: DataTypes.STRING, 
+      allowNull: false, 
+      validate: {
+        len: [3, 20], 
+        isNotEmail(value) { 
+          if (Validator.isEmail(value)) { 
+            throw new Error('Cannot be an email.'); 
+          }
+        }
+      },
+    }, 
     email: { 
       type: DataTypes.STRING, 
       allowNull: false, 
@@ -61,17 +73,12 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING, 
       allowNull: false,  
     },
-    occupation: { 
-      type: DataTypes.STRING,  
+    bio: { 
+      type: DataTypes.STRING, 
       allowNull: false,  
-    },
-    indulgence: { 
-      type: DataTypes.STRING, 
-      allowNull: false
-    },
-    relationshipStatus: { 
-      type: DataTypes.STRING, 
-      allowNull: false
+      validate: {
+        len: [20, 256]
+      },
     },
     profileViews: { 
       type: DataTypes.INTEGER, 
@@ -85,7 +92,7 @@ module.exports = (sequelize, DataTypes) => {
   {
     defaultScope: { 
       attributes: { 
-        exclude: ['hashedPassword', 'email', 'picturePath', 'gotchaDate', 'breed', 'location', 'occupation', 'indulgence', 'relationshipStatus', 'profileViews', 'impressions', 'createdAt', 'updatedAt']
+        exclude: ['hashedPassword', 'email', 'username', 'picturePath', 'gotchaDate', 'breed', 'location', 'bio', 'profileViews', 'impressions', 'createdAt', 'updatedAt']
       }
     }, 
     scopes: { 
@@ -175,29 +182,38 @@ module.exports = (sequelize, DataTypes) => {
     return User.scope('currentUser').findByPk(id); 
   };
 
-  User.login = async function({ email, password }) { 
+  User.login = async function({ credential, password }) { 
     // note: this is the only time we request information from the db using the widest scope - 'loginUser'
+    const { Op } = require('sequelize'); 
     const user = await User.scope('loginUser').findOne({ 
-      where: { email: email }
+      where: { 
+        [Op.or]: { 
+          username: credential, 
+          email: credential
+        }  
+      }
     }); 
 
     if (user && user.validatePassword(password)) {
-      // note: data sent back is scoped much more tightly
+      // note: data actually sent back is scoped much more tightly
       return await User.scope('currentUser').findByPk(user.id);
     }; 
   };
 
-  User.signup = async function({ firstName, lastName, email, password, picturePath, location, occupation, viewedProfile, impressions }) { 
+  User.signup = async function({ firstName, lastName, username, email, password, picturePath, gotchaDate, breed, location, bio, profileViews, impressions }) { 
     const hashedPassword = bcrypt.hashSync(password); 
     const user = await User.create({ 
       firstName, 
       lastName, 
+      username, 
       email, 
       hashedPassword, 
       picturePath, 
+      gotchaDate, 
+      breed, 
       location, 
-      occupation, 
-      viewedProfile, 
+      bio,  
+      profileViews, 
       impressions
     });
     

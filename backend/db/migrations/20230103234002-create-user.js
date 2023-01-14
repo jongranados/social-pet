@@ -16,6 +16,10 @@ module.exports = {
         type: Sequelize.STRING, 
         allowNull: false
       },
+      username: { 
+        type: Sequelize.STRING, 
+        allowNull: false
+      }, 
       email: {
         type: Sequelize.STRING, 
         allowNull: false, 
@@ -41,15 +45,7 @@ module.exports = {
         type: Sequelize.STRING, 
         allowNull: false
       },
-      occupation: {
-        type: Sequelize.STRING, 
-        allowNull: false
-      },
-      indulgence: { 
-        type: Sequelize.STRING, 
-        allowNull: false
-      },
-      relationshipStatus: { 
+      bio: {
         type: Sequelize.STRING, 
         allowNull: false
       },
