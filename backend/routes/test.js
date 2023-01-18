@@ -16,7 +16,7 @@ const asyncHandler = require('express-async-handler');
 const { setTokenCookie, restoreSessionUser, requireAuthentication } = require('../middleware/auth.js'); 
 const { User } = require('../db/models'); 
 
-// GET /api/set-token-cookie
+// GET /test/set-token-cookie
 router.get(
     '/set-token-cookie', 
     asyncHandler(async (_req, res) => { 
@@ -31,7 +31,7 @@ router.get(
     })
 ); 
 
-// GET /api/restore-user
+// GET /test/restore-user
 router.get(
     '/restore-session-user', 
     restoreSessionUser, 
@@ -40,7 +40,7 @@ router.get(
     }
 ); 
 
-// GET /api/require-auth
+// GET /test/require-auth
 router.get(
     '/require-authentication', 
     requireAuthentication, 

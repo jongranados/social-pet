@@ -1,5 +1,6 @@
 const { User } = require('../db/models'); 
 const { setTokenCookie } = require("../middleware/auth");
+const bcrypt = require('bcrypt'); 
 
 /* LOGIN CONTROLLER */
 const login = async (req, res, next) => { 
@@ -22,4 +23,48 @@ const login = async (req, res, next) => {
     }); 
 }; 
 
-module.exports = { login }
+/* SIGN UP CONTROLLER */
+const signup = async (req, res) => { 
+
+    const { 
+        firstName, 
+        lastName, 
+        username, 
+        email, 
+        password, 
+        picturePath, 
+        gotchaDate, 
+        breed, 
+        location, 
+        bio,
+    } = req.body; 
+
+    const salt = await bcrypt.genSalt(); 
+    const hashedPassword = await bcrypt.hash(password, salt); 
+    let profileViews = Math.floor(Math.random() * (20000 - 2000 + 1)) + 2000;
+    let impressions = Math.floor((Math.random() * (0.8 - 0.3) + 0.3) * profileViews);
+
+    const newUser = await User.signup({
+        firstName, 
+        lastName, 
+        username, 
+        email, 
+        password, 
+        picturePath, 
+        gotchaDate, 
+        breed, 
+        location, 
+        bio, 
+        profileViews, 
+        impressions,
+    }); 
+
+    await setTokenCookie(res, newUser); 
+
+    return res.json({ 
+        newUser
+    }); 
+}
+
+
+module.exports = { login, signup }
