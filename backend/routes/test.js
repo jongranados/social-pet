@@ -2,13 +2,19 @@ const express = require('express');
 const router = express.Router(); 
 
 /* TEST ROUTES */
+router.get('/hello/world', function(req, res) {
+    const xsrfToken = req.csrfToken()
+    res.cookie('XSRF-TOKEN', xsrfToken);
+    res.send('Hello World!');
+});
+
 router.post('/test', function(req, res) { 
     res.json({ requestBody: req.body }); 
 });
 
 const asyncHandler = require('express-async-handler'); 
-const { setTokenCookie, restoreSessionUser, requireAuthentication } = require('../../middleware/auth.js'); 
-const { User } = require('../../db/models'); 
+const { setTokenCookie, restoreSessionUser, requireAuthentication } = require('../middleware/auth.js'); 
+const { User } = require('../db/models'); 
 
 // GET /api/set-token-cookie
 router.get(
