@@ -64,7 +64,19 @@ const signup = async (req, res) => {
     return res.json({ 
         newUser
     }); 
+};
+
+/* GET SESSION USER CONTROLLER */
+const session = (req, res) => { 
+    const { user } = req; // restoreUser, preceding middleware, appends session user to req.user
+    
+    if (user) { 
+        return res.json({
+            user: user.toSafeObject()
+        }); 
+    } else { 
+        return res.json({}); 
+    }
 }
 
-
-module.exports = { login, signup }
+module.exports = { login, signup, session }
