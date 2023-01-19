@@ -34,7 +34,7 @@ module.exports = {
         allowNull: false
       },
       gotchaDate: {
-        type: Sequelize.DATE,
+        type: Sequelize.DATEONLY,
         allowNull: false
       },
       breed: {
