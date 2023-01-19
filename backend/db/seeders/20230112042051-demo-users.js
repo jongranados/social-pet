@@ -1,6 +1,6 @@
 'use strict';
 const bcrypt = require('bcrypt'); 
-const { Op } = require('sequelize'); 
+const { User } = require('../models'); 
 
 let demoUsers = [
   {
@@ -453,10 +453,10 @@ let demoUsers = [
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkInsert('Users', demoUsers); 
+    await queryInterface.bulkInsert('Users', demoUsers);  
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete('Users', { [Op.or]: demoUsers })
+    await User.destroy({ where: {} })
   }
 };
