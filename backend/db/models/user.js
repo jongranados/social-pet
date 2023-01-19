@@ -100,6 +100,11 @@ module.exports = (sequelize, DataTypes) => {
         attributes: { 
           exclude: ['hashedPassword'] 
         }
+      },
+      userProfile: {
+        attributes: { 
+          exclude: ['hashedPassword', 'email']
+        }
       }, 
       loginUser: {
         attributes: {}
@@ -180,6 +185,10 @@ module.exports = (sequelize, DataTypes) => {
 
   User.getCurrentUserById = function(id) { 
     return User.scope('currentUser').findByPk(id); 
+  };
+
+  User.getUserById = function(id) { 
+    return User.scope('userProfile').findByPk(id); 
   };
 
   User.login = async function({ credential, password }) { 
