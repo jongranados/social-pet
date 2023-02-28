@@ -20,7 +20,7 @@ const getUser = async (req, res, next) => {
     });
 }; 
 
-const getUserFollows = async (req, res, next) => { 
+const getUserFollowing = async (req, res, next) => { 
     const { id } = req.params; 
     const user = await User.getUserById(id); 
 
@@ -32,7 +32,8 @@ const getUserFollows = async (req, res, next) => {
         return next(err); 
     };
 
-    let followsIds = await Follow.findAll({ 
+    // retrive the list of ids for accounts that the user follows. 
+    let followingIds = await Follow.findAll({ 
         where: { 
             followerId: id
         }, 
@@ -40,13 +41,16 @@ const getUserFollows = async (req, res, next) => {
         raw: true
     }); 
 
-    followsIds = followsIds.map(followee => followee.followeeId)
+    // retrieve the profiles of corresponding ids. 
+    const following = await Promise.all(followingIds.map(async followingId => { 
+        const id = followingId.followeeId; 
+        const user = User.getUserById(id); 
+        return user; 
+    }));
     
-    // We call Promise.all on the array returned by map to transform it to a single Promise we can then await
-    const follows = await Promise.all(followsIds.map(async followsId => await User.getUserById(followsId)));
-    
+    // return profiles
     return res.json({
-        follows
+        following
     }); 
 }; 
 
@@ -94,8 +98,8 @@ const updateUserFollowing = async (req, res, next) => {
     }); 
 
     // retrieve the profiles of corresponding ids. 
-    const following = await Promise.all(followingIds.map(async followsId => { 
-        const id = followsId.followeeId; 
+    const following = await Promise.all(followingIds.map(async followingId => { 
+        const id = followingId.followeeId; 
         const user = User.getUserById(id); 
         return user; 
     }));
@@ -106,4 +110,4 @@ const updateUserFollowing = async (req, res, next) => {
     }); 
 }; 
 
-module.exports = { getUser, getUserFollows, updateUserFollowing }; 
+module.exports = { getUser, getUserFollowing, updateUserFollowing }; 
