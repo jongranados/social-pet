@@ -5,6 +5,7 @@ const data = [
         user: { 
             firstName: 'Havana', 
             lastName: 'Sagrado', 
+            username: 'havanalacubana', 
             gotchaData: '2018-7-10', 
             species: 'Dog',
             breed: 'Mini Blue Merle Aussie', 
@@ -36,12 +37,13 @@ const data = [
     { 
         user: { 
             firstName: 'Peony', 
-        lastName: 'Sagrado', 
-        gotchaData: '2019-11-13',
-        species: 'Dog',
-        breed: 'Mini Goldendoodle', 
-        location: 'East Palo Alto, CA', 
-        bio: `Showy, graceful, and delicate - like peonies. 🌸 Ball is life! 🎾`, 
+            lastName: 'Sagrado', 
+            username: 'peothedoodle', 
+            gotchaData: '2019-11-13',
+            species: 'Dog',
+            breed: 'Mini Goldendoodle', 
+            location: 'East Palo Alto, CA', 
+            bio: `Showy, graceful, and delicate - like peonies. 🌸 Ball is life! 🎾`, 
         }, 
         posts: { 
             descriptions: [
@@ -67,6 +69,7 @@ const data = [
         user: { 
             firstName: 'Milo', 
             lastName: 'Dao', 
+            username: 'milothegreat', 
             gotchaData: '2020-9-26',
             species: 'Dog',
             breed: 'Mini Labradoodle', 
@@ -96,6 +99,7 @@ const data = [
         user: { 
             firstName: 'Archie', 
             lastName: 'Luna', 
+            username: 'goodboyarchie', 
             gotchaData: '2021-11-24',
             species: 'Dog',
             breed: 'Australian Shepherd', 
@@ -123,6 +127,7 @@ const data = [
         user: { 
             firstName: 'Doug', 
             lastName: 'Barkowitz', 
+            username: 'dougthepug',
             gotchaData: '2016-3-26',
             species: 'Dog',
             breed: 'Pug', 
@@ -146,7 +151,8 @@ const data = [
     { 
         user: { 
             firstName: 'Pepper', 
-            lastName: 'Urchin', 
+            lastName: 'Urchin',
+            username: 'saltandpepper', 
             gotchaData: '2019-6-24',
             species: 'Hedgehog',
             breed: 'White-bellied', 
@@ -169,6 +175,7 @@ const data = [
         user: { 
             firstName: 'Ludwig', 
             lastName: 'Nibbles', 
+            username: 'piguiea',
             gotchaData: '2022-8-16',
             species: 'Guinea Pig',
             breed: 'Cavia Porcellus (Hairless)', 
@@ -190,6 +197,7 @@ const data = [
         user: { 
             firstName: 'Thor', 
             lastName: 'Beardicus', 
+            username: 'tailsofscales',
             gotchaData: '2021-7-18',
             species: 'Bearded Dragon',
             breed: 'Pogona Vitticeps (Inland)', 
@@ -213,6 +221,7 @@ const data = [
         user: { 
             firstName: 'Wooly', 
             lastName: 'Fluffington', 
+            username: 'lambie',
             gotchaData: '2015-2-6',
             species: 'Lamb',
             breed: 'Herdwick', 
@@ -233,7 +242,8 @@ const data = [
     { 
         user: { 
             firstName: 'Hamlet', 
-            lastName: 'Hogsworth', 
+            lastName: 'Hogsworth',
+            username: 'hammie', 
             gotchaData: '2016-6-23',
             species: 'Pig',
             breed: 'Yorkshire', 
@@ -256,6 +266,7 @@ const data = [
         user: { 
             firstName: 'Gigi', 
             lastName: 'Chanel', 
+            username: 'bougie',
             gotchaData: '2022-5-1',
             species: 'Dog',
             breed: 'Italian Greyhound', 
@@ -279,6 +290,7 @@ const data = [
        user: { 
             firstName: 'Scruffy', 
             lastName: 'Sprouts', 
+            username: 'chewbarka',
             gotchaData: '2014-3-19',
             species: 'Dog',
             breed: 'Brussels Griffon', 
@@ -298,13 +310,14 @@ const data = [
     // 13
     { 
        user: { 
-            firstName: 'Pringle', 
-            lastName: 'Floof', 
+            firstName: 'Sam', 
+            lastName: 'Patches', 
+            username: 'sam.i.am',
             gotchaData: '2018-5-12',
             species: 'Cat',
             breed: 'Bengal', 
             location: 'Seattle, WA', 
-            bio: `Blind, adventurous, and ready to take over the world. `, 
+            bio: `Blind, adventurous, and ready to take over the world. 🐱`, 
         }, 
         posts: { 
             descriptions: [
@@ -322,6 +335,7 @@ const data = [
        user: { 
             firstName: 'Kiwi', 
             lastName: 'Plucky', 
+            username: 'lilkiwi',
             gotchaData: '2010-10-18',
             species: 'Bird',
             breed: 'Budgerigar (Parakeet)', 
@@ -343,6 +357,7 @@ const data = [
        user: { 
             firstName: 'Leonardo', 
             lastName: 'Yertle', 
+            username: 'ninjayertle',
             gotchaData: '1994-4-9',
             species: 'Tortoise',
             breed: 'Sulcata', 
@@ -364,6 +379,7 @@ const data = [
        user: { 
             firstName: 'Arnie', 
             lastName: 'Hammie', 
+            username: 'heyarnie',
             gotchaData: '2016-1-18',
             species: 'Hamster',
             breed: 'Syrian', 
@@ -385,6 +401,7 @@ const data = [
        user: { 
             firstName: 'Lily', 
             lastName: 'Floofs', 
+            username: 'lilythebun',
             gotchaData: '2021-5-30',
             species: 'Rabbit',
             breed: 'Lionhead', 
@@ -406,6 +423,7 @@ const data = [
        user: { 
             firstName: 'Friz', 
             lastName: 'Boriz', 
+            username: 'curlicue',
             gotchaData: '2010-1-25',
             species: 'Chihuahua',
             breed: 'Long-haired', 
@@ -428,6 +446,7 @@ const data = [
        user: { 
             firstName: 'Merlin', 
             lastName: 'McGrumps', 
+            username: 'grumplord',
             gotchaData: '2017-9-12',
             species: 'Cat',
             breed: 'Ragdoll', 
@@ -449,6 +468,7 @@ const data = [
        user: { 
             firstName: 'Harry', 
             lastName: 'Whiskers', 
+            username: 'harrycat',
             gotchaData: '2019-8-31',
             species: 'Cat',
             breed: 'Persian', 
@@ -471,6 +491,7 @@ const data = [
        user: { 
             firstName: 'Aura', 
             lastName: 'Purr', 
+            username: 'queenragdoll',
             gotchaData: '2021-2-28',
             species: 'Cat',
             breed: 'Ragdoll', 
@@ -493,6 +514,7 @@ const data = [
        user: { 
             firstName: 'Daisy', 
             lastName: 'Claws', 
+            username: 'hellodaisy',
             gotchaData: '2020-11-28',
             species: 'Cat',
             breed: 'Scottish Fold', 
@@ -515,6 +537,7 @@ const data = [
        user: { 
             firstName: 'Sadie', 
             lastName: 'Blue', 
+            username: 'sadiegirl',
             gotchaData: '2011-7-23',
             species: 'Dog',
             breed: 'Blue Nose Pitbull', 
@@ -537,6 +560,7 @@ const data = [
        user: { 
             firstName: 'Maisie', 
             lastName: 'McFury', 
+            username: 'squirrelymaisie',
             gotchaData: '2013-3-25',
             species: 'Squirrel',
             breed: 'Eastern Gray', 
@@ -559,6 +583,7 @@ const data = [
        user: { 
             firstName: 'Maple', 
             lastName: 'Nibbles', 
+            username: 'maplethebandit',
             gotchaData: '2017-5-29',
             species: 'Raccoon',
             breed: 'Bahamian', 
@@ -581,6 +606,7 @@ const data = [
        user: { 
             firstName: 'Duke', 
             lastName: 'Sterling', 
+            username: 'duketheghost',
             gotchaData: '2015-10-13',
             species: 'Dog',
             breed: 'Weimaraner', 
@@ -603,6 +629,7 @@ const data = [
        user: { 
             firstName: 'Nutmeg', 
             lastName: 'Ivy', 
+            username: 'lilachilles',
             gotchaData: '2014-12-4',
             species: 'Dog',
             breed: 'Dachshund', 
@@ -625,6 +652,7 @@ const data = [
        user: { 
             firstName: 'Speckles', 
             lastName: 'Delmar', 
+            username: 'bigfoot',
             gotchaData: '2013-9-30',
             species: 'Dog',
             breed: 'Dachshund', 
@@ -647,6 +675,7 @@ const data = [
        user: { 
             firstName: 'Sage', 
             lastName: 'Emerson', 
+            username: 'wanderlust',
             gotchaData: '2019-4-3',
             species: 'Cat',
             breed: 'Bengal', 
@@ -669,6 +698,7 @@ const data = [
        user: { 
             firstName: 'Oliver', 
             lastName: 'Catticus', 
+            username: 'ollie',
             gotchaData: '2020-3-29',
             species: 'Cat',
             breed: 'British Shorthair', 
