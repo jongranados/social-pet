@@ -1,4 +1,4 @@
-const mockData = [
+const data = [
 
     // 1 
     { 
@@ -471,7 +471,7 @@ const mockData = [
        user: { 
             firstName: 'Aura', 
             lastName: 'Purr', 
-            gotchaData: '2021-2-29',
+            gotchaData: '2021-2-28',
             species: 'Cat',
             breed: 'Ragdoll', 
             location: 'Las Vegas, NV', 
@@ -687,5 +687,4 @@ const mockData = [
     },
 ]; 
 
-console.log(JSON.stringify(mockData)); 
-module.exports = mockData; 
+module.exports = data; 
