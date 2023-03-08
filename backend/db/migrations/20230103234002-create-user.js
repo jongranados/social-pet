@@ -37,6 +37,10 @@ module.exports = {
         type: Sequelize.DATEONLY,
         allowNull: false
       },
+      species: {
+        type: Sequelize.STRING, 
+        allowNull: false
+      },
       breed: {
         type: Sequelize.STRING, 
         allowNull: false

@@ -65,6 +65,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATEONLY,
       allowNull: false
     },
+    species: {
+      type: DataTypes.STRING, 
+      allowNull: false
+    }, 
     breed: {
       type: DataTypes.STRING, 
       allowNull: false
