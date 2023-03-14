@@ -12,8 +12,8 @@ const data = [
             location: 'East Palo Alto, CA', 
             bio: `Lil Aussie with a big personality and a pink nose. 👸🐽🎀`,
         }, 
-        posts: { 
-            1: { 
+        posts: [ 
+            { 
                 description: `Hi everyone! I'm Havana, a blue merle mini aussie. 🐶 I’m 4 months old and my parents just adopted me! 🍼🐾 One of my eyes is extra special. 👁  I love sitting out on our balcony on my little patch of grass. I'm supposed to use it to potty train but I'd rather lay on it. 🌱 I also love belly rubs, naps, and cuddles! 👨‍👩‍👧 I’m teething right now and I love chewing on my parent’s shoes. 🙊 Im a little shy and get anxious at times but I’m working on it.`, 
                 comments: [
                     `Hi Havana! 👋`, 
@@ -30,7 +30,7 @@ const data = [
                     `Hey pretty girl! 🥰`,
                 ], 
             }, 
-            2: { 
+            { 
                 description: `Rainy days got me like... 😴 `, 
                 comments: [
                     `💤💤💤`, 
@@ -45,7 +45,7 @@ const data = [
                     `QT 🥰`, 
                 ], 
             }, 
-            3: { 
+            { 
                 description: `Just another day at the office. 👩‍💻`, 
                 comments: [
                     `🤣🤣🤣`, 
@@ -59,7 +59,7 @@ const data = [
                     `I thought work meant herding sheep for you aussies? 🐑`,
                 ], 
             }, 
-            4: { 
+            { 
                 description: `Mom said we were going to Disneyland but we ended up at the vet instead. Now I’m in this cone for 2 weeks. 😭`, 
                 comments: [
                     `Same thing happened to me! 😂💀`, 
@@ -77,7 +77,7 @@ const data = [
                     `Awe Havi. Hope you get better soon. 💔☹️`,
                 ], 
             }, 
-            5: { 
+            { 
                 description: `My hoomans swore they wouldn’t let me on new couch but they forgot how cute I am. 🐶`, 
                 comments: [
                     `All I have to do is give them sad eyes. 😥😂`, 
@@ -92,7 +92,7 @@ const data = [
                     `Same! 💀😂`, 
                 ], 
             }, 
-            6: { 
+            { 
                 description: `I LOVE visiting grandma! 👵 She lets me sample hooman food when my parents aren't looking. 🙊 This time I got to try tamales. 🫔😂`, 
                 comments: [
                     `Grandparents are the BEST! 👵👴`, 
@@ -110,7 +110,7 @@ const data = [
                     `Y'all are twins! 🐶👵`,
                 ], 
             }, 
-            7: { 
+            { 
                 description: `Guess what everyone?! I have a baby sister! 🐣 Can you tell I'm so excited?! 👯‍♀️`, 
                 comments: [
                     `Baby sisted?! She towers you! 😆`, 
@@ -129,7 +129,7 @@ const data = [
                     `Looks like she's cooler than you! 😜`,  
                 ], 
             }, 
-            8: { 
+            { 
                 description: `Y'all GOTTA try these cod cubes! They're delicious! 🍣`, 
                 comments: [
                     `Omg these cod cubes look so amazing! 😍`, 
@@ -145,7 +145,7 @@ const data = [
                     `How much are your hoomans being paid to promote this? 😂`, 
                 ], 
             }, 
-            9: { 
+            { 
                 description: `Dreaming of greenies, chew toys, and belly rubs. ✨✨✨`, 
                 comments: [
                     `You're so at peace. ❤️`, 
@@ -157,7 +157,7 @@ const data = [
                     `And herding sheep? 🐑`,  
                 ], 
             }, 
-            10: { 
+            { 
                 description: `Mom thinks she can fool us by hiding our meds in whipped cream. She's ain't wrong. 😅`, 
                 comments: [
                     `Just spit it out after they leave! 😂`, 
@@ -170,7 +170,7 @@ const data = [
                     `This works 100% of the time unfortunately. 🤪`,  
                 ], 
             }, 
-            11: { 
+            { 
                 description: `Benebones are life! ❤️ Especially the bacon-flavored one! 🥓`, 
                 comments: [
                     `Careful! I broke a tooth chewing on this! ❤️‍🩹`, 
@@ -185,7 +185,7 @@ const data = [
                     `I go through one of these a week! 🤪`,
                 ], 
             }, 
-            12: { 
+            { 
                 description: `Maybe if I get into trouble around the house my parents will never want to leave. 🧐 I'll start by digging out the plants. 😈`, 
                 comments: [
                     `Try escaping for a few minutes! That also works. 😂`, 
@@ -199,7 +199,7 @@ const data = [
                     `So rude. 💀😆`,
                 ], 
             }, 
-            13: { 
+            { 
                 description: `Candid moment or totally staged? 🤪`, 
                 comments: [
                     `QT 🥧`, 
@@ -214,7 +214,7 @@ const data = [
                     `You're always sleeping!`,
                 ], 
             }, 
-            14: { 
+            { 
                 description: `Peep the breakfast burrito mom was taunting me with this morning. 😢 I showed a lot of restraint and wasn't rewarded in the end. 💔 Next time I'm taking a bite! 🍳`, 
                 comments: [
                     `Call dad ASAP! 👿`,
@@ -233,7 +233,7 @@ const data = [
                     `Report this to her boss! 😒`, 
                 ], 
             }, 
-            15: { 
+            { 
                 description: `✨🌈 golden hour 🌈✨`, 
                 comments: [
                     `So pretty! 😍`, 
@@ -248,7 +248,7 @@ const data = [
                     `Literally perfect. 😍`,  
                 ], 
             }, 
-        },
+        ],
      }, 
 
     // 2
@@ -263,8 +263,8 @@ const data = [
             location: 'East Palo Alto, CA', 
             bio: `Showy, graceful, and delicate - like peonies. 🌸 Ball is life! 🎾`, 
         }, 
-        posts: {
-            1: { 
+        posts: [
+            { 
                 description: `Hi everyone! I'm Peony. 🌸 I'm a mini goldendoodle with a big personality. ✨ I just turned 4 months old and already almost tower over my big sister Havana 🦒. I love playing fetch 🎾, eating 🍽, going to the beach 🌊, sleeping under our couch 🛋, and chewing on things around the house 🤷‍♀️! My parents think I'm part horse because I prance and gallop but I'm just elegant. 🐎`, 
                 comments: [
                     `Hello Peony! 👋`, 
@@ -275,7 +275,7 @@ const data = [
                     `Hai! 👋`,
                 ], 
             }, 
-            2: { 
+            { 
                 description: `I survived my first visit to the vet! Look at the cool sign they made just for me! 🥰 Thank you Dr. Hernandez for the pets, treats, and belly rubs! 🐶`, 
                 comments: [
                     `🙌🙌🙌`, 
@@ -289,7 +289,7 @@ const data = [
                     `Woot woot! 👏`,
                 ], 
             }, 
-            3: { 
+            { 
                 description: `OMG! I love Benebones! ❤️ 🥓`, 
                 comments: [
                     `You gotta try out the chicken one! 🐓`, 
@@ -300,7 +300,7 @@ const data = [
                     `I'm probably on my tenth one! 🤪`, 
                 ], 
             }, 
-            4: { 
+            { 
                 description: `I (barely) survived my first grooming! I can finally see again! 🙈`, 
                 comments: [
                     `That glow-up! 😍`, 
@@ -312,7 +312,7 @@ const data = [
                     `You're so happy! 🤗`,  
                 ], 
             }, 
-            5: { 
+            { 
                 description: `My goodness, these cod cubes are delicious! 🍣`, 
                 comments: [
                     `They're dangerously good! 😍`, 
@@ -324,7 +324,7 @@ const data = [
                     `Wouldn't have been able to tell from the picture. 🤣`, 
                 ], 
             }, 
-            6: { 
+            { 
                 description: `Can you tell I LOVE to play fetch? 🎾`, 
                 comments: [
                     `It's the golden retriver in you!`, 
@@ -334,7 +334,7 @@ const data = [
                     `Me too!`, 
                 ], 
             }, 
-            7: { 
+            { 
                 description: `I'm officially 3 hooman years old today! I think that makes me 21 dog years old! Cheers? 👀🍺`, 
                 comments: [
                     `HBD Peony! 🎈`,
@@ -348,7 +348,7 @@ const data = [
                     `I hope you have an amazing day! 😊`, 
                 ], 
             }, 
-            8: { 
+            { 
                 description: `First time experiencing snow. ☃️ It was magical! ✨`, 
                 comments: [
                     `I still haven't gone! 😢`, 
@@ -358,7 +358,7 @@ const data = [
                     `Don't forget to make a snow angel! 👼🏻`, 
                 ], 
             }, 
-            9: { 
+            { 
                 description: `I'm allegedly not allowed on the furniture. Keyword: allegedly. 😂`, 
                 comments: [
                     `lmaooo my parents said the same thing and here we are!`,
@@ -371,18 +371,18 @@ const data = [
                     `Just give them sad eyes. ☹️😆`,
                 ], 
             }, 
-            10: { 
+            { 
                 description: `Rain, rain, go away. Please come back another day. 🌧 I miss playing fetch outside. 🥺`, 
                 comments: [
                     `I hate the rain too. 😢`,
-                    `This weather sucks. 😐` 
+                    `This weather sucks. 😐`,
                     `Just put on a rain jacket! 🤔`, 
                     `😩`,
                     `Who invented rain anyway. 😒`,
                     `Unpopular opinion, I actually love the rain! 😅`,
                 ], 
             }, 
-            11: { 
+            { 
                 description: `Embracing the chipmunk in me. 🐿`, 
                 comments: [
                     `😂`, 
@@ -392,7 +392,7 @@ const data = [
                     `Doood you look hilarious! 🤣`, 
                 ], 
             }, 
-            12: { 
+            { 
                 description: `You can see my pearly whites even when my mouth is closed. 🦷😬`, 
                 comments: [
                     `Lil teef! 😁`, 
@@ -402,7 +402,7 @@ const data = [
                     `🤣`, 
                 ], 
             }, 
-            13: { 
+            { 
                 description: `Happy New Year everyone! 🍾`, 
                 comments: [
                     `HNY Peo! 🪅`, 
@@ -414,7 +414,7 @@ const data = [
                     `🎉🥰🤗`, 
                 ], 
             }, 
-        },
+        ],
     },
 
     // 3
@@ -430,8 +430,8 @@ const data = [
             location: 'Sunnyvale, CA', 
             bio: `People judge me for my eyebrows | 🍫🐕`, 
         },
-        posts: {
-            1: { 
+        posts: [
+            { 
                 description: `What's up y'all! I'm Milo. 👋 I'm a mini labradoodle. I'm originally from Oregon but my original hoomans couldn't handle my craziness so I was rehomed. 😖 To be fair, I was (read: am) crazy. 🤪 That was the best thing that could've ever happened to me though because I'm now living my best life in sunny California with my forever family! 👨‍👩‍👦 I love exploring new places, meeting new furry friends, going on walks, and woofing. Follow me for doses of cuteness, playfulness, and occasional craziness. 🐶`, 
                 comments: [
                     `What up dude! 🤙`, 
@@ -443,7 +443,7 @@ const data = [
                     `Hey Milo! Welcome! 😊`, 
                 ], 
             }, 
-            2: { 
+            { 
                 description: `I've got brows for days! 🤨`, 
                 comments: [
                     `Boop! 🐽`, 
@@ -453,7 +453,7 @@ const data = [
                     `D'awe. 🥰`,
                 ], 
             }, 
-            3: { 
+            { 
                 description: `It’s Friday the 13th which means I’m going to be a demon child today. 👹`, 
                 comments: [
                     `Everyday is torment day! 😈`, 
@@ -463,7 +463,7 @@ const data = [
                     `Watch them kick you out. 😹`, 
                 ], 
             }, 
-            4: { 
+            { 
                 description: `Went to the beach this weekend! Let’s just say the sand was delicious. 🏖`, 
                 comments: [
                     `Booop!`, 
@@ -473,7 +473,7 @@ const data = [
                     `🐽🐽🐽`, 
                 ], 
             }, 
-            5: { 
+            { 
                 description: `Can you tell I had a blast at the dog park?! 🤩`, 
                 comments: [
                     `You look like a little lion here! 🦁`, 
@@ -484,7 +484,7 @@ const data = [
                     `Woah you're so big now!`, 
                 ], 
             }, 
-            6: { 
+            { 
                 description: `Eyebrows on fleeeek! 😎`, 
                 comments: [
                     `ON FLEEK! 😎`, 
@@ -494,7 +494,7 @@ const data = [
                     `Your coat. 😍`, 
                 ], 
             }, 
-            7: { 
+            { 
                 description: `Before and after my first big boy cut. It was about dang time, ma! 💈`, 
                 comments: [
                     `About dang time!`, 
@@ -507,7 +507,7 @@ const data = [
                     `You're so happy now! 🤗`,  
                 ], 
             }, 
-            8: { 
+            { 
                 description: `Tongue Out Tuesday? Tongue Out EVERYDAY! 👻`, 
                 comments: [
                     `Eyyy! 😎`, 
@@ -516,7 +516,7 @@ const data = [
                     `Those eyes. 😍`,
                 ], 
             }, 
-            9: { 
+            { 
                 description: `Ran into the wall this morning. I think my hair is getting a tad bit too long... 🙈`, 
                 comments: [
                     `Dude you definitely need a cut. 😳`, 
@@ -525,7 +525,7 @@ const data = [
                     `Ummm.. 😰`,
                 ], 
             }, 
-            10: { 
+            { 
                 description: `Which am I more more interested in? The wet food or the kibble? 🤤`, 
                 comments: [
                     `Hmmm, I can't tell.. 😂`, 
@@ -535,7 +535,7 @@ const data = [
                     `Hella bougie!`, 
                 ], 
             }, 
-            11: { 
+            { 
                 description: `They said I wasn't allowed on the bed or couch, but said nothin' about the desk. 😏`, 
                 comments: [
                     `S'right! 😎`, 
@@ -545,7 +545,7 @@ const data = [
                     `🤫`, 
                 ], 
             }, 
-            12: { 
+            { 
                 description: `Hung out with my girlfriends today. Yes, that was plural. 😏`, 
                 comments: [
                     `Who those cuties? 😉`, 
@@ -556,7 +556,7 @@ const data = [
                     `Your hoomans are probably just dog-sitting. 💀`,
                 ], 
             }, 
-        },        
+        ],        
     },
 
     // 4
@@ -571,8 +571,8 @@ const data = [
             location: 'Los Angeles, CA', 
             bio: `The goodest boy (most of the time). 🐶`, 
         },
-        posts: {
-            1: { 
+        posts: [
+            { 
                 description: `G'day, mate! I'm Archie. I'm a wild and wacky australian shepherd with a goofy grin and a wagging tail. When I'm not herding sheep 🐑, I'm herding my big sister Arya 🐺. I love chasing my tail, rolling in the mud, and playing fetch (though I often forget to bring the ball back!). I'm a furry ball of energy who loves nothing more than a good belly rub and a tasty treat. So come along for the ride and let's have some fun together! 🤪`, 
                 comments: [
                     `Welcome! 🐶`,
@@ -585,7 +585,7 @@ const data = [
                     `Hi Archie! 👋`, 
                 ], 
             }, 
-            2: { 
+            { 
                 description: `Catchin' zZz's. 💤`, 
                 comments: [
                     `I'm just resting my eyes. 🤪`, 
@@ -594,7 +594,7 @@ const data = [
                     `Now I'm sleepy! 🥱`,
                 ], 
             }, 
-            3: { 
+            { 
                 description: `In jail for peeing in the house. Free Archie! 🚔`, 
                 comments: [
                     `Locked up. They won't let me out. 🎶`, 
@@ -604,7 +604,7 @@ const data = [
                     `Free Arch!`, 
                 ], 
             }, 
-            4: { 
+            { 
                 description: `Mom says I'm pawtogenic! 📸`, 
                 comments: [
                     `Egh. 🤣`, 
@@ -614,7 +614,7 @@ const data = [
                     `She lyin'! 😹`, 
                 ], 
             }, 
-            5: { 
+            { 
                 description: `Ruff mornings call for a puppuccino with my hooman ☕️🐶❤️`, 
                 comments: [
                     `Looks like you loved it. 😆`, 
@@ -625,7 +625,7 @@ const data = [
 
                 ], 
             }, 
-            6: { 
+            { 
                 description: `Time to Paw-tayyy! 🥳`, 
                 comments: [
                     `🎈🎊🎁🍾`, 
@@ -635,7 +635,7 @@ const data = [
                     `Paaaawtay! 🎉`, 
                 ], 
             }, 
-            7: { 
+            { 
                 description: `Just out here being a good wilderness scout. 🐻`, 
                 comments: [
                     `Aren't you supposed to be a herder? 🐑`, 
@@ -643,7 +643,7 @@ const data = [
                     `I love that trail! 🥾`,
                 ], 
             }, 
-            8: { 
+            { 
                 description: `Happy 4th of July friends! 🇺🇸🎇🧨🐾`, 
                 comments: [
                     `You aren't scared of the fireworks? 😱`, 
@@ -652,7 +652,7 @@ const data = [
                     `Happy 4th Archie! 🍔🌭`,
                 ], 
             }, 
-            9: { 
+            { 
                 description: `It's my first birthday and I'm feeling fur-tastic! 🐾🎂🐶`, 
                 comments: [
                     `Happy Birthday to the one and only Archie! 🎈`,
@@ -666,7 +666,7 @@ const data = [
                     `Happy Birthday buddy! ❤️`, 
                 ], 
             }, 
-            10: { 
+            { 
                 description: `Merry Christmas, from our pack to yours!🎄❤️`, 
                 comments: [
                     `Merry Chrysler to you and your family! ❤️`,
@@ -677,7 +677,7 @@ const data = [
                     `I hope you got lots of treats from Santa Archie! 🎅🍪`,
                 ], 
             },
-        }, 
+        ], 
     },
 
     // 5
@@ -692,8 +692,8 @@ const data = [
             location: 'Nashville, TN', 
             bio: `👑 King 👑`, 
         },
-        posts: {
-            1: { 
+        posts: [
+            { 
                 description: `Been thinking of you a latte. ❤️`, 
                 comments: [
                     `You think you're Edgar Allan Pug now or what? 🤣`, 
@@ -704,7 +704,7 @@ const data = [
                     `Fellas, we lost one. 💔😆`,  
                 ], 
             }, 
-            2: { 
+            { 
                 description: `Am I doing this meal prep thing right? 🤪`, 
                 comments: [
                     `Looks good to me! 🤣`, 
@@ -714,7 +714,7 @@ const data = [
                     `I think you need another slice in each. 😝`, 
                 ], 
             }, 
-            3: { 
+            { 
                 description: `Land of the furry, home of the brave! 'Merica! 🍺`, 
                 comments: [
                     `🍻`, 
@@ -724,7 +724,7 @@ const data = [
                     `This is just another excuse to eat huh? 🤣🍔🌭`,
                 ], 
             }, 
-            4: { 
+            { 
                 description: `First day on the job. This would be a lot easier if I had thumbs. 🥲`, 
                 comments: [
                     `💀🤣`, 
@@ -734,17 +734,17 @@ const data = [
                     `I give it another day before you're fired. 🤣`, 
                 ], 
             }, 
-            5: { 
+            { 
                 description: `Merry pugmas y'all! 🎄❤️`, 
                 comments: [
                     `Merry Christmas bro! ❤️`,
                     `Merry Christmas! 🥰`, 
-                    `Likewise Dougie! ❤️`
+                    `Likewise Dougie! ❤️`, 
                     `Merry Christmas to you too Doug! 🎄`, 
                     `Merry Christmas Doug! 🤗`, 
                 ], 
             }, 
-            6: { 
+            { 
                 description: `Vibin' out here in Barbados. Jk, we at the community pool. 😂`, 
                 comments: [
                     `Bruh you play too much! 🤣`, 
@@ -753,7 +753,7 @@ const data = [
                     `Where's the invite tho? 👀`, 
                 ], 
             }, 
-            7: { 
+            { 
                 description: `MSCHF's Big Red Boots: secured. 😎`, 
                 comments: [
                     `Sheesh! 😎`, 
@@ -764,7 +764,7 @@ const data = [
                     `Looking fresh Doug! 😎`, 
                 ], 
             }, 
-        }, 
+        ], 
     },
 
     // 6
@@ -779,8 +779,8 @@ const data = [
             location: 'Austin, TX', 
             bio: `Happy and smiling! 🦔🌻`, 
         },
-        posts: {
-            1: { 
+        posts: [
+            { 
                 description: `New pair of sunnies! How do they look?! 🕶`, 
                 comments: [
                     `They look great on you! 😍`, 
@@ -790,7 +790,7 @@ const data = [
                     `Def keepers!`, 
                 ], 
             }, 
-            2: { 
+            { 
                 description: `Sunday's are for self-care. Who doesn't love a spa day? 🧖‍♀️`, 
                 comments: [
                     `👏👏👏👏👏`, 
@@ -799,7 +799,7 @@ const data = [
                     `Living your best life! 💅`,
                 ], 
             }, 
-            3: { 
+            { 
                 description: `Officially a noogler! Joining the search team as an L5! 👩‍💻`, 
                 comments: [
                     `Congrats! 🎉`, 
@@ -811,7 +811,7 @@ const data = [
                     `Woot woot! 🙌`, 
                 ], 
             }, 
-            4: { 
+            { 
                 description: `Y'all, idk about this... 😳`, 
                 comments: [
                     `Hmmm.. idk about that either. 🤣`, 
@@ -821,7 +821,7 @@ const data = [
                     `Do it! 🤣`, 
                 ], 
             }, 
-            5: { 
+            { 
                 description: `Chipoltees on a Friday night! 🌯`, 
                 comments: [
                     `Eyyyy! 😎`, 
@@ -831,7 +831,7 @@ const data = [
                     `Chipoltees!`, 
                 ], 
             }, 
-        }, 
+        ], 
     },
 
     // 7
@@ -846,8 +846,8 @@ const data = [
             location: 'Detroit, MI', 
             bio: `Tiny but mighty. 🐹`, 
         },
-        posts: {
-            1: { 
+        posts: [
+            { 
                 description: `Greetings everyone. I'm Ludwig. I'm a hairless guinea pig. What I lack in fur, I have in spirit, wit, and charm. Follow my adventures as I explore the world, one squeak at a time. 🐹✨`, 
                 comments: [
                     `Hey Ludwig! ☺️`, 
@@ -857,7 +857,7 @@ const data = [
                     `Hey what's up!`, 
                 ], 
             }, 
-            2: { 
+            { 
                 description: `It's always sweater weather when you're hairless. 🥶`, 
                 comments: [
                     `Oh no! 😆`, 
@@ -867,7 +867,7 @@ const data = [
                     `D'awe. ❤️`, 
                 ], 
             }, 
-            3: { 
+            { 
                 description: `I did not choose the chunky life, the chunky life chose me. 🍕`, 
                 comments: [
                     `It chose me too! 🤣`, 
@@ -876,7 +876,7 @@ const data = [
                     `Chonkies, unite! 👏`, 
                 ], 
             }, 
-            4: { 
+            { 
                 description: `Loving this wfh policy! ☕️`, 
                 comments: [
                     `Why's the page empty? 😂`, 
@@ -886,7 +886,7 @@ const data = [
                     `It's theee best!`, 
                 ], 
             }, 
-        }, 
+        ], 
     },
 
     // 8
@@ -901,8 +901,8 @@ const data = [
             location: 'Jacksonville, FL', 
             bio: `Join me on my scaly journey as I conquer the world one basking spot at a time. 🐲`, 
         },
-        posts: {
-            1: { 
+        posts: [
+            { 
                 description: `Hear ye, hear ye! 🗣 I am a mighty and majestic bearded dragon, revered for my strength, intellect, and unmistakable appearance. Don't let my rough scales, sharp claws, or pissy expression fool you, I'm actually gentle and friendly. ☺️ Follow along as I explore the world! 🦎✨ `, 
                 comments: [
                     `Howdy! 👋`, 
@@ -912,7 +912,7 @@ const data = [
                     `Welcome Thor! 🤗`, 
                 ], 
             }, 
-            2: { 
+            { 
                 description: `Despite my RBF saying otherwise, I LOVE going to the beach! 🌞🧘‍♂️`, 
                 comments: [
                     `I would have never guessed. 😂`, 
@@ -922,7 +922,7 @@ const data = [
                     `Looks like you hate it. 🤣`, 
                 ], 
             }, 
-            3: { 
+            { 
                 description: `Who wants to catch these gloves?! 🥊😤 Kidding! 🥰`, 
                 comments: [
                     `Lehgo 😤😆`, 
@@ -932,7 +932,7 @@ const data = [
                     `Maaaan come on. 🤣`,
                 ], 
             }, 
-            4: { 
+            { 
                 description: `Working hard or hardly working? 🚜👷`, 
                 comments: [
                     `I'd say the latter. 😂`, 
@@ -942,7 +942,7 @@ const data = [
                     `Thor we all know the answer to that. 🤣`, 
                 ], 
             }, 
-            5: { 
+            { 
                 description: `Momma we made it! 🎓`, 
                 comments: [
                     `Congrats buddy! ☺️`, 
@@ -952,7 +952,7 @@ const data = [
                     `You deserve it all Thory! ❤️`, 
                 ], 
             }, 
-            6: { 
+            { 
                 description: `People are always surprised to find out that my favorite hobby is tea-time! 🫖🎩`, 
                 comments: [
                     `I'm still shocked tbh. 🤣`, 
@@ -962,7 +962,7 @@ const data = [
                     `That's so awesome! 😂`, 
                 ], 
             }, 
-        },  
+        ],  
     },
 
     // 9
@@ -977,8 +977,8 @@ const data = [
             location: 'East Berne, NY', 
             bio: `I like to frolic in the meadows, nibble on grass, and soake up the sunshine. 💕`, 
         },
-        posts: {
-            1: { 
+        posts: [
+            { 
                 description: `Baaa! 👋 Nice to meet you! 🐑`, 
                 comments: [
                     `Hi there! Lovely to meet you too! 🐑❤️`, 
@@ -988,7 +988,7 @@ const data = [
                     `Too precious! I can't! 😭`, 
                 ], 
             }, 
-            2: { 
+            { 
                 description: `Counting lambs. 🐑`, 
                 comments: [
                     `I can't! 😭`, 
@@ -998,7 +998,7 @@ const data = [
                     `So peaceful! 🐑🌿`, 
                 ], 
             }, 
-            3: { 
+            { 
                 description: `In my happy place. 😌`, 
                 comments: [
                     `This radiates happiness! 💕`,
@@ -1009,7 +1009,7 @@ const data = [
                     `This photo is like a breath of fresh air, thank you for sharing your happy place with us! 😊`, 
                 ], 
             }, 
-            4: { 
+            { 
                 description: `Smiles all round. 😊 Have a great weekend friends! 🤗`, 
                 comments: [
                     `Your smile is contagious! 😊🌞`, 
@@ -1019,7 +1019,7 @@ const data = [
                     `Have a happy and relaxing weekend! 😊`, 
                 ], 
             }, 
-        }, 
+        ], 
     },
 
     // 10
@@ -1034,8 +1034,8 @@ const data = [
             location: 'Charlotte, NC', 
             bio: `Mud puddles, snout scratches, and oinking adventures. 🐷`,
         },
-        posts: {
-            1: { 
+        posts: [
+            { 
                 description: `Happy National Pie Day! 🥧🍎🍑🫐`, 
                 comments: [
                     `It's my favorite day of the year! 🤤`, 
@@ -1046,7 +1046,7 @@ const data = [
                     `That pie is almost too pretty to eat...almost! 😜👌`, 
                 ], 
             }, 
-            2: { 
+            { 
                 description: `Catching waves and soaking up the sun. Who says pigs can't surf?! ☀️🏄‍♀️🐷`, 
                 comments: [
                     `Look at you! 🏄‍♀️🐷`, 
@@ -1057,7 +1057,7 @@ const data = [
                     `Surfs up brah! 🤙`,
                 ], 
             }, 
-            3: { 
+            { 
                 description: `Pigging out at the bar, living my best life. 🍻🐷🍔`, 
                 comments: [
                     `Now that's what I call pigging out! 🤣`,
@@ -1066,7 +1066,7 @@ const data = [
                     `Nothing wrong with indulging every once in a while! Enjoy! 🐷👌`, 
                 ], 
             }, 
-            4: { 
+            { 
                 description: `Throwback to when I was just a little piglet. 👶`, 
                 comments: [
                     `You were an adorable piglet! 🐷 What happened?! 🤣`, 
@@ -1075,7 +1075,7 @@ const data = [
                     `And then life happened. 😂 Kidding Hams! 🤪`, 
                 ], 
             }, 
-            5: { 
+            { 
                 description: `Boop! 🐽`, 
                 comments: [
                     `Boop! Gotcha! 😜👉🐽`, 
@@ -1084,7 +1084,7 @@ const data = [
                     `Your boopability factor is off the charts! Boop! 😜🐽`, 
                 ], 
             }, 
-        }, 
+        ], 
     },
 
     // 11
@@ -1099,8 +1099,8 @@ const data = [
             location: 'New York, NY', 
             bio: `Fashion designer for the brands your admire. My taste is high-end and my attitude is even higher. 💅`, 
         }, 
-        posts: {
-            1: { 
+        posts: [
+            { 
                 description: `👸`, 
                 comments: [
                     `Bless us queen! 👸`, 
@@ -1111,7 +1111,7 @@ const data = [
                     `Queen of NY! Loves u! ❤️🐾`, 
                 ], 
             }, 
-            2: { 
+            { 
                 description: `Stay classy y'all. 💅`, 
                 comments: [
                     `Classy and fab! Per usual! 💅😎`, 
@@ -1123,7 +1123,7 @@ const data = [
                     `Classy, bougie, and can't forget about sassy! Slay bae! 💃`, 
                 ], 
             }, 
-            3: { 
+            { 
                 description: `Sneak peak at Szn 7. 🤫`, 
                 comments: [
                     `On fleek! 😍👗`, 
@@ -1135,7 +1135,7 @@ const data = [
                     `Delivered. Like usual. 🔥`,
                 ], 
             }, 
-            4: { 
+            { 
                 description: `Breaking necks - as usual. ❤️`, 
                 comments: [
                     `😍😍😍`, 
@@ -1144,7 +1144,7 @@ const data = [
                     `Y'all so perfect it should be illegal! 😍`, 
                 ], 
             }, 
-            5: { 
+            { 
                 description: `My first cover issue hits the stands today. What an honor! 📸`, 
                 comments: [
                     `Cover girl! Couldn't be prouder! Congrats! 🎉👏`, 
@@ -1155,7 +1155,7 @@ const data = [
                     `So proud Gigi!!! 😭`, 
                 ], 
             }, 
-            6: { 
+            { 
                 description: `NY tingz. 💋`, 
                 comments: [
                     `Tell 'em! 💄`, 
@@ -1166,7 +1166,7 @@ const data = [
                     `Ou there blessing these streets! 🙌`, 
                 ], 
             }, 
-        },               
+        ],               
     },
 
     // 12
@@ -1181,8 +1181,8 @@ const data = [
             location: 'Boston, MA', 
             bio: `Short king with a big personality. 🕺`, 
         },
-        posts: {
-            1: { 
+        posts: [
+            { 
                 description: `First day of law school! Already over it. 🤓`, 
                 comments: [
                     `Sending you all the good vibes on your first day of law school! 🤗🎉`, 
@@ -1194,7 +1194,7 @@ const data = [
                     `Only three more years! 😅`, 
                 ], 
             }, 
-            2: { 
+            { 
                 description: `Me doing me. 💅`, 
                 comments: [
                     `Eyyyy!`, 
@@ -1204,7 +1204,7 @@ const data = [
                     `Who hurt you Scruffs?! 😂`, 
                 ], 
             }, 
-            3: { 
+            { 
                 description: `Tiny boss vibes. ☕️💻😎`, 
                 comments: [
                     `Schmooood! 🤩`, 
@@ -1213,7 +1213,7 @@ const data = [
                     `Tell 'em Scruffs! 🗣`, 
                 ], 
             }, 
-            4: { 
+            { 
                 description: `Esq. vibes 👨‍⚖️`, 
                 comments: [
                     `Congrats! 🎉`, 
@@ -1225,7 +1225,7 @@ const data = [
                     `😭❤️`, 
                 ], 
             }, 
-        }, 
+        ], 
     },
 
     // 13
@@ -1240,8 +1240,8 @@ const data = [
             location: 'Seattle, WA', 
             bio: `Blind, adventurous, and ready to take over the world. 🐱`, 
         },
-        posts: {
-            1: { 
+        posts: [
+            { 
                 description: `👋`, 
                 comments: [
                     `Hey Patches! How are you doing today? 😸`, 
@@ -1251,7 +1251,7 @@ const data = [
                     `Looking like a total boss Sam! What's new with you? 😎`, 
                 ], 
             }, 
-            2: { 
+            { 
                 description: `Aesthetic or wdyt?  😎`, 
                 comments: [
                     `You always look cool no matter what! 😸`, 
@@ -1260,7 +1260,7 @@ const data = [
                     `Def aesthetic 🔥`,
                 ], 
             }, 
-            3: { 
+            { 
                 description: `Just hangin' out. 🐨`, 
                 comments: [
                     `Bruh you're gonna fall! 😰`,
@@ -1270,7 +1270,7 @@ const data = [
                     `Livin' life on the edge! 🤘`, 
                 ], 
             }, 
-            4: { 
+            { 
                 description: `Love me a good box! 📦`, 
                 comments: [
                     `😻`, 
@@ -1279,7 +1279,7 @@ const data = [
                     `Can someone explain? I honestly don't get this. 😆`,
                 ], 
             }, 
-            5: { 
+            { 
                 description: `Friday night. Feelin' alright. 🌚✨ Poet, who didn't know it. 🖌`, 
                 comments: [
                     `🗣🗣🗣`, 
@@ -1289,7 +1289,7 @@ const data = [
                     `Bro maybe keep your day job for a bit. 😂`, 
                 ], 
             }, 
-        }, 
+        ], 
     },
 
     // 14 
@@ -1304,8 +1304,8 @@ const data = [
             location: 'Columbus, OH', 
             bio: `Life of a wise budgie. 🦜🥝`, 
         },
-        posts: {
-            1: { 
+        posts: [
+            { 
                 description: `Happy Wednesday ❤`, 
                 comments: [
                     `Happy Wednesday budgie! 🦜`, 
@@ -1313,7 +1313,7 @@ const data = [
                     `Happy midweek budge! ☺️`, 
                 ], 
             }, 
-            2: { 
+            { 
                 description: `Peek-a-boo! 👻`, 
                 comments: [
                     `I see you! 🤪`, 
@@ -1322,7 +1322,7 @@ const data = [
                     `Peek-a-boo! I see you! 🐤`,
                 ], 
             }, 
-            3: { 
+            { 
                 description: `Not sleeping - promise! 🥴 Just resting my eyes! 💤`, 
                 comments: [
                     `Lies! 😂`,
@@ -1332,7 +1332,7 @@ const data = [
                     `We all need out beauty sleep. 😍`,
                 ], 
             }, 
-            4: { 
+            { 
                 description: `Happy birthday to me! Officially 10! 👴🏻`, 
                 comments: [
                     `Looking great!`,  
@@ -1346,7 +1346,7 @@ const data = [
                     `HBD bud! 🍾`,
                 ], 
             }, 
-        }, 
+        ], 
     },
 
     // 15
@@ -1361,8 +1361,8 @@ const data = [
             location: 'Tempe, AZ', 
             bio: `Roaming, eating, and country-pace living. 🐢`, 
         },
-        posts: {
-            1: { 
+        posts: [
+            { 
                 description: `Slow mornings are my favorite. 🐢`, 
                 comments: [
                     `Slow mornings every day! Nothing beats taking it easy and enjoying life. ☕️`, 
@@ -1371,7 +1371,7 @@ const data = [
                     `The cutest couch potato! Keep on taking it easy and enjoying life. 🥰`, 
                 ], 
             }, 
-            2: { 
+            { 
                 description: `Couch potato forevah and evah. 🥔`, 
                 comments: [
                     `Couch potato? All I see if someone enjoying life! 😊`, 
@@ -1381,7 +1381,7 @@ const data = [
                     `The ultimate chill tortoise!`, 
                 ], 
             }, 
-            3: { 
+            { 
                 description: `Basking? Tanning? Tomato tomahto. ☀️`, 
                 comments: [
                     `Keep on soaking up those rays, Leo! 🌞`, 
@@ -1390,7 +1390,7 @@ const data = [
                     `Sunny days ahead. 👑`,
                 ], 
             }, 
-            4: { 
+            { 
                 description: `Throwy to when I was just barely bigger than a strawberry. 👶🍓`, 
                 comments: [
                     `Aww, little baby Leo! 😭 You were the cutest. 🥰`, 
@@ -1400,7 +1400,7 @@ const data = [
                     `Dude what went wrong along the way? Kidding Leo! 😂`, 
                 ], 
             }, 
-        },  
+        ],  
     },
 
     // 16 
@@ -1415,8 +1415,8 @@ const data = [
             location: 'El Paso, TX', 
             bio: `Here for a good time. 🤙`, 
         },
-        posts: {
-            1: { 
+        posts: [
+            { 
                 description: `Hi I'm Arnie. 🐹`, 
                 comments: [
                     `Hi Arnie! Welcome! 👋`, 
@@ -1426,7 +1426,7 @@ const data = [
                     `Welcome! You're gonna break the internet! 😍`, 
                 ], 
             }, 
-            2: { 
+            { 
                 description: `Bro. These "strawberry" things? DELICIOUS! 🍓`, 
                 comments: [
                     `Haha, I love your facial expression! Those strawberries must be really tasty! 😂🍓`, 
@@ -1435,7 +1435,7 @@ const data = [
                     `Arnie, you're the cutest little foodie I know! 🍓🐹`, 
                 ], 
             }, 
-            3: { 
+            { 
                 description: `HBD to me! 🎉`, 
                 comments: [
                     `The cake is to tiny! 😆 HBD Arnie!`,
@@ -1446,7 +1446,7 @@ const data = [
                     `Happy b-day Arnie! 🎂🎉`, 
                 ], 
             }, 
-            4: { 
+            { 
                 description: `Ayo someone help me outta here! 😰`, 
                 comments: [
                     `Oh no, Arnie! Don't worry, we'll get you out of there in no time! 😅`, 
@@ -1456,7 +1456,7 @@ const data = [
                     `Arnie the Houdini! 😂`,
                 ], 
             },  
-        },  
+        ],  
     },
 
     // 17
@@ -1471,8 +1471,8 @@ const data = [
             location: 'Denver, CO', 
             bio: `Hoppying and binkying with my lion-like mane. 🦁`, 
         },
-        posts: {
-            1: { 
+        posts: [
+            { 
                 description: `When I was just a little baby. 🐰`, 
                 comments: [
                     `Omg you were the cutest little baby bunny ever! 😍🐰`, 
@@ -1482,7 +1482,7 @@ const data = [
                     `😍😍😍😍😍`, 
                 ], 
             }, 
-            2: { 
+            { 
                 description: `You can't sit with us. 💁‍♀️`, 
                 comments: [
                     `Haha, I love the attitude. 😂💁‍♀️`, 
@@ -1492,7 +1492,7 @@ const data = [
                     `Tell 'em Lily! 💅`, 
                 ], 
             }, 
-            3: { 
+            { 
                 description: `Pretending to work but secretly ordering treats online. 👸🏼`, 
                 comments: [
                     `I see you! 🕵️‍♀️😜`, 
@@ -1502,7 +1502,7 @@ const data = [
                     `That's genius! 😂`, 
                 ], 
             }, 
-            4: { 
+            { 
                 description: `Merry Chrysler from my family to yours! ❤️`, 
                 comments: [
                     `Merry Christmas to you too, Lily! 🎄🐰`, 
@@ -1514,7 +1514,7 @@ const data = [
                     `🎄🎅`
                 ], 
             }, 
-        }, 
+        ], 
     }, 
 
     // 18
@@ -1529,8 +1529,8 @@ const data = [
             location: 'Indianapolis, IN', 
             bio: `Unruly hair rules. 🤪`, 
         },
-        posts: {
-            1: { 
+        posts: [
+            { 
                 description: `🍂🍁🥮`, 
                 comments: [
                     `I can't decide what's better: the crunchy leaves or the pumpkin treats? 😍🍁🎃`, 
@@ -1540,7 +1540,7 @@ const data = [
                     `I'm convinced that Friz is secretly a squirrel. He's just as cute and loves the fall season! 🐿️🧡`, 
                 ], 
             }, 
-            2: { 
+            { 
                 description: `Call me Salvador Dali from now on! 👨‍🎨`, 
                 comments: [
                     `You're a true work of art, Friz! 🎨🖼️`, 
@@ -1550,7 +1550,7 @@ const data = [
                     `If I didn't know any better, I'd say that painting was done by you, Friz! 🤔🎨`, 
                 ], 
             }, 
-            3: { 
+            { 
                 description: `I guess. A little bit. You’re being kinda rude though. 🐒`, 
                 comments: [
                     `It's okay Friz, Chewie is a legend! Plus, you're way cuter! 😍🐶`, 
@@ -1560,7 +1560,7 @@ const data = [
                     `I think the resemblance is uncanny, Friz! But don't worry, you're still the most handsome chihuahua in the galaxy! 😍🐾`, 
                 ], 
             }, 
-            4: { 
+            { 
                 description: `I think someone spiked my dognog. I ain't mad about it! 🦴🍸`, 
                 comments: [
                     `I think it's safe to say that someone's having a good time! 😂🍹🐶`, 
@@ -1570,7 +1570,7 @@ const data = [
                     `I'll have what Friz is having! 🍹🤣🐶`, 
                 ], 
             }, 
-            5: { 
+            { 
                 description: `91 dog years old today! But I don't look a day over 21 right...? 😰`, 
                 comments: [
                     `Friz out here aging like a fine wine! 💪🏼`, 
@@ -1581,7 +1581,7 @@ const data = [
                     `Tell us your routine! 🧖`,  
                 ], 
             }, 
-        },
+        ],
     },
 
     // 19
@@ -1596,8 +1596,8 @@ const data = [
             location: 'Oklahoma City, OK', 
             bio: `Eternally disappointed. 😾`, 
         },
-        posts: {
-            1: { 
+        posts: [
+            { 
                 description: `Hi. I'm Merlin and I'm eternally disappointed. 😾`, 
                 comments: [
                     `Aww, Merlin, cheer up! Don't be a grump!`, 
@@ -1610,7 +1610,7 @@ const data = [
                     `Some cats just don't change. 😂`,
                 ], 
             }, 
-            2: { 
+            { 
                 description: `My birthday sucked. 😤`, 
                 comments: [
                     `Sorry to hear that, Merlin. Next year, let's throw you a surprise party and watch you try to act surprised. 😹`, 
@@ -1621,7 +1621,7 @@ const data = [
                     `Oh don't be a grump - grandpa! 😂`,
                 ], 
             }, 
-            3: { 
+            { 
                 description: `Happy Monday to everyone except for Monday. 🤬`, 
                 comments: [
                     `Merlin, I feel like you and Garfield would get along swimmingly. 😂`, 
@@ -1633,7 +1633,7 @@ const data = [
                     `😹😹😹`, 
                 ], 
             }, 
-            4: { 
+            { 
                 description: `The fluff is this, human?! I said I wanted pizza! 😡`, 
                 comments: [
                     `What a disapointment! 😂`, 
@@ -1646,7 +1646,7 @@ const data = [
                     `So disrespectful. 😤 To the guillotine! 😹`, 
                 ], 
             }, 
-        },     
+        ],     
     },
 
     // 20
@@ -1661,8 +1661,8 @@ const data = [
             location: 'Louisville, KY', 
             bio: `I'm just a cat with luscious locks. 😽`, 
         },
-        posts: {
-            1: { 
+        posts: [
+            { 
                 description: `Mondays. Amarite? 🤢`, 
                 comments: [
                     `Mondays are the worst, but at least your hair is looking fabulous! 😻`, 
@@ -1673,7 +1673,7 @@ const data = [
                     `I just sleep through it. 😂`,
                 ], 
             }, 
-            2: { 
+            { 
                 description: `I don't get it either. I just love them. 📦`, 
                 comments: [
                     `You know you're a cat when a cardboard box is your favorite toy! 😹`, 
@@ -1685,7 +1685,7 @@ const data = [
                     `Why are you like this?! 😹`,
                 ], 
             }, 
-            3: { 
+            { 
                 description: `Can you tell I'm so excited to bathe? 🤬`, 
                 comments: [
                     `Look at the bright side, Harry. At least your hair will be even more fabulous after the bath! 😸`, 
@@ -1698,7 +1698,7 @@ const data = [
                     `Protest by rolling in the mud! 😉`,
                 ], 
             }, 
-            4: { 
+            { 
                 description: `Thankful. I guess. 🦃`, 
                 comments: [
                     `You're not a turkey, Harry. No need to be salty about Thanksgiving! 😹`, 
@@ -1709,7 +1709,7 @@ const data = [
                     `I'm ready to grub! 🍽`,
                 ], 
             }, 
-            5: { 
+            { 
                 description: `Blaming this one on the dog, again. 😂 `, 
                 comments: [
                     `You savage! Poor dog! 😂`, 
@@ -1721,7 +1721,7 @@ const data = [
                     `Rude. 🙄`,
                 ], 
             }, 
-        }, 
+        ], 
     },
 
     // 21
@@ -1736,8 +1736,8 @@ const data = [
             location: 'Las Vegas, NV', 
             bio: `Bow to the queen. 👑`, 
         },
-        posts: {
-            1: { 
+        posts: [
+            { 
                 description: `That's Queen Purr to you. 👸`, 
                 comments: [
                     `Aura, you remind me of a certain Regina George. 😂`, 
@@ -1747,7 +1747,7 @@ const data = [
                     `I respect the sass! 😝`, 
                 ], 
             }, 
-            2: { 
+            { 
                 description: `Same same. 💅`, 
                 comments: [
                     `Royalty. Both of you! 👑`, 
@@ -1757,7 +1757,7 @@ const data = [
                     `Cut from the same fabric!`, 
                 ], 
             }, 
-            3: { 
+            { 
                 description: `Fall vibes. 🍁🍂`, 
                 comments: [
                     `Loving the aesthetic, Aura! 🧡`, 
@@ -1766,7 +1766,7 @@ const data = [
                     `Fall feels! 🍂`, 
                 ], 
             }, 
-            4: { 
+            { 
                 description: `PSL szn!`, 
                 comments: [
                     `Obsessed! ☕️🎃`, 
@@ -1776,7 +1776,7 @@ const data = [
                     `Drink up! ☕️`,
                 ], 
             }, 
-            5: { 
+            { 
                 description: `Out here watching over my kingdom. 👑`, 
                 comments: [
                     `Protect your kingdom! 👑`, 
@@ -1786,7 +1786,7 @@ const data = [
                     `Majestic. ✨✨✨`,
                 ], 
             }, 
-        }, 
+        ], 
     }, 
 
     // 22 
@@ -1801,8 +1801,8 @@ const data = [
             location: 'Washington, D.C.', 
             bio: `Catching hearts with my folded ears. 😻`, 
         },
-        posts: {
-            1: { 
+        posts: [
+            { 
                 description: `Eyes are the window to the soul or whateva. 👁`, 
                 comments: [
                     `Those eyes could pierce through any soul, Daisy! 😳`, 
@@ -1813,7 +1813,7 @@ const data = [
                     `Stop looking at me with those things! 😂`, 
                 ], 
             }, 
-            2: { 
+            { 
                 description: `My presence is your present. 🎄🎁`, 
                 comments: [
                     `Girl, relax. 😹`,
@@ -1825,7 +1825,7 @@ const data = [
                     `Your head is getting a little big Daisy. 😹`,
                 ], 
             }, 
-            3: { 
+            { 
                 description: `Halp. 💤 `, 
                 comments: [
                     `You're about to drift asleep! 😂`, 
@@ -1833,7 +1833,7 @@ const data = [
                     `I think Daisy's spirit animal is a sloth! 😜`, 
                 ], 
             }, 
-            4: { 
+            { 
                 description: `Hooman, why? I already groom myself! 🛀 `, 
                 comments: [
                     `Where'd all the floof go?! 😹`,
@@ -1843,7 +1843,7 @@ const data = [
                     `Oh no! 😩`, 
                 ], 
             }, 
-            5: { 
+            { 
                 description: `Bad angle! I swear I'm not this chonky! 🥲`, 
                 comments: [
                     `T-rex arms. 🦖`,
@@ -1854,7 +1854,7 @@ const data = [
                     `More to love! Amarite? 😹`, 
                 ], 
             },  
-        }, 
+        ], 
     },
 
     // 23
@@ -1869,8 +1869,8 @@ const data = [
             location: 'San Diego, CA', 
             bio: `Gentle giant on a mission to break stereotypes. 🐾`, 
         },
-        posts: {
-            1: { 
+        posts: [
+            { 
                 description: `Hey all! 🙋‍♀️ I'm Sadie. I'm a blue pit living in San Diego CA. 🌞 Don't let my build and stereotypes about my breed fool you, I'm actually a gentle giant and heart and love nothing more than to snuggle and cuddle with my humans. I also enjoy belly rubs, waggin' my tail, going to the beach 🌊, and making friends at the park 🤗.`, 
                 comments: [
                     `You're such a sweetheart, Sadie Blue! 🥰`, 
@@ -1880,7 +1880,7 @@ const data = [
                     `Sadie, you're such a gentle soul. Don't let anyone tell you otherwise.`, 
                 ], 
             }, 
-            2: { 
+            { 
                 description: `84 pup years around the sun! 👵`, 
                 comments: [
                     `You're getting more distinguished with age, Sadie. Like a fine wine. 🍷`, 
@@ -1895,7 +1895,7 @@ const data = [
                     `You look great for 84! 👵 Happy Birthday! ❤️`,
                 ], 
             }, 
-            3: { 
+            { 
                 description: `In my happy place. 🛁🌸🌹`, 
                 comments: [
                     `QT 🥧`, 
@@ -1905,7 +1905,7 @@ const data = [
                     `Fun!`, 
                 ], 
             }, 
-            4: { 
+            { 
                 description: `Happy Valentine's Day everyone! ❤️❤️❤️❤️❤️❤️`, 
                 comments: [
                     `Love you to the moon and back, Sadie! You're the best furry friend anyone could ask for.`, 
@@ -1915,7 +1915,7 @@ const data = [
                     `Happy Valentine's Day! 🥰`, 
                 ], 
             }, 
-            5: { 
+            { 
                 description: `Mom. This is so embarrassing. 🙈`, 
                 comments: [
                     `OMG. 😂❤️`, 
@@ -1927,7 +1927,7 @@ const data = [
                     `QT 🥧`,
                 ], 
             }, 
-        }, 
+        ], 
     },
 
     // 24 
@@ -1942,8 +1942,8 @@ const data = [
             location: 'Chicago, IL', 
             bio: `Squirrely girl in a squirrely world. 🐿`, 
         },
-        posts: {
-            1: { 
+        posts: [
+            { 
                 description: `When I was just a little baby. 🐣`, 
                 comments: [
                     `I can't! 🥰`, 
@@ -1954,7 +1954,7 @@ const data = [
                     `You were to tiny! 😭`,
                 ], 
             }, 
-            2: { 
+            { 
                 description: `Hai! 🙋‍♀️`, 
                 comments: [
                     `Hi cutie! 😍`, 
@@ -1966,7 +1966,7 @@ const data = [
                     `What up Acorn! 👋`,
                 ], 
             }, 
-            3: { 
+            { 
                 description: `Soaking up the Sunday sun. 🌞👙`, 
                 comments: [
                     `Where's the kini?! 😂`,
@@ -1978,7 +1978,7 @@ const data = [
                     `It's officially summer! 🕶`, 
                 ], 
             }, 
-            4: { 
+            { 
                 description: `Remember that you are fabulous. 💖`, 
                 comments: [
                     `Thanks for the reminder Acorn! 🥰`,
@@ -1990,7 +1990,7 @@ const data = [
                     `😭`,
                 ], 
             }, 
-            5: { 
+            { 
                 description: `This weather is not it y'all. ⛄️🤧 `, 
                 comments: [
                     `Hang in there, Acorn! Spring will come soon enough! 🌸`, 
@@ -2001,7 +2001,7 @@ const data = [
                     `But you look so cozy! ☺️`, 
                 ], 
             }, 
-        }, 
+        ], 
     },
 
     // 25
@@ -2016,8 +2016,8 @@ const data = [
             location: 'Philadelphia, PA', 
             bio: `Mischief and adventure. 🦝`, 
         },
-        posts: {
-            1: { 
+        posts: [
+            { 
                 description: `No paparazzi please! 📸`, 
                 comments: [
                     `So staged! Looks like a selfie! 😆`,
@@ -2028,7 +2028,7 @@ const data = [
                     `Remember us when you're famous! 😩`,
                 ], 
             }, 
-            2: { 
+            { 
                 description: `Avocado on erthang! 🥑`, 
                 comments: [
                     `Those are the nicest avocados I've ever seen! 🤤`,
@@ -2040,7 +2040,7 @@ const data = [
                     `I completely overlooked the graham crackers lol`, 
                 ], 
             }, 
-            3: { 
+            { 
                 description: `Almost got this walking thing down. 🚶`, 
                 comments: [
                     `QT 🥧`,
@@ -2052,7 +2052,7 @@ const data = [
                     `You're practically a hooman. 🚶‍♂️`, 
                 ], 
             }, 
-            4: { 
+            { 
                 description: `Halp! 🙀`, 
                 comments: [
                     `OMW, just hange on! Ha!`, 
@@ -2063,7 +2063,7 @@ const data = [
                     `Drama queen. 😆`,
                 ], 
             }, 
-            5: { 
+            { 
                 description: `What's the serving size again? 🤪`, 
                 comments: [
                     `I'd have as much as you want, and some! 🤣`, 
@@ -2075,7 +2075,7 @@ const data = [
                     `As much as you can handle. 🤪`,
                 ], 
             }, 
-        }, 
+        ], 
     },
     
     // 26 
@@ -2090,8 +2090,8 @@ const data = [
             location: 'Salt Lake City, UT', 
             bio: `Silver coat and soulful eyes.`, 
         },
-        posts: {
-            1: { 
+        posts: [
+            { 
                 description: `RUN! 😳`, 
                 comments: [
                     `Always ready for a run! Wait for me! 🏃‍♂️🐾`, 
@@ -2102,7 +2102,7 @@ const data = [
                     `When the hoomans catch you going through the snack drawer. 😂`,
                 ], 
             }, 
-            2: { 
+            { 
                 description: `🤪`, 
                 comments: [
                     `😍🐾`, 
@@ -2113,7 +2113,7 @@ const data = [
                     `You play too much. 😂`,
                 ], 
             }, 
-            3: { 
+            { 
                 description: `Umm.. who turned off the lights? 😰`, 
                 comments: [
                     `🤡🤡🤡`,
@@ -2124,7 +2124,7 @@ const data = [
                     `Model. 🕺`,
                 ], 
             }, 
-            4: { 
+            { 
                 description: `Made a new friend today. 🐞`, 
                 comments: [
                     `I dare you to sneeze. 😂`, 
@@ -2136,7 +2136,7 @@ const data = [
                     `Yeah I'm gonna pass on that! 😱`,
                 ], 
             }, 
-            5: { 
+            { 
                 description: `Fireworks are coming huh? 🧨🙀`, 
                 comments: [
                     `Take a sedative! They're game-changing!`, 
@@ -2147,7 +2147,7 @@ const data = [
                     `What happened?! I thought you were tough! 😆`,
                 ], 
             }, 
-        }, 
+        ], 
     },
 
     // 27
@@ -2162,8 +2162,8 @@ const data = [
             location: 'Buffalo, New York', 
             bio: `Exploring the world with my stubby legs. 🐾`, 
         },
-        posts: {
-            1: { 
+        posts: [
+            { 
                 description: `Ears to the weekend! 🥂`, 
                 comments: [
                     `Awe Nutmeg! 😍`,
@@ -2174,7 +2174,7 @@ const data = [
                     `Cheeears! 🤪`,
                 ], 
             }, 
-            2: { 
+            { 
                 description: `Boop! 🐽`, 
                 comments: [
                     `Got your nose! 😂`, 
@@ -2183,7 +2183,7 @@ const data = [
                     `Dog or pig? 🐶🐷`,
                 ], 
             }, 
-            3: { 
+            { 
                 description: `Out here making snow angels! 👼🏻`, 
                 comments: [
                     `Those are some tiny snow angels. 😂`,
@@ -2191,7 +2191,7 @@ const data = [
                     `So cute! 😊`, 
                 ], 
             }, 
-            4: { 
+            { 
                 description: `👻`, 
                 comments: [
                     `I can barely see you! 😂`, 
@@ -2200,7 +2200,7 @@ const data = [
                     `Looks like you're overheating. 😆`,
                 ], 
             }, 
-            5: { 
+            { 
                 description: `No 🧢`, 
                 comments: [
                     `Looking good Nutmeg! 😎`, 
@@ -2209,7 +2209,7 @@ const data = [
                     `Chilly dog. ❄️🌭`, 
                 ], 
             }, 
-        }, 
+        ], 
     },
 
     // 28
@@ -2224,8 +2224,8 @@ const data = [
             location: 'Portland, Maine', 
             bio: `Big personality in a small package. 🐶`, 
         },
-        posts: {
-            1: { 
+        posts: [
+            { 
                 description: `What I look like before coffee. ☕️`, 
                 comments: [
                     `Same! It's a vice. 😰`, 
@@ -2236,7 +2236,7 @@ const data = [
                     `For real! 💀🤣`, 
                 ], 
             }, 
-            2: { 
+            { 
                 description: `Roadtrip! 🚗`, 
                 comments: [
                     `I'd be terrified if I was your pasanger. 😂`, 
@@ -2246,7 +2246,7 @@ const data = [
                     `Idk about this one Specks. 😳`,
                 ], 
             }, 
-            3: { 
+            { 
                 description: `I’ve fallen for you 🍁`, 
                 comments: [
                     `So romantic! Who's the lucky lady? 😏`, 
@@ -2257,7 +2257,7 @@ const data = [
                     `So embarrassing Speckles. 😂`,
                 ], 
             }, 
-            4: { 
+            { 
                 description: `Gobble, Gobble! Happy Thanksgiving! 🦃`, 
                 comments: [
                     `Happy Thanksgiving, Speckles! 😃`, 
@@ -2267,7 +2267,7 @@ const data = [
                     `Gobble 'til you wobble! Happy Thanksgiving from our family to yours! 😌`, 
                 ], 
             }, 
-            5: { 
+            { 
                 description: `Chili dogs. ❄️`, 
                 comments: [
                     `Don't forget your warmest coat! 🥶`, 
@@ -2278,7 +2278,7 @@ const data = [
                     `In another life you'd be a husky! ❄️`,
                 ], 
             }, 
-        }, 
+        ], 
     },
 
     // 29
@@ -2293,8 +2293,8 @@ const data = [
             location: 'Tacoma, WA', 
             bio: `Exploring every corner of the world. ✨`, 
         },
-        posts: {
-            1: { 
+        posts: [
+            { 
                 description: `Selfie game strong. 🤳 `, 
                 comments: [
                     `Candid or staged moment? 🤨`, 
@@ -2306,7 +2306,7 @@ const data = [
                     `Dang Sage! Way to make an appearance! 💃`, 
                 ], 
             }, 
-            2: { 
+            { 
                 description: `😸🍁🍂`, 
                 comments: [
                     `🔥😍🔥😍🔥😍`,
@@ -2319,7 +2319,7 @@ const data = [
                     `I'm living vicariously through you! 🥰`, 
                 ], 
             }, 
-            3: { 
+            { 
                 description: `Close enough. 😂`, 
                 comments: [
                     `The hoomans set you up! 😆`,
@@ -2330,7 +2330,7 @@ const data = [
                     `Send this to influencers in the wild! 😂`, 
                 ], 
             }, 
-            4: { 
+            { 
                 description: `I'm a fierce dande-lion! 😻🌼`, 
                 comments: [
                     `Slay 👸`, 
@@ -2341,7 +2341,7 @@ const data = [
                     `Pawtogenic! 🥰`, 
                 ], 
             }, 
-            5: { 
+            { 
                 description: `Stay present friends. 🧘‍♀️`, 
                 comments: [
                     `Louder! 👏`,
@@ -2352,7 +2352,7 @@ const data = [
                     `I usually end up falling asleep. 😅`,
                 ], 
             }, 
-        },
+        ],
     },
 
     // 30
@@ -2367,8 +2367,8 @@ const data = [
             location: 'Costa Mesa, CA', 
             bio: `😽😸😺😻😼`, 
         },
-        posts: {
-            1: { 
+        posts: [
+            { 
                 description: `Wise beyond my years. 🧐`, 
                 comments: [
                     `Man, sit yoself down. 🤣`, 
@@ -2379,7 +2379,7 @@ const data = [
                     `Ollie. Come on. 😂`, 
                 ], 
             }, 
-            2: { 
+            { 
                 description: `14-pound, apartment-range, tuna-fed fluffball. Happy Thanksgiving homies! 🦃`, 
                 comments: [
                     `14lbs?! Chonkie boi! 🤣`, 
@@ -2391,7 +2391,7 @@ const data = [
                     `That's a big ol' turkey! 🤣`,
                 ], 
             }, 
-            3: { 
+            { 
                 description: `Nothing like starting the morning with a tuna-spice latte from Pawbucks. ☕️`, 
                 comments: [
                     `That sounds like the purrrfect way to start the day. 😉`, 
@@ -2401,7 +2401,7 @@ const data = [
                     `🔥`, 
                 ], 
             }, 
-            4: { 
+            { 
                 description: `Found the cure for Monday scaries! 🥱`, 
                 comments: [
                     `💀💀💀`,
@@ -2413,7 +2413,7 @@ const data = [
                     `I'm gonna do this every day of the week! 🤪`,
                 ], 
             }, 
-            5: { 
+            { 
                 description: `I do wut I want! 😤`, 
                 comments: [
                     `You rebel!`, 
@@ -2424,7 +2424,7 @@ const data = [
                     `Louder for the hoomans in the back! 🗣`, 
                 ], 
             }, 
-        }, 
+        ], 
     },
 ]; 
 
