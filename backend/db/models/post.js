@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,  
     },
     description: { 
-      type: DataTypes.STRING, 
+      type: DataTypes.TEXT, 
       allowNull: false,  
     }, 
     picturePath: { 
@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     likes: { 
       type: DataTypes.INTEGER, 
-      allowNull: false,  
+      allowNull: true,  
     }
   }, {});
   Post.associate = function(models) {

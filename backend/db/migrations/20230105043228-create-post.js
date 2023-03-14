@@ -25,7 +25,7 @@ module.exports = {
         defaultValue: 0, 
       },
       description: { 
-        type: Sequelize.INTEGER,
+        type: Sequelize.TEXT,
         allowNull: false,   
       },
       createdAt: {
