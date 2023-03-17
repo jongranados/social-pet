@@ -5,8 +5,12 @@ import App from './App';
 
 import { Provider as ReduxProvider } from 'react-redux';
 import store from '../src/store'; 
+import { csrfFetch, restoreCSRF } from 'store/csrf';
 
 if (process.env.NODE_ENV !== 'production') { 
+  restoreCSRF(); 
+
+  window.csrfFetch = csrfFetch; 
   window.store = store; 
 }; 
 

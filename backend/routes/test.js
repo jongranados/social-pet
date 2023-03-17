@@ -8,7 +8,7 @@ router.get('/hello/world', function(req, res) {
     res.send('Hello World!');
 });
 
-router.post('/test', function(req, res) { 
+router.post('/', function(req, res) { 
     res.json({ requestBody: req.body }); 
 });
 

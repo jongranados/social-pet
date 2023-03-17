@@ -13,4 +13,12 @@ router.use('/auth', authRouter);
 /* USERS ROUTER MOUNTING */
 router.use('/users', usersRouter);
 
+/* XSRF-TOKEN COOKIE RETRIEVAL ROUTE (for when in dev env and backend and frontend is served from two servers) */
+if (process.env.NODE_ENV !== 'production') { 
+    router.get('/csrf/restore', (req, res) => { 
+        res.cookie('XSRF-TOKEN', req.csrfToken()); 
+        return res.json({}); 
+    }); 
+}
+
 module.exports = router; 
