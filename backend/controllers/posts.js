@@ -20,7 +20,7 @@ const getPosts = async (req, res, next) => {
     // posts requested: feedPosts - include ids of user and everyone they follow in query
     if (postsRequested === 'feedPosts') { 
 
-        // retrive the updated list of ids for accounts that the user follows. 
+        // retrive list of ids for accounts that the user follows. 
         targetIds = await Follow.findAll({ 
             where: { 
                 followerId: id
@@ -30,7 +30,6 @@ const getPosts = async (req, res, next) => {
 
         // retain only values (user ids) of each key-value pair in the resulting object array
         targetIds = targetIds.map(targetId => targetId.followeeId);
-        console.log(`followingIds = ${targetIds}`) 
 
         // add the user to the list
         targetIds.push(id); 
@@ -39,7 +38,6 @@ const getPosts = async (req, res, next) => {
     else { 
         targetIds = id; 
     }
-
 
     let posts = await Post.findAll({ 
         where: { 
@@ -63,4 +61,47 @@ const getPosts = async (req, res, next) => {
     });
 }; 
 
-module.exports = { getPosts }; 
+/* UPDATE CONTROLLERS */
+const createPost = async (req, res, next) => { 
+    const {  
+        userId, 
+        picturePath, 
+        description,
+    } = req.body; 
+
+    const newPost = await Post.create({
+        userId, 
+        picturePath, 
+        description,
+    }); 
+
+    // retrive the list of ids for accounts that the user follows. 
+    let targetIds = await Follow.findAll({ 
+        where: { 
+            followerId: userId
+        }, 
+        attributes: ['followeeId'], 
+    }); 
+
+    // retain only values (user ids) of each key-value pair in the resulting object array
+    targetIds = targetIds.map(targetId => targetId.followeeId);
+
+    // add the user to the list
+    targetIds.push(userId); 
+
+    let posts = await Post.findAll({ 
+        where: { 
+            userId: targetIds 
+        }, 
+        order: [
+            ['createdAt', 'ASC'], 
+        ]
+    }); 
+
+    return res.json({ 
+        posts
+    }); 
+}
+
+
+module.exports = { getPosts, createPost }; 
