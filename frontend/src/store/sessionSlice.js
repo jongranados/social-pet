@@ -9,6 +9,7 @@ const initialState = {
     likes: [], 
 };
 
+
 export const sessionSlice = createSlice({ 
     name: 'session', 
     initialState: initialState, 
@@ -36,7 +37,7 @@ export const sessionSlice = createSlice({
 }); 
 
 // export session action creators
-export const { setMode, setLogin, setLogout, setFriends, setPosts, } = sessionSlice.actions;
+export const { setMode, setUser, removeUser, setFollowing, setPosts, } = sessionSlice.actions;
 
 // export session reducer
 export default sessionSlice.reducer; 
