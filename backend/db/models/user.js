@@ -175,9 +175,11 @@ module.exports = (sequelize, DataTypes) => {
 
   // model methods - implemented to limit and segment the logic that explicitly interacts with the Users table
   User.prototype.toSafeObject = function() { 
-    const { id, username, email } = this; 
+    const { id, firstName, lastName, username, email } = this; 
     return { 
       id, 
+      firstName, 
+      lastName,
       username, 
       email,
     }

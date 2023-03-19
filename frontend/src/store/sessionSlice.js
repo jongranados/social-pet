@@ -1,4 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { csrfFetch } from "./csrf";
 
 const initialState = { 
     mode: 'light',
@@ -9,6 +10,21 @@ const initialState = {
     likes: [], 
 };
 
+export const restoreUser = createAsyncThunk(
+    'session/restore', 
+    async (_, thunkAPI) => {
+        const url = '/auth/session'; 
+        const options = { 
+            method: 'GET', 
+        };
+
+        const response = await csrfFetch(url, options); 
+        const data = await response.json(); 
+        console.log(data); 
+        if (data.user) thunkAPI.dispatch(setUser(data.user)); 
+        return data; 
+    },
+);
 
 export const sessionSlice = createSlice({ 
     name: 'session', 

@@ -14,8 +14,15 @@ function App() {
   const mode = useSelector((state) => state.session.mode); 
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
 
+  // check to see if session user already exists
+  const dispatch = useDispatch();
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  return (
+  useEffect(() => {
+    dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
+  }, [dispatch]);
+
+  return isLoaded && (
     <div className="app">
       <BrowserRouter> 
         <ThemeProvider theme={theme}>
