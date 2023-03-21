@@ -215,7 +215,7 @@ module.exports = (sequelize, DataTypes) => {
     }; 
   };
 
-  User.signup = async function({ firstName, lastName, username, email, password, picturePath, gotchaDate, breed, location, bio, profileViews, impressions }) { 
+  User.signup = async function({ firstName, lastName, username, email, password, picturePath, gotchaDate, species, breed, location, bio, profileViews, impressions }) { 
     const hashedPassword = bcrypt.hashSync(password, 10); 
     const user = await User.create({ 
       firstName, 
@@ -224,7 +224,8 @@ module.exports = (sequelize, DataTypes) => {
       email, 
       hashedPassword, 
       picturePath, 
-      gotchaDate, 
+      gotchaDate,
+      species, 
       breed, 
       location, 
       bio,  
