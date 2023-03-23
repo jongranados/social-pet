@@ -10,6 +10,7 @@ const initialState = {
     likes: [], 
 };
 
+// restore previously authenticated user 
 export const restoreUser = createAsyncThunk(
     'session/restore', 
     async (_, thunkAPI) => {
@@ -25,6 +26,32 @@ export const restoreUser = createAsyncThunk(
         return data; 
     },
 );
+
+// login thunk
+export const login = createAsyncThunk(
+    'session/login', 
+    async (user, thunkAPI) => { 
+        const { credential, password } = user; 
+        const url = '/auth/login'; 
+        const options = { 
+            method: 'POST', 
+            body: JSON.stringify({
+                credential, 
+                password,
+            }),
+        };
+
+        try { 
+            const response = await csrfFetch(url, options); 
+            const data = await response.json(); 
+            thunkAPI.dispatch(setUser(data.user)); 
+            return data; 
+        } catch(errorResponse) { 
+            const  errorData = await errorResponse.json(); 
+            return thunkAPI.rejectWithValue(errorData.errors)
+        }
+    }, 
+); 
 
 export const sessionSlice = createSlice({ 
     name: 'session', 
