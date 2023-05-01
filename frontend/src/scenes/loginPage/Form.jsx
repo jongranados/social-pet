@@ -1,15 +1,30 @@
-import { Box, Button, TextField, useMediaQuery, Typography, useTheme } from '@mui/material';
+import { useDispatch } from 'react-redux';
+
+import { Box, Button, TextField, useMediaQuery, useTheme } from '@mui/material';
 
 import { Formik } from 'formik'; 
 import { initialLoginValues, loginValidationSchema } from 'validations';
+import * as sessionActions from 'store/sessionSlice';
 
 const Form = () => { 
     const theme = useTheme(); 
-    const { palette } = theme;  
+    const { palette } = theme; 
+    const dispatch = useDispatch(); 
     const matchesMobileDevice = useMediaQuery('(max-width:600px)'); 
+
+    const handleFormSubmit = async(values, onSubmitProps) => { 
+        const { credential, password } = values; 
+
+        await dispatch(sessionActions.login({ credential, password }))
+            .unwrap()
+            .catch(async backendValidationErrors => alert(backendValidationErrors));
+
+        onSubmitProps.resetForm(); 
+    };
 
     return(
         <Formik
+            onSubmit={handleFormSubmit}
             initialValues={ initialLoginValues } 
             validationSchema={ loginValidationSchema }        
         >
@@ -20,6 +35,8 @@ const Form = () => {
                 handleBlur, 
                 handleChange, 
                 handleSubmit, 
+                setFieldValue, 
+                resetForm, 
             }) => (
                 <form onSubmit={handleSubmit}>
                     <Box
