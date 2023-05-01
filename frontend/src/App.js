@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'; 
 import HomePage from 'scenes/homePage'; 
 import LoginPage from 'scenes/loginPage'; 
+import SignupPage from 'scenes/signupPage'; 
 import ProfilePage from 'scenes/profilePage'; 
 import * as sessionActions from "./store/sessionSlice";
 
@@ -29,6 +30,7 @@ function App() {
           <CssBaseline />
           <Routes> 
             <Route path='/' element={<LoginPage />} />
+            <Route path='/signup' element={<SignupPage />} />
             <Route path='/home' element={<HomePage />} />
             <Route path='/profile/:userId' element={<ProfilePage />} />
           </Routes>

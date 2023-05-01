@@ -1,6 +1,7 @@
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import { Box, Button, TextField, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Button, TextField, useMediaQuery, Typography, useTheme } from '@mui/material';
 
 import { Formik } from 'formik'; 
 import { initialLoginValues, loginValidationSchema } from 'validations';
@@ -10,6 +11,7 @@ const Form = () => {
     const theme = useTheme(); 
     const { palette } = theme; 
     const dispatch = useDispatch(); 
+    const navigate = useNavigate(); 
     const matchesMobileDevice = useMediaQuery('(max-width:600px)'); 
 
     const handleFormSubmit = async(values, onSubmitProps) => { 
@@ -84,7 +86,19 @@ const Form = () => {
                     >
                         LOGIN
                     </Button>
-
+                    <Typography
+                        onClick={() => navigate('/signup')}
+                        sx={{
+                            textDecoration: 'underline',
+                            color: palette.primary.main,
+                            '&:hover': { 
+                                cursor: 'pointer', 
+                                color: palette.primary.light
+                            },
+                        }}
+                    >
+                        Don't have an account? Sign up here! 
+                    </Typography>
                 </form>
             )}
         </Formik>
