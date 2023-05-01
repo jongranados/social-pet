@@ -1,18 +1,27 @@
 import { Box, Button, TextField, useMediaQuery, Typography, useTheme } from '@mui/material';
+
 import { Formik } from 'formik'; 
+import { initialLoginValues, loginValidationSchema } from 'validations';
 
 const Form = () => { 
     const theme = useTheme(); 
-    const { palette } = theme; 
+    const { palette } = theme;  
     const matchesMobileDevice = useMediaQuery('(max-width:600px)'); 
 
     return(
-        <Formik>
+        <Formik
+            initialValues={ initialLoginValues } 
+            validationSchema={ loginValidationSchema }        
+        >
             {({
+                values,
+                errors,
+                touched, 
                 handleBlur, 
                 handleChange, 
+                handleSubmit, 
             }) => (
-                <form>
+                <form onSubmit={handleSubmit}>
                     <Box
                         display='grid'
                         gap='30px'
@@ -25,7 +34,10 @@ const Form = () => {
                         label='Username or email address'
                         onBlur={handleBlur}
                         onChange={handleChange}
+                        value={values.credential}
                         name='credential'
+                        error={Boolean(touched.credential) && Boolean(errors.credential)}
+                        helperText={touched.credential && errors.credential}
                         sx={{ gridColumn: 'span 1' }}
                     />
                     <TextField
@@ -33,7 +45,10 @@ const Form = () => {
                         type='password'
                         onBlur={handleBlur}
                         onChange={handleChange}
+                        value={values.password}
                         name='password'
+                        error={Boolean(touched.password) && Boolean(errors.password)}
+                        helperText={touched.password && errors.password}
                         sx={{ gridColumn: 'span 1' }}
                     />
                     </Box>
