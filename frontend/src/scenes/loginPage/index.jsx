@@ -1,5 +1,6 @@
 import { Box, Typography, useTheme, useMediaQuery } from '@mui/material'; 
-import Form from './Form'; 
+import Form from './LoginForm'; 
+import FormBanner from 'components/FormBanner';
 
 const LoginPage = () => {
     const theme = useTheme(); 
@@ -7,26 +8,8 @@ const LoginPage = () => {
     
     return (
         <Box>
-            <Box
-                width='100%'
-                backgroundColor={theme.palette.background.alt}
-                padding='1rem 6%'
-                textAlign='center'
-            >
-                <Typography
-                    fontWeight='bold'
-                    fontSize='32px'
-                    color='primary'
-                >
-                     Social Pets
-                </Typography>
-                <Typography
-                    fontSize='18px'
-                >
-                    🐱🐶🐰🐭🐹🦊🐻🐻‍❄️🐼🐨🐷🐮🐸🐯🦁
-                </Typography>
-            </Box>
-
+            <FormBanner />
+            
             <Box
                 width={matchesMobileDevice ? '93%' : '50%'}
                 padding='2rem'
@@ -44,10 +27,7 @@ const LoginPage = () => {
                 <Form /> 
             </Box>
         </Box>
-
     )
-
-
 };
 
 export default LoginPage; 

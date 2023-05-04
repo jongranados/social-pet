@@ -7,20 +7,26 @@ import { Formik } from 'formik';
 import { initialLoginValues, loginValidationSchema } from 'validations';
 import * as sessionActions from 'store/sessionSlice';
 
-const Form = () => { 
+const LoginForm = () => { 
     const theme = useTheme(); 
     const { palette } = theme; 
     const dispatch = useDispatch(); 
     const navigate = useNavigate(); 
     const matchesMobileDevice = useMediaQuery('(max-width:600px)'); 
 
+    // submission handler passed to form via Formik's provided handleSubmit prop
     const handleFormSubmit = async(values, onSubmitProps) => { 
+        // destructure submitted form values; Formik provides submission handler with submitted values via 'values' object
         const { credential, password } = values; 
 
+        // dispatch redux login thunk upon form submission
         await dispatch(sessionActions.login({ credential, password }))
+            // unwrap promise returned from login thunk in order to handle failed login request attempt at component level
             .unwrap()
+            // handle errors returned from failed login request attempt
             .catch(async backendValidationErrors => alert(backendValidationErrors));
 
+        // reset form upon failed login request attempt
         onSubmitProps.resetForm(); 
     };
 
@@ -37,8 +43,6 @@ const Form = () => {
                 handleBlur, 
                 handleChange, 
                 handleSubmit, 
-                setFieldValue, 
-                resetForm, 
             }) => (
                 <form onSubmit={handleSubmit}>
                     <Box
@@ -103,7 +107,6 @@ const Form = () => {
             )}
         </Formik>
     )
-    
 }; 
 
-export default Form; 
+export default LoginForm; 
