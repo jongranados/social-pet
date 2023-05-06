@@ -76,7 +76,6 @@ const LoginForm = () => {
                     />
                     </Box>
 
-                    {/* BUTTONS */}
                     <Button
                         fullWidth
                         type='submit'
