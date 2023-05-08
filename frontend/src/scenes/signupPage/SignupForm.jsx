@@ -1,6 +1,6 @@
 import { Formik } from 'formik';
 
-const Form = () => {
+const SignupForm = () => {
 
     return (
         <Formik>
@@ -14,4 +14,4 @@ const Form = () => {
 
 };
 
-export default Form; 
+export default SignupForm; 
