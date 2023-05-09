@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 import { Box, Button, useMediaQuery, Typography, useTheme, TextField } from '@mui/material';
-import { initialSignupValues } from 'validations';
+import { initialSignupValues, signupValidationSchema } from 'validations';
 
 
 const SignupForm = () => {
@@ -14,10 +14,12 @@ const SignupForm = () => {
 
     return (
         <Formik
-            initialValues={initialSignupValues} 
+            initialValues={initialSignupValues}
+            validationSchema={signupValidationSchema} 
         >
             {({ 
                 values,
+                errors,
                 touched, 
                 handleBlur, 
                 handleChange, 
@@ -38,7 +40,8 @@ const SignupForm = () => {
                         onChange={handleChange}
                         value={values.firstName}
                         name='firstName'
-                        helperText={touched.firstName}
+                        error={Boolean(touched.firstName) && Boolean(errors.firstName)}
+                        helperText={touched.firstName && errors.firstName}
                         sx={{ gridColumn: 'span 1' }}
                     />
 
@@ -48,7 +51,8 @@ const SignupForm = () => {
                         onChange={handleChange}
                         value={values.lastName}
                         name='lastName'
-                        helperText={touched.lastName}
+                        error={Boolean(touched.lastName) && Boolean(errors.lastName)}
+                        helperText={touched.lastName && errors.lastName}
                         sx={{ gridColumn: 'span 1' }}
                     />
 
@@ -58,7 +62,8 @@ const SignupForm = () => {
                         onChange={handleChange}
                         value={values.username}
                         name='username'
-                        helperText={touched.username}
+                        error={Boolean(touched.username) && Boolean(errors.username)}
+                        helperText={touched.username && errors.username}
                         sx={{ gridColumn: 'span 1' }}
                     />
 
@@ -68,7 +73,8 @@ const SignupForm = () => {
                         onChange={handleChange}
                         value={values.email}
                         name='email'
-                        helperText={touched.email}
+                        error={Boolean(touched.email) && Boolean(errors.email)}
+                        helperText={touched.email && errors.email}
                         sx={{ gridColumn: 'span 1' }}
                     />
 
@@ -78,7 +84,8 @@ const SignupForm = () => {
                         onChange={handleChange}
                         value={values.gotchaDate}
                         name='gotchaDate'
-                        helperText={touched.gotchaDate}
+                        error={Boolean(touched.gotchaDate) && Boolean(errors.gotchaDate)}
+                        helperText={touched.gotchaDate && errors.gotchaDate}
                         sx={{ gridColumn: 'span 1' }}
                     />
 
@@ -88,7 +95,8 @@ const SignupForm = () => {
                         onChange={handleChange}
                         value={values.species}
                         name='species'
-                        helperText={touched.species}
+                        error={Boolean(touched.species) && Boolean(errors.species)}
+                        helperText={touched.species && errors.species}
                         sx={{ gridColumn: 'span 1' }}
                     />
 
@@ -98,7 +106,8 @@ const SignupForm = () => {
                         onChange={handleChange}
                         value={values.breed}
                         name='breed'
-                        helperText={touched.breed}
+                        error={Boolean(touched.breed) && Boolean(errors.breed)}
+                        helperText={touched.breed && errors.breed}
                         sx={{ gridColumn: 'span 1' }}
                     />
 
@@ -108,7 +117,8 @@ const SignupForm = () => {
                         onChange={handleChange}
                         value={values.location}
                         name='location'
-                        helperText={touched.location}
+                        error={Boolean(touched.location) && Boolean(errors.location)}
+                        helperText={touched.location && errors.location}
                         sx={{ gridColumn: 'span 1' }}
                     />
 
@@ -118,7 +128,8 @@ const SignupForm = () => {
                         onChange={handleChange}
                         value={values.bio}
                         name='bio'
-                        helperText={touched.bio}
+                        error={Boolean(touched.bio) && Boolean(errors.bio)}
+                        helperText={touched.bio && errors.bio}
                         sx={{ gridColumn: 'span 2' }}
                     />
 
@@ -129,7 +140,8 @@ const SignupForm = () => {
                         onChange={handleChange}
                         value={values.password}
                         name='password'
-                        helperText={touched.password}
+                        error={Boolean(touched.password) && Boolean(errors.password)}
+                        helperText={touched.password && errors.password}
                         sx={{ gridColumn: 'span 1' }}
                     />
 
@@ -140,7 +152,8 @@ const SignupForm = () => {
                         onChange={handleChange}
                         value={values.confirmPassword}
                         name='confirmPassword'
-                        helperText={touched.confirmPassword}
+                        error={Boolean(touched.confirmPassword) && Boolean(errors.confirmPassword)}
+                        helperText={touched.confirmPassword && errors.confirmPassword}
                         sx={{ gridColumn: 'span 1' }}
                     />
                     </Box>
