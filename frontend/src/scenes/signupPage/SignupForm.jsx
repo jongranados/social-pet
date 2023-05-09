@@ -1,13 +1,15 @@
 import { Formik } from 'formik';
+import { useNavigate } from 'react-router-dom';
 
 
-import { Box, Button, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Button, useMediaQuery, Typography, useTheme } from '@mui/material';
 
 
 const SignupForm = () => {
     const theme = useTheme();
     const { palette } = theme;
     const matchesMobileDevice = useMediaQuery('(max-width:600px)');
+    const navigate = useNavigate(); 
 
     return (
         <Formik>
@@ -37,6 +39,19 @@ const SignupForm = () => {
                         SIGNUP
                     </Button>
 
+                    <Typography
+                        onClick={() => navigate('/')}
+                        sx={{
+                            textDecoration: 'underline',
+                            color: palette.primary.main,
+                            '&:hover': {
+                                cursor: 'pointer',
+                                color: palette.primary.light
+                            },
+                        }}
+                    >
+                        Already have an account? Login here!
+                    </Typography>
                 </form>
             )}
         </Formik>
