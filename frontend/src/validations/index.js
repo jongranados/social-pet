@@ -16,7 +16,7 @@ export const initialLoginValues = {
 }
 
 // validation schema for the signup form
-export const singupValidationSchema = yup.object().shape({ 
+export const signupValidationSchema = yup.object().shape({ 
     firstName: yup
         .string()
         .required('Your first name is required.'),
