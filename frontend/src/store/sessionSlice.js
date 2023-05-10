@@ -53,6 +53,54 @@ export const login = createAsyncThunk(
     }, 
 ); 
 
+// signup thunk
+export const signup = createAsyncThunk(
+    'session/signup', 
+    async (user, thunkAPI) => { 
+        const { 
+            firstName, 
+            lastName, 
+            username, 
+            email, 
+            password,
+            picturePath, 
+            gotchaDate,
+            species, 
+            breed, 
+            location, 
+            bio,          
+        } = user; 
+
+        const url = '/auth/signup'; 
+        const options = { 
+            method: 'POST', 
+            body: JSON.stringify({
+                firstName, 
+                lastName, 
+                username, 
+                email, 
+                password,
+                picturePath, 
+                gotchaDate,
+                species, 
+                breed, 
+                location, 
+                bio, 
+            }),
+        };
+
+        try { 
+            const response = await csrfFetch(url, options); 
+            const data = await response.json(); 
+            thunkAPI.dispatch(setUser(data.user)); 
+            return data; 
+        } catch(errorResponse) { 
+            const  errorData = await errorResponse.json(); 
+            return thunkAPI.rejectWithValue(errorData.errors)
+        }
+    }, 
+); 
+
 export const sessionSlice = createSlice({ 
     name: 'session', 
     initialState: initialState, 
