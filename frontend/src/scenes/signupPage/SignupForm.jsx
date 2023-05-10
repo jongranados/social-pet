@@ -57,9 +57,7 @@ const SignupForm = () => {
         // redirect home upon successful signup request attempt or reset form upon failed attempt
         if (signupSuccessful) {
             navigate('/home');
-        } else { 
-            // onSubmitProps.resetForm();
-        }
+        } 
     };
 
     return (
