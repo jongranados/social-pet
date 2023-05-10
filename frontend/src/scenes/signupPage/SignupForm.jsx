@@ -1,9 +1,12 @@
-import { Formik } from 'formik';
 import { useNavigate } from 'react-router-dom';
-
+import { useDispatch } from 'react-redux';
 
 import { Box, Button, useMediaQuery, Typography, useTheme, TextField } from '@mui/material';
+
+import { Formik } from 'formik';
 import { initialSignupValues, signupValidationSchema } from 'validations';
+
+import * as sessionActions from '../../store/sessionSlice'
 
 
 const SignupForm = () => {
@@ -11,9 +14,57 @@ const SignupForm = () => {
     const { palette } = theme;
     const matchesMobileDevice = useMediaQuery('(max-width:600px)');
     const navigate = useNavigate(); 
+    const dispatch = useDispatch(); 
+
+    // submission handler passed to form via Formik's provided handleSubmit prop
+    const handleFormSubmit = async (values, onSubmitProps) => {
+        console.log('in here')
+        console.log(values); 
+        // destructure submitted form values; Formik provides submission handler with submitted values via 'values' object
+        const { 
+            firstName,
+            lastName,
+            username,
+            email,
+            password,
+            // picturePath,
+            gotchaDate,
+            species,
+            breed,
+            location,
+            bio,    
+         } = values;
+
+        // dispatch redux signup thunk upon form submission
+        const signupSuccessful = await dispatch(sessionActions.signup({ 
+            firstName,
+            lastName,
+            username,
+            email,
+            password,
+            picturePath: 'test',
+            gotchaDate,
+            species,
+            breed,
+            location,
+            bio,    
+         }))
+            // unwrap promise returned from signup thunk in order to handle failed signup request attempt at component level
+            .unwrap()
+            // handle errors returned from failed signup request attempt
+            .catch(async backendValidationErrors => alert(backendValidationErrors));
+
+        // redirect home upon successful signup request attempt or reset form upon failed attempt
+        if (signupSuccessful) {
+            navigate('/home');
+        } else { 
+            // onSubmitProps.resetForm();
+        }
+    };
 
     return (
         <Formik
+            onSubmit={handleFormSubmit}
             initialValues={initialSignupValues}
             validationSchema={signupValidationSchema} 
         >
@@ -23,8 +74,9 @@ const SignupForm = () => {
                 touched, 
                 handleBlur, 
                 handleChange, 
+                handleSubmit
             }) => (
-                <form>
+                <form onSubmit={handleSubmit}>
                     <Box
                         display='grid'
                         gap='30px'
