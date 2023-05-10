@@ -48,6 +48,7 @@ export const signupValidationSchema = yup.object().shape({
         .required('Your location is required.'),
     bio: yup
         .string()
+        .max(256, 'Your bio must be less than 256 characters long.')
         .required('Your profile bio is required.'),
     password: yup
         .string()
