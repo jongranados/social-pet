@@ -17,7 +17,6 @@ const Navbar = () => {
     const dark = theme.palette.neutral.dark; 
     const neutralLight = theme.palette.neutral.light; 
     const primaryDark = theme.palette.primary.dark; 
-    const primaryLight = theme.palette.primary.light; 
     const background = theme.palette.background.default; 
     const alt = theme.palette.background.alt; 
 
