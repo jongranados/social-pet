@@ -78,6 +78,7 @@ DISCLAIMER: While unlikely, there is a chance that your pet may become too engro
 - User profiles
 - Create, read, update, and delete posts
 - Create, read, update, and delete comments on posts
+- Create, read, update, and delete likes on posts
 - Upload images 
 - Follow and unfollow other users
 
