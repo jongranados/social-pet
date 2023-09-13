@@ -21,7 +21,6 @@ export const restoreUser = createAsyncThunk(
 
         const response = await csrfFetch(url, options); 
         const data = await response.json(); 
-        console.log(data); 
         if (data.user) thunkAPI.dispatch(setUser(data.user)); 
         return data; 
     },
@@ -63,10 +62,8 @@ export const logout = createAsyncThunk(
         };
 
         try { 
-            console.log('about to try')
             const response = await csrfFetch(url, options); 
             const data = await response.json(); 
-            console.log(data); 
             thunkAPI.dispatch(removeUser()); 
             return data; 
         } catch(errorResponse) { 
