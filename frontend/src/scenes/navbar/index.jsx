@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Box, IconButton, InputBase, Typography, Select, MenuItem, FormControl, useTheme, useMediaQuery } from '@mui/material';
 import { Search, Message, DarkMode, LightMode, Notifications, Help, Menu, Close } from '@mui/icons-material'; 
 import { useDispatch, useSelector } from 'react-redux';
-import { setMode, removeUser } from 'store/sessionSlice'; 
+import * as sessionActions from 'store/sessionSlice'; 
 import { useNavigate } from 'react-router-dom';
 import FlexBetweenBox from 'components/FlexBetweenBox';
 
@@ -20,7 +20,20 @@ const Navbar = () => {
     const background = theme.palette.background.default; 
     const alt = theme.palette.background.alt; 
 
-    const fullName = `${user.firstName} ${user.lastName}`; 
+    const fullName = user ? `${user.firstName} ${user.lastName}` : 'NULL'; 
+
+    const handleLogoutRequest = async() => { 
+        // dispatch redux lgout thunk upon logout request
+        const logoutSuccessful = await dispatch(sessionActions.logout())
+            // unwrap promise returned from logout thunk in order to handle failed login request attempt at component level
+            .unwrap()
+            // handle errors returned from failed logout request attempt
+            .catch(async backendValidationErrors => alert(backendValidationErrors));
+
+        if (logoutSuccessful) { 
+            navigate('/')
+        } 
+    };
 
     return ( 
         <FlexBetweenBox padding='1rem 6%' backgroundColor={alt}>
@@ -65,7 +78,7 @@ const Navbar = () => {
             ) : (
                 // FOR DESKTOP:
                 <FlexBetweenBox gap='2rem'>
-                    <IconButton onClick={() => dispatch(setMode())}>
+                    <IconButton onClick={() => dispatch(sessionActions.setMode())}>
                         {
                             theme.palette.mode === 'dark' ? (
                                 <DarkMode sx={{ fontSize: '25px' }} />
@@ -96,7 +109,7 @@ const Navbar = () => {
                             input={<InputBase />}
                         >
                             <MenuItem value={fullName}><Typography>{fullName}</Typography></MenuItem>
-                            <MenuItem onClick={() => dispatch(removeUser())}>Log Out</MenuItem>
+                            <MenuItem onClick={handleLogoutRequest}>Log Out</MenuItem>
                         </Select>
                     </FormControl>
                 </FlexBetweenBox>
@@ -134,7 +147,7 @@ const Navbar = () => {
                         gap='3rem'
                     >
                         <IconButton 
-                            onClick={() => dispatch(setMode())} 
+                            onClick={() => dispatch(sessionActions.setMode())} 
                             sx={{ fontSize:'25px '}}
                         >
                             {
@@ -166,7 +179,7 @@ const Navbar = () => {
                                 input={<InputBase />}
                             >
                                 <MenuItem value={fullName}><Typography>{fullName}</Typography></MenuItem>
-                                <MenuItem onClick={() => dispatch(removeUser())}>Log Out</MenuItem>
+                                <MenuItem onClick={handleLogoutRequest}>Log Out</MenuItem>
                             </Select>
                         </FormControl>
                     </FlexBetweenBox>
