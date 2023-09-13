@@ -53,6 +53,29 @@ export const login = createAsyncThunk(
     }, 
 ); 
 
+// logout thunk
+export const logout = createAsyncThunk(
+    'session/logout', 
+    async (_, thunkAPI) => { 
+        const url = '/auth/logout'; 
+        const options = { 
+            method: 'DELETE', 
+        };
+
+        try { 
+            console.log('about to try')
+            const response = await csrfFetch(url, options); 
+            const data = await response.json(); 
+            console.log(data); 
+            thunkAPI.dispatch(removeUser()); 
+            return data; 
+        } catch(errorResponse) { 
+            const  errorData = await errorResponse.json(); 
+            return thunkAPI.rejectWithValue(errorData.errors)
+        }
+    }, 
+)
+
 // signup thunk
 export const signup = createAsyncThunk(
     'session/signup', 
