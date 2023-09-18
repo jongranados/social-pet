@@ -1,4 +1,4 @@
-const { User, Follow, Post } = require('../db/models'); 
+const { User, Follow, Post, Comment } = require('../db/models'); 
 
 
 /* READ CONTROLLERS */
@@ -42,6 +42,7 @@ const getPosts = async (req, res, next) => {
         where: { 
             userId: targetIds 
         }, 
+        include: Comment, 
         order: [
             ['createdAt', 'DESC'], 
         ]
