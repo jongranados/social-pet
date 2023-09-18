@@ -3,7 +3,7 @@ import { csrfFetch } from "./csrf";
 
 const initialState = { 
     mode: 'light',
-    user: null, 
+    user: undefined, 
     following: [], 
     posts: [], 
     comments: [], 
@@ -120,6 +120,30 @@ export const signup = createAsyncThunk(
         }
     }, 
 ); 
+
+// get posts 
+export const getPosts = createAsyncThunk(
+	"session/getPosts",
+	async ({ id, requestedPosts }, thunkAPI) => {
+		const url = `/posts?id=${id}&requestedPosts=${requestedPosts}`;
+		const options = {
+			method: "GET",
+		};
+
+		try {
+			const response = await csrfFetch(url, options);
+			const data = await response.json();
+
+			thunkAPI.dispatch(setPosts(data.posts));
+			console.log("survived dispatching");
+
+			return data;
+		} catch (errorResponse) {
+			const errorData = await errorResponse.json();
+			return thunkAPI.rejectWithValue(errorData.errors);
+		}
+	}
+);
 
 export const sessionSlice = createSlice({ 
     name: 'session', 
