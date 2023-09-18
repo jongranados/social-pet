@@ -133,10 +133,7 @@ export const getPosts = createAsyncThunk(
 		try {
 			const response = await csrfFetch(url, options);
 			const data = await response.json();
-
 			thunkAPI.dispatch(setPosts(data.posts));
-			console.log("survived dispatching");
-
 			return data;
 		} catch (errorResponse) {
 			const errorData = await errorResponse.json();
