@@ -29,11 +29,7 @@ const UserFeed = () => {
 
     return (
         <Box>
-            <Post />
-            <Post />
-            <Post />
-            <Post />
-            <Post />
+            {posts.map((post) => <Post key={`post-${post.id}`} post={post} /> )}
         </Box>
     )
 }
