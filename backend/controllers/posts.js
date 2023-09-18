@@ -42,7 +42,13 @@ const getPosts = async (req, res, next) => {
         where: { 
             userId: targetIds 
         }, 
-        include: Comment, 
+        include: { 
+            model: Comment, 
+            include: {
+                model: User,
+                attributes: ['firstName', 'lastName']
+            }, 
+        }, 
         order: [
             ['createdAt', 'DESC'], 
         ]
