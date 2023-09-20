@@ -13,17 +13,28 @@ const Post = ({ post }) => {
             xs: 'column', // mobile
             sm: 'row', // tablet and up
             },
+            justifyContent: 'center', 
+            alignItems: 'center', 
+            width: 1, 
         }}
         >
             <CardMedia
                 component="img"
                 src={`http://localhost:3000/${picturePath}.jpeg`}
+                sx={{ 
+                    width: 1/2, 
+                    maxWidth: 'md',
+                }}
             />
             <Box>
                 <Box> 
                     <CardMedia
                         component="img"
                         src={`http://localhost:3000/${authorPicturePath}.jpeg`}
+                        sx={{
+                            width: 32, 
+                            height: 32, 
+                        }}
                     />
 
                     <Typography>

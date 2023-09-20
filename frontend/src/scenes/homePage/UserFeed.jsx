@@ -28,7 +28,19 @@ const UserFeed = () => {
     }, [dispatch, user, navigate]); 
 
     return (
-        <Box>
+        <Box
+            sx={{
+                width: '100%',
+                p: 2, 
+                border: '1px solid red', 
+                display: 'flex', 
+                flexDirection: 'column',
+                alignItems: 'center', 
+                gap: 2, 
+                
+            }}
+        
+        >
             {posts.map((post) => <Post key={`post-${post.id}`} post={post} /> )}
         </Box>
     )
