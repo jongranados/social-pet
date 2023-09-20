@@ -38,21 +38,25 @@ const getPosts = async (req, res, next) => {
 		targetIds = id;
 	}
 
-    let posts = await Post.findAll({ 
-        where: { 
-            userId: targetIds 
-        }, 
-        include: { 
-            model: Comment, 
-            include: {
-                model: User,
-                attributes: ['firstName', 'lastName']
-            }, 
-        }, 
-        order: [
-            ['createdAt', 'DESC'], 
-        ]
-    }); 
+    let posts = await Post.findAll({
+		where: {
+			userId: targetIds,
+		},
+		include: [
+			{
+				model: Comment,
+				include: {
+					model: User,
+					attributes: ["firstName", "lastName"],
+				},
+			},
+			{
+				model: User.scope("userProfile"),
+				attributes: ["username", "picturePath"],
+			},
+		],
+		order: [["createdAt", "DESC"]],
+	}); 
 
     if (!posts) { 
         const err = new Error('Posts not found for specified user.');
