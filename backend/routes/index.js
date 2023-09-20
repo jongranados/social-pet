@@ -29,7 +29,7 @@ if (process.env.NODE_ENV !== 'production') {
 if (process.env.NODE_ENV === 'production') { 
     const path = require('path'); 
 
-    // serve index.html file at root route
+    // serve the index.html file at the root route
     router.get('/', (req, res) => { 
         res.cookie('XSRF-TOKEN', req.csrfToken()); 
         return res.sendFile(path.resolve(__dirname, '../../frontend', 'build', 'index.html')); 
