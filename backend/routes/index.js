@@ -25,4 +25,24 @@ if (process.env.NODE_ENV !== 'production') {
     }); 
 }
 
+/* STATIC ROUTES FOR PRODUCTION */
+if (process.env.NODE_ENV === 'production') { 
+    const path = require('path'); 
+
+    // serve index.html file at root route
+    router.get('/', (req, res) => { 
+        res.cookie('XSRF-TOKEN', req.csrfToken()); 
+        return res.sendFile(path.resolve(__dirname, '../../frontend', 'build', 'index.html')); 
+    }); 
+
+    // serve the static assets in the frontend's build folder
+    router.use(express.static(path.resolve('../frontend/build'))); 
+
+    // serve the frontend's index.html file at all other routes NOT starting with /api
+    router.get(/^(?!\/?(auth|users|posts)).*/, (req, res) => { 
+        res.cookie('XSRF-TOKEN', req.csrfToken()); 
+        return res.sendFile(path.resolve(__dirname, '../../frontend', 'build', 'index.html')); 
+    }); 
+}
+
 module.exports = router; 
