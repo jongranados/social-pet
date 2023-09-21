@@ -1,7 +1,14 @@
 'use strict';
+
+let options = {};
+if (process.env.NODE_ENV === "production") {
+	options.schema = process.env.SCHEMA;
+	options.tableName = "Comments";
+}
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('Comments', {
+    return queryInterface.createTable(options, {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -38,9 +45,9 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    });
+    }, {});
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('Comments');
+    return queryInterface.dropTable(options);
   }
 };
