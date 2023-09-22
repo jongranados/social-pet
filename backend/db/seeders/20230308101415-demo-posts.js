@@ -2,6 +2,12 @@
 const { Post, User } = require('../models'); 
 const data = require('../../data/index'); 
 
+let options = {};
+if (process.env.NODE_ENV === "production") {
+	options.schema = process.env.SCHEMA;
+	options.tableName = "Posts";
+}
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
 
@@ -22,7 +28,7 @@ module.exports = {
       let postCount = await Post.count({ where: { userId } }); 
 
       // seed db with content of their oldest post
-      await Post.create({ 
+      await queryInterface.insert(options, { 
         userId, 
         description, 
         picturePath: `${firstName.toLowerCase()}-post-${postCount + 1}`,
