@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER, 
       allowNull: true,  
     }
-  }, {});
+  }, {hasTrigger: true});
   Post.associate = function(models) {
     // association with User model: 
     Post.belongsTo(
