@@ -2,6 +2,16 @@
 const { User, Post, Comment, Like, Follow } = require('../models'); 
 const data = require('../../data/index'); 
 
+let commentsOptions = {};
+let likesOptions = {}; 
+if (process.env.NODE_ENV === "production") {
+	commentsOptions.schema = process.env.SCHEMA;
+	commentsOptions.tableName = "Comments";
+	likesOptions.schema = process.env.SCHEMA;
+	likesOptions.tableName = "Likes";
+
+}
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     // loop through each mock user's data
@@ -33,7 +43,7 @@ module.exports = {
           let authorId = followeeIds.splice(randomIndex, 1).pop().followerId;
 
           // seed db's Comment table
-          await Comment.create({ 
+          await queryInterface.insert(commentsOptions, { 
             userId: authorId, 
             postId: post.id, 
             description: comment,
@@ -41,7 +51,7 @@ module.exports = {
 
           // seed db's Like table. conditional ensures that only a subset of users that comment on a post also like the post
           if (Math.random() < 0.7) { 
-            await Like.create({ 
+            await queryInterface.insert(likesOptions, { 
               userId: authorId, 
               postId: post.id, 
             }); 
