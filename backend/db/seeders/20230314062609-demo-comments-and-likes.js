@@ -14,6 +14,9 @@ if (process.env.NODE_ENV === "production") {
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
+    let demoComments = []; 
+    let demoLikes = []; 
+
     // loop through each mock user's data
     for (let i = 0; i < data.length; i++) { 
       let datum = data[i]; 
@@ -42,19 +45,20 @@ module.exports = {
           let randomIndex = Math.floor(Math.random() * followeeIds.length); 
           let authorId = followeeIds.splice(randomIndex, 1).pop().followerId;
 
-          // seed db's Comment table
-          await queryInterface.insert(commentsOptions, { 
+          // add comment to running collection
+          demoComments.push({
             userId: authorId, 
             postId: post.id, 
             description: comment,
-          }); 
 
-          // seed db's Like table. conditional ensures that only a subset of users that comment on a post also like the post
+          });
+
+          // add like to running collection. conditional ensures that only a subset of users that comment on a post also like the post
           if (Math.random() < 0.7) { 
-            await queryInterface.insert(likesOptions, { 
+            demoLikes.push({
               userId: authorId, 
               postId: post.id, 
-            }); 
+            })
           };
         
           // break out of loop if we run out of followers before running out of unpublished comments
@@ -62,6 +66,10 @@ module.exports = {
         };
       };
     };
+
+    // finally, add the collection of comments and likes to the database
+    await queryInterface.bulkInsert(commentsOptions, demoComments);  
+    await queryInterface.bulkInsert(likesOptions, demoLikes);  
   },
 
   down: async (queryInterface, Sequelize) => {
