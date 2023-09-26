@@ -55,7 +55,7 @@ const getPosts = async (req, res, next) => {
 				attributes: ["username", "picturePath"],
 			},
 		],
-		order: [["createdAt", "DESC"]],
+		order: [["id", "DESC"]],
 	}); 
 
     if (!posts) { 
