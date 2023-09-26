@@ -9,11 +9,13 @@ if (process.env.NODE_ENV === "production") {
 	commentsOptions.tableName = "Comments";
 	likesOptions.schema = process.env.SCHEMA;
 	likesOptions.tableName = "Likes";
-
 }
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
+    let demoComments = []; 
+    let demoLikes = []; 
+
     // loop through each mock user's data
     for (let i = 0; i < data.length; i++) { 
       let datum = data[i]; 
@@ -22,12 +24,10 @@ module.exports = {
       // loop through each mock user's posts
       for (let j = 0; j < posts.length; j++) { 
         let username = datum.user.username; 
-        let user = await User.findOne({ where: { username } }); 
-
+        let user = await User.findOne({ where: { username }, raw: true }); 
         let comments = posts[j].comments; 
         let description = posts[j].description; 
-        let post = await Post.findOne({ where: { description } }); 
-
+        let post = await Post.findOne({ where: { description }, raw: true }); 
         let followeeIds = await Follow.findAll({ 
           where: { followeeId: user.id }, 
           attributes: ['followerId'], 
@@ -42,19 +42,20 @@ module.exports = {
           let randomIndex = Math.floor(Math.random() * followeeIds.length); 
           let authorId = followeeIds.splice(randomIndex, 1).pop().followerId;
 
-          // seed db's Comment table
-          await queryInterface.insert(commentsOptions, { 
+          // add comment to running collection
+          demoComments.push({
             userId: authorId, 
             postId: post.id, 
             description: comment,
-          }); 
 
-          // seed db's Like table. conditional ensures that only a subset of users that comment on a post also like the post
+          });
+
+          // add like to running collection. conditional ensures that only a subset of users that comment on a post also like the post
           if (Math.random() < 0.7) { 
-            await queryInterface.insert(likesOptions, { 
+            demoLikes.push({
               userId: authorId, 
               postId: post.id, 
-            }); 
+            })
           };
         
           // break out of loop if we run out of followers before running out of unpublished comments
@@ -62,6 +63,10 @@ module.exports = {
         };
       };
     };
+
+    // finally, seed db with collection of comments and likes
+    await queryInterface.bulkInsert(commentsOptions, demoComments);  
+    await queryInterface.bulkInsert(likesOptions, demoLikes);  
   },
 
   down: async (queryInterface, Sequelize) => {
