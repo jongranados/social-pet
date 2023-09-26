@@ -47,7 +47,7 @@ const getPosts = async (req, res, next) => {
 				model: Comment,
 				include: {
 					model: User,
-					attributes: ["firstName", "lastName"],
+					attributes: ["firstName", "lastName", "picturePath"],
 				},
 			},
 			{
