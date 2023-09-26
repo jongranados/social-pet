@@ -10,9 +10,10 @@ if (process.env.NODE_ENV === "production") {
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-
     // generate posts; randomized effort to mimic the variable nature of content-publication across the app's userbase
     let demoPosts = []; 
+    data = JSON.parse(JSON.stringify(data)); // deeply clone mock data to prevent mutating original source
+
     while (data.length) {
 
       // choose a random user that has pending posts
