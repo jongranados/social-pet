@@ -9,7 +9,6 @@ if (process.env.NODE_ENV === "production") {
 	commentsOptions.tableName = "Comments";
 	likesOptions.schema = process.env.SCHEMA;
 	likesOptions.tableName = "Likes";
-
 }
 
 module.exports = {
@@ -25,12 +24,10 @@ module.exports = {
       // loop through each mock user's posts
       for (let j = 0; j < posts.length; j++) { 
         let username = datum.user.username; 
-        let user = await User.findOne({ where: { username } }); 
-
+        let user = await User.findOne({ where: { username }, raw: true }); 
         let comments = posts[j].comments; 
         let description = posts[j].description; 
-        let post = await Post.findOne({ where: { description } }); 
-
+        let post = await Post.findOne({ where: { description }, raw: true }); 
         let followeeIds = await Follow.findAll({ 
           where: { followeeId: user.id }, 
           attributes: ['followerId'], 
@@ -67,7 +64,7 @@ module.exports = {
       };
     };
 
-    // finally, add the collection of comments and likes to the database
+    // finally, seed db with collection of comments and likes
     await queryInterface.bulkInsert(commentsOptions, demoComments);  
     await queryInterface.bulkInsert(likesOptions, demoLikes);  
   },
