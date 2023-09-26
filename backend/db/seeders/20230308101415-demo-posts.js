@@ -1,6 +1,6 @@
 'use strict';
 const { Post, User } = require('../models'); 
-const data = require('../../data/index'); 
+let data = require('../../data/index'); 
 
 let options = {};
 if (process.env.NODE_ENV === "production") {
