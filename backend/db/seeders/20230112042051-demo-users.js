@@ -37,8 +37,6 @@ module.exports = {
       return demoUser; 
     }); 
 
-    console.log(JSON.stringify(demoUsers)); 
-
     await queryInterface.bulkInsert(options, demoUsers);  
   },
 
