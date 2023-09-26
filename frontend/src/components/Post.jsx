@@ -57,13 +57,13 @@ const Post = ({ post }) => {
                     <Box>
                         {comments.map((comment) => {
                             return (
-                            <Box>
+                            <Box key={`comment-${comment.id}`}>
                                 <img
                                 src={`/${comment.User.picturePath}.jpeg`}
                                 alt='profile'
                                 width='32'
                                 />
-                                <Typography key={`comment-${comment.id}`}>{comment.description}</Typography> 
+                                <Typography>{comment.description}</Typography> 
                             </Box>)
                         })}
                     </Box>
