@@ -55,7 +55,17 @@ const Post = ({ post }) => {
                         </Typography>
                     </Box>
                     <Box>
-                        {comments.map((comment) => <Typography key={`comment-${comment.id}`}>{comment.description}</Typography>)}
+                        {comments.map((comment) => {
+                            return (
+                            <Box>
+                                <img
+                                src={`/${comment.User.picturePath}.jpeg`}
+                                alt='profile'
+                                width='32'
+                                />
+                                <Typography key={`comment-${comment.id}`}>{comment.description}</Typography> 
+                            </Box>)
+                        })}
                     </Box>
                 </Box>
 
