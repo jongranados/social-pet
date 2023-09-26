@@ -20,7 +20,7 @@ const Post = ({ post }) => {
         >
             <CardMedia
                 component="img"
-                src={`https://localhost:3000/${picturePath}.jpeg`}
+                src={`http://localhost:3000/${picturePath}.jpeg`}
                 sx={{ 
                     width: 1/2, 
                     maxWidth: 'md',
@@ -30,7 +30,7 @@ const Post = ({ post }) => {
                 <Box> 
                     <CardMedia
                         component="img"
-                        src={`https://localhost:3000/${authorPicturePath}.jpeg`}
+                        src={`http://localhost:3000/${authorPicturePath}.jpeg`}
                         sx={{
                             width: 32, 
                             height: 32, 
