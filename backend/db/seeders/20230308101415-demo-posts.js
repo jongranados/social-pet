@@ -27,7 +27,13 @@ module.exports = {
       let unpublishedPosts = data[randomIndex].posts; 
       let targetPost = unpublishedPosts.shift();
       let description = targetPost.description; 
-      let postCount = await Post.count({ where: { userId } }); 
+      
+      let postCount = 0; 
+      demoPosts.forEach((demoPost) => {
+        if (demoPost.userId === userId) {
+          postCount++; 
+        }
+      }); 
 
       // add post to running collection
       demoPosts.push({ 

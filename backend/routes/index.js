@@ -17,6 +17,9 @@ router.use('/users', usersRouter);
 /* POSTS ROUTER MOUNTING */
 router.use('/posts', postsRouter); 
 
+/* DEPLOY MIDDLEWARE HANDLING STATIC ASSETS */
+router.use(express.static("public/assets")); 
+
 /* XSRF-TOKEN COOKIE RETRIEVAL ROUTE (for when in dev env and backend and frontend is served from two servers) */
 if (process.env.NODE_ENV !== 'production') { 
     router.get('/csrf/restore', (req, res) => { 

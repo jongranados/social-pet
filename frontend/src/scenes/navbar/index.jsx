@@ -24,15 +24,15 @@ const Navbar = () => {
 
     const handleLogoutRequest = async() => { 
         // dispatch redux lgout thunk upon logout request
-        const logoutSuccessful = await dispatch(sessionActions.logout())
+        await dispatch(sessionActions.logout())
             // unwrap promise returned from logout thunk in order to handle failed login request attempt at component level
             .unwrap()
+            // hande successful logout request by navigating to login page
+            .then(() => { 
+                navigate('/login');
+            })
             // handle errors returned from failed logout request attempt
             .catch(async backendValidationErrors => alert(backendValidationErrors));
-
-        if (logoutSuccessful) { 
-            navigate('/')
-        } 
     };
 
     return ( 
@@ -43,7 +43,7 @@ const Navbar = () => {
                     fontWeight='bold' 
                     fontSize='clamp(1rem, 2rem, 2.25rem)' 
                     color ='primary' 
-                    onClick={() => navigate('/home')}
+                    onClick={() => navigate('/')}
                     sx={{
                         '&:hover': { 
                             color: primaryDark, 

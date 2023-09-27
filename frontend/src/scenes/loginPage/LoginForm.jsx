@@ -20,17 +20,18 @@ const LoginForm = () => {
         const { credential, password } = values; 
 
         // dispatch redux login thunk upon form submission
-        const loginSuccessful = await dispatch(sessionActions.login({ credential, password }))
+        await dispatch(sessionActions.login({ credential, password }))
             // unwrap promise returned from login thunk in order to handle failed login request attempt at component level
             .unwrap()
+            // hande successful login request by navigating home
+            .then(() => { 
+                navigate('/');  
+            })
             // handle errors returned from failed login request attempt
-            .catch(async backendValidationErrors => alert(backendValidationErrors));
-
-        if (loginSuccessful) { 
-            navigate('/home')
-        } else { 
-            onSubmitProps.resetForm(); 
-        }
+            .catch(async backendValidationErrors => {
+                alert(backendValidationErrors)
+                onSubmitProps.resetForm(); 
+            });
     };
 
     return(

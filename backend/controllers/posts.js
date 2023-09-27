@@ -1,11 +1,11 @@
-const { User, Follow, Post } = require('../db/models'); 
+const { User, Follow, Post, Comment } = require('../db/models'); 
 
 
 /* READ CONTROLLERS */
-const getPosts = async (req, res, next) => { 
-    const { id, postsRequested } = req.query; 
-
-    const user = await User.getUserById(Number(id));
+const getFeedPosts = async (req, res, next) => { 
+    const { sessionUserId } = req.query; 
+    
+    const user = await User.getUserById(Number(sessionUserId));
 
     if (!user) { 
         const err = new Error('User not found.');
@@ -15,38 +15,39 @@ const getPosts = async (req, res, next) => {
         return next(err); 
     };
 
-    let targetIds; 
+    // retrieve list of ids for accounts that the user follows.
+    let targetIds = await Follow.findAll({
+        where: {
+            followerId: sessionUserId,
+        },
+        attributes: ["followeeId"],
+    });
 
-    // posts requested: feedPosts - include ids of user and everyone they follow in query
-    if (postsRequested === 'feedPosts') { 
+    // retain only values (user ids) of each key-value pair in the resulting object array
+    targetIds = targetIds.map((targetId) => targetId.followeeId);
 
-        // retrive list of ids for accounts that the user follows. 
-        targetIds = await Follow.findAll({ 
-            where: { 
-                followerId: id
-            }, 
-            attributes: ['followeeId'], 
-        }); 
+    // include session user to the list
+    targetIds.push(sessionUserId);
 
-        // retain only values (user ids) of each key-value pair in the resulting object array
-        targetIds = targetIds.map(targetId => targetId.followeeId);
-
-        // add the user to the list
-        targetIds.push(id); 
-    } 
-    // posts requested: userPosts - only include id of user in query
-    else { 
-        targetIds = id; 
-    }
-
-    let posts = await Post.findAll({ 
-        where: { 
-            userId: targetIds 
-        }, 
-        order: [
-            ['createdAt', 'ASC'], 
-        ]
-    }); 
+    let posts = await Post.findAll({
+		where: {
+			userId: targetIds,
+		},
+		include: [
+			{
+				model: Comment,
+				include: {
+					model: User,
+					attributes: ["firstName", "lastName", "picturePath"],
+				},
+			},
+			{
+				model: User.scope("userProfile"),
+				attributes: ["username", "picturePath"],
+			},
+		],
+		order: [["id", "DESC"]],
+	}); 
 
     if (!posts) { 
         const err = new Error('Posts not found for specified user.');
@@ -60,6 +61,9 @@ const getPosts = async (req, res, next) => {
         posts
     });
 }; 
+
+//TODO: implement controller dedicated to exclusively querying for user's posts 
+const getUserPosts = async (req, res, next) => {}; 
 
 /* UPDATE CONTROLLERS */
 const createPost = async (req, res, next) => { 
@@ -104,4 +108,4 @@ const createPost = async (req, res, next) => {
 }
 
 
-module.exports = { getPosts, createPost }; 
+module.exports = { getFeedPosts, getUserPosts, createPost }; 
