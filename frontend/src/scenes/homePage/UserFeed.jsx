@@ -9,11 +9,11 @@ const UserFeed = () => {
     const dispatch = useDispatch(); 
     const navigate = useNavigate(); 
     const user = useSelector(state => state.session.user);
-    const posts = useSelector(state => state.session.posts); 
+    const feedPosts = useSelector(state => state.session.feedPosts); 
     useEffect(() => { 
         const fetchFeed = async () => { 
             // dispatch redux getPosts thunk upon successful login
-            await dispatch(sessionActions.getPosts({ id: user.id, requestedPosts: 'feedPosts' }))
+            await dispatch(sessionActions.getFeedPosts({ id: user.id, }))
                 // unwrap promise returned from getPosts thunk in order to handle failed login request attempt at component level
                 .unwrap()
                 // handle errors returned from failed getPosts request attempt
@@ -41,7 +41,7 @@ const UserFeed = () => {
             }}
         
         >
-            {posts.map((post) => <Post key={`post-${post.id}`} post={post} /> )}
+            {feedPosts.map((post) => <Post key={`post-${post.id}`} post={post} /> )}
         </Box>
     )
 }

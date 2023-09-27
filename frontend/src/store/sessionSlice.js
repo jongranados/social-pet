@@ -5,9 +5,7 @@ const initialState = {
     mode: 'light',
     user: undefined, 
     following: [], 
-    posts: [], 
-    comments: [], 
-    likes: [], 
+    feedPosts: [], 
 };
 
 // restore previously authenticated user 
@@ -121,11 +119,11 @@ export const signup = createAsyncThunk(
     }, 
 ); 
 
-// get posts 
-export const getPosts = createAsyncThunk(
-	"session/getPosts",
-	async ({ id, requestedPosts }, thunkAPI) => {
-		const url = `/posts?id=${id}&requestedPosts=${requestedPosts}`;
+// get feed posts 
+export const getFeedPosts = createAsyncThunk(
+	"session/getFeedPosts",
+	async ({ id }, thunkAPI) => {
+		const url = `/posts?sessionUserId=${id}`;
 		const options = {
 			method: "GET",
 		};
@@ -133,7 +131,7 @@ export const getPosts = createAsyncThunk(
 		try {
 			const response = await csrfFetch(url, options);
 			const data = await response.json();
-			thunkAPI.dispatch(setPosts(data.posts));
+			thunkAPI.dispatch(setFeedPosts(data.posts));
 			return data;
 		} catch (errorResponse) {
 			const errorData = await errorResponse.json();
@@ -141,6 +139,9 @@ export const getPosts = createAsyncThunk(
 		}
 	}
 );
+
+// TODO: thunk for getting a single user's 
+export const getUserPosts = createAsyncThunk(); 
 
 export const sessionSlice = createSlice({ 
     name: 'session', 
@@ -158,8 +159,8 @@ export const sessionSlice = createSlice({
         setFollowing(state, action) { 
             state.following = action.payload; 
         }, 
-        setPosts(state, action) { 
-            state.posts = action.payload; 
+        setFeedPosts(state, action) { 
+            state.feedPosts = action.payload; 
         }, 
         // // to-do
         // setPost(state, action) { 
@@ -169,7 +170,7 @@ export const sessionSlice = createSlice({
 }); 
 
 // export session action creators
-export const { setMode, setUser, removeUser, setFollowing, setPosts, } = sessionSlice.actions;
+export const { setMode, setUser, removeUser, setFollowing, setFeedPosts, } = sessionSlice.actions;
 
 // export session reducer
 export default sessionSlice.reducer; 
