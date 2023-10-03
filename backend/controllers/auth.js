@@ -23,6 +23,13 @@ const login = async (req, res, next) => {
     }); 
 }; 
 
+/* LOGOUT CONTROLLER */
+const logout = async (req, res) => {
+	console.log("in logout controller");
+	res.clearCookie("token");
+	return res.json({ message: "success" });
+}; 
+
 /* SIGN UP CONTROLLER */
 const signup = async (req, res) => { 
 
@@ -81,4 +88,4 @@ const session = (req, res) => {
     }
 }
 
-module.exports = { login, signup, session }
+module.exports = { login, logout, signup, session }

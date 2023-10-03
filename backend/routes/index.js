@@ -17,11 +17,34 @@ router.use('/users', usersRouter);
 /* POSTS ROUTER MOUNTING */
 router.use('/posts', postsRouter); 
 
+/* DEPLOY MIDDLEWARE HANDLING STATIC ASSETS */
+router.use(express.static("public/assets")); 
+
 /* XSRF-TOKEN COOKIE RETRIEVAL ROUTE (for when in dev env and backend and frontend is served from two servers) */
 if (process.env.NODE_ENV !== 'production') { 
     router.get('/csrf/restore', (req, res) => { 
         res.cookie('XSRF-TOKEN', req.csrfToken()); 
         return res.json({}); 
+    }); 
+}
+
+/* STATIC ROUTES FOR PRODUCTION */
+if (process.env.NODE_ENV === 'production') { 
+    const path = require('path'); 
+
+    // serve the index.html file at the root route
+    router.get('/', (req, res) => { 
+        res.cookie('XSRF-TOKEN', req.csrfToken()); 
+        return res.sendFile(path.resolve(__dirname, '../../frontend', 'build', 'index.html')); 
+    }); 
+
+    // serve the static assets in the frontend's build folder
+    router.use(express.static(path.resolve('../frontend/build'))); 
+
+    // serve the frontend's index.html file at all other routes NOT starting with /api
+    router.get(/^(?!\/?(auth|users|posts)).*/, (req, res) => { 
+        res.cookie('XSRF-TOKEN', req.csrfToken()); 
+        return res.sendFile(path.resolve(__dirname, '../../frontend', 'build', 'index.html')); 
     }); 
 }
 

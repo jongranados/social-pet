@@ -3,6 +3,12 @@ const bcrypt = require('bcrypt');
 const { User } = require('../models');
 const data = require('../../data/index');  
 
+let options = {};
+if (process.env.NODE_ENV === "production") {
+	options.schema = process.env.SCHEMA;
+	options.tableName = "Users";
+}
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
 
@@ -31,9 +37,7 @@ module.exports = {
       return demoUser; 
     }); 
 
-    console.log(JSON.stringify(demoUsers)); 
-
-    await queryInterface.bulkInsert('Users', demoUsers);  
+    await queryInterface.bulkInsert(options, demoUsers);  
   },
 
   down: async (queryInterface, Sequelize) => {

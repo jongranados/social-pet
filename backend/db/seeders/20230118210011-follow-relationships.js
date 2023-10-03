@@ -1,6 +1,12 @@
 'use strict';
 const { Follow } = require('../models'); 
 
+let options = {};
+if (process.env.NODE_ENV === "production") {
+	options.schema = process.env.SCHEMA;
+	options.tableName = "Follows";
+}
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
 
@@ -37,7 +43,7 @@ module.exports = {
       }; 
     };
 
-    await queryInterface.bulkInsert('Follows', relationships);  
+    await queryInterface.bulkInsert(options, relationships);  
   },
 
   down: async (queryInterface, Sequelize) => {

@@ -3,11 +3,9 @@ import { csrfFetch } from "./csrf";
 
 const initialState = { 
     mode: 'light',
-    user: null, 
+    user: undefined, 
     following: [], 
-    posts: [], 
-    comments: [], 
-    likes: [], 
+    feedPosts: [], 
 };
 
 // restore previously authenticated user 
@@ -21,7 +19,6 @@ export const restoreUser = createAsyncThunk(
 
         const response = await csrfFetch(url, options); 
         const data = await response.json(); 
-        console.log(data); 
         if (data.user) thunkAPI.dispatch(setUser(data.user)); 
         return data; 
     },
@@ -52,6 +49,27 @@ export const login = createAsyncThunk(
         }
     }, 
 ); 
+
+// logout thunk
+export const logout = createAsyncThunk(
+    'session/logout', 
+    async (_, thunkAPI) => { 
+        const url = '/auth/logout'; 
+        const options = { 
+            method: 'DELETE', 
+        };
+
+        try { 
+            const response = await csrfFetch(url, options); 
+            const data = await response.json(); 
+            thunkAPI.dispatch(removeUser()); 
+            return data; 
+        } catch(errorResponse) { 
+            const  errorData = await errorResponse.json(); 
+            return thunkAPI.rejectWithValue(errorData.errors)
+        }
+    }, 
+)
 
 // signup thunk
 export const signup = createAsyncThunk(
@@ -101,6 +119,30 @@ export const signup = createAsyncThunk(
     }, 
 ); 
 
+// get feed posts 
+export const getFeedPosts = createAsyncThunk(
+	"session/getFeedPosts",
+	async ({ id }, thunkAPI) => {
+		const url = `/posts?sessionUserId=${id}`;
+		const options = {
+			method: "GET",
+		};
+
+		try {
+			const response = await csrfFetch(url, options);
+			const data = await response.json();
+			thunkAPI.dispatch(setFeedPosts(data.posts));
+			return data;
+		} catch (errorResponse) {
+			const errorData = await errorResponse.json();
+			return thunkAPI.rejectWithValue(errorData.errors);
+		}
+	}
+);
+
+// TODO: thunk for getting a single user's 
+export const getUserPosts = createAsyncThunk(); 
+
 export const sessionSlice = createSlice({ 
     name: 'session', 
     initialState: initialState, 
@@ -117,8 +159,8 @@ export const sessionSlice = createSlice({
         setFollowing(state, action) { 
             state.following = action.payload; 
         }, 
-        setPosts(state, action) { 
-            state.posts = action.payload; 
+        setFeedPosts(state, action) { 
+            state.feedPosts = action.payload; 
         }, 
         // // to-do
         // setPost(state, action) { 
@@ -128,7 +170,7 @@ export const sessionSlice = createSlice({
 }); 
 
 // export session action creators
-export const { setMode, setUser, removeUser, setFollowing, setPosts, } = sessionSlice.actions;
+export const { setMode, setUser, removeUser, setFollowing, setFeedPosts, } = sessionSlice.actions;
 
 // export session reducer
 export default sessionSlice.reducer; 
