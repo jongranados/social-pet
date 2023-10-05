@@ -3,9 +3,9 @@ const { User, Follow, Post, Comment } = require('../db/models');
 
 /* READ CONTROLLERS */
 const getFeedPosts = async (req, res, next) => { 
-    const { sessionUserId } = req.query; 
+    const { id } = req.params; 
     
-    const user = await User.getUserById(Number(sessionUserId));
+    const user = await User.getUserById(Number(id));
 
     if (!user) { 
         const err = new Error('User not found.');
@@ -18,7 +18,7 @@ const getFeedPosts = async (req, res, next) => {
     // retrieve list of ids for accounts that the user follows.
     let targetIds = await Follow.findAll({
         where: {
-            followerId: sessionUserId,
+            followerId: id,
         },
         attributes: ["followeeId"],
     });
@@ -27,7 +27,7 @@ const getFeedPosts = async (req, res, next) => {
     targetIds = targetIds.map((targetId) => targetId.followeeId);
 
     // include session user to the list
-    targetIds.push(sessionUserId);
+    targetIds.push(id);
 
     let posts = await Post.findAll({
 		where: {

@@ -123,8 +123,8 @@ export const signup = createAsyncThunk(
 export const getFeedPosts = createAsyncThunk(
 	"session/getFeedPosts",
 	async ({ id }, thunkAPI) => {
-		const url = `/posts?sessionUserId=${id}`;
-		const options = {
+		const url = `/users/${id}/feed`;
+        const options = {
 			method: "GET",
 		};
 
