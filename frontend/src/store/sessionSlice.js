@@ -140,7 +140,6 @@ export const getFeedPosts = createAsyncThunk(
 	}
 );
 
-// TODO: thunk for getting a single user's 
 export const getUserPosts = createAsyncThunk(
 	"session/getUserPosts",
 	async ({ id }, thunkAPI) => {
