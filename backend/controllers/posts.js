@@ -63,7 +63,17 @@ const getFeedPosts = async (req, res, next) => {
 }; 
 
 const getUserPosts = async (req, res, next) => {
-    const { id } = req.params;
+	const { id } = req.params;
+
+	const user = await User.getUserById(id);
+
+	if (!user) {
+		const err = new Error("User not found.");
+		err.status = 404;
+		err.title = "User not found.";
+		err.errors = ["The queried user was not found."];
+		return next(err);
+	}
 
 	let posts = await Post.findAll({
 		where: {
@@ -79,7 +89,6 @@ const getUserPosts = async (req, res, next) => {
 			},
 			{
 				model: User.scope("userProfile"),
-				attributes: ["username", "picturePath"],
 			},
 		],
 		order: [["id", "DESC"]],
@@ -94,9 +103,9 @@ const getUserPosts = async (req, res, next) => {
 	}
 
 	return res.json({
+        user,
 		posts,
 	});
-
 }; 
 
 /* UPDATE CONTROLLERS */
