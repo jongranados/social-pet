@@ -2,9 +2,12 @@ import { ImageList, ImageListItem } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import * as sessionActions from '../../store/sessionSlice';
+import { useLocation } from 'react-router';
 
 const ProfilePage = () => {    
-    const id = 1; 
+    const { pathname } = useLocation(); // leverage react router dom to capture the browser's current location, which points to the target user
+    const id = pathname.split('/').pop(); // from the pathname, isolate the id of the target user 
+    
     const dispatch = useDispatch(); 
     const [userPosts, setUserPosts] = useState();
 
@@ -31,7 +34,6 @@ const ProfilePage = () => {
                 {userPosts.map((post) => (
                     <ImageListItem key={post.picturePath}>
                         <img
-                            // srcSet={`${post.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
                             src={`/${post.picturePath}.jpeg`}
                             alt='Test'
                             loading="lazy"
