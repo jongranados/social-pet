@@ -58,11 +58,14 @@ const Post = ({ post }) => {
                         {comments.map((comment) => {
                             return (
                             <Box key={`comment-${comment.id}`}>
-                                <img
-                                src={`/${comment.User.picturePath}.jpeg`}
-                                alt='profile'
-                                width='32'
-                                />
+                                <a href={`/profile/${comment.userId}`}>
+                                    <img
+                                    src={`/${comment.User.picturePath}.jpeg`}
+                                    alt='profile'
+                                    width='32'
+                                    />
+                                </a>
+
                                 <Typography>{comment.description}</Typography> 
                             </Box>)
                         })}
