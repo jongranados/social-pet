@@ -62,8 +62,51 @@ const getFeedPosts = async (req, res, next) => {
     });
 }; 
 
-//TODO: implement controller dedicated to exclusively querying for user's posts 
-const getUserPosts = async (req, res, next) => {}; 
+const getUserPosts = async (req, res, next) => {
+	const { id } = req.params;
+
+	const user = await User.getUserById(id);
+
+	if (!user) {
+		const err = new Error("User not found.");
+		err.status = 404;
+		err.title = "User not found.";
+		err.errors = ["The queried user was not found."];
+		return next(err);
+	}
+
+	let posts = await Post.findAll({
+		where: {
+			userId: id,
+		},
+		include: [
+			{
+				model: Comment,
+				include: {
+					model: User,
+					attributes: ["firstName", "lastName", "picturePath"],
+				},
+			},
+			{
+				model: User.scope("userProfile"),
+			},
+		],
+		order: [["id", "DESC"]],
+	});
+
+	if (!posts) {
+		const err = new Error("Posts not found for specified user.");
+		err.status = 404;
+		err.title = "Posts not found for specified user.";
+		err.errors = ["Posts not found for specified user."];
+		return next(err);
+	}
+
+	return res.json({
+        user,
+		posts,
+	});
+}; 
 
 /* UPDATE CONTROLLERS */
 const createPost = async (req, res, next) => { 

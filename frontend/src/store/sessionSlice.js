@@ -140,8 +140,24 @@ export const getFeedPosts = createAsyncThunk(
 	}
 );
 
-// TODO: thunk for getting a single user's 
-export const getUserPosts = createAsyncThunk(); 
+export const getUserPosts = createAsyncThunk(
+	"session/getUserPosts",
+	async ({ id }, thunkAPI) => {
+		const url = `/users/${id}/posts`;
+		const options = {
+			method: "GET",
+		};
+
+		try {
+			const response = await csrfFetch(url, options);
+			const data = await response.json();
+			return data;
+		} catch (errorResponse) {
+			const errorData = await errorResponse.json();
+			return thunkAPI.rejectWithValue(errorData.errors);
+		}
+	}
+); 
 
 export const sessionSlice = createSlice({ 
     name: 'session', 
