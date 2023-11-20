@@ -43,7 +43,7 @@ const getFeedPosts = async (req, res, next) => {
 			},
 			{
 				model: User.scope("userProfile"),
-				attributes: ["username", "picturePath"],
+				attributes: ["id", "username", "picturePath"],
 			},
 		],
 		order: [["id", "DESC"]],
@@ -89,6 +89,7 @@ const getUserPosts = async (req, res, next) => {
 			},
 			{
 				model: User.scope("userProfile"),
+				attributes: ["id", "username", "picturePath"],
 			},
 		],
 		order: [["id", "DESC"]],
