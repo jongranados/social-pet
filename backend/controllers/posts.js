@@ -151,5 +151,29 @@ const createPost = async (req, res, next) => {
     }); 
 }
 
+const createComment = async (req, res, next) => { 
+    const { postId } = req.params;
 
-module.exports = { getFeedPosts, getUserPosts, createPost }; 
+    const { userId, description } = req.body;
+
+	const newComment = await Comment.create({
+		postId,
+		userId,
+		description,
+	});
+
+	if (!newComment) {
+		const err = new Error("Failed to post new comment.");
+		err.status = 404;
+		err.title = "Failed to post new comment.";
+		err.errors = ["An error occurred while attempting to post your comment. Please try again."];
+		return next(err);
+	}
+
+	return res.json({
+		newComment,
+	}); 
+}; 
+
+
+module.exports = { getFeedPosts, getUserPosts, createPost, createComment }; 
