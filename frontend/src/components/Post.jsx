@@ -1,9 +1,15 @@
 import { Card, CardMedia, Typography, Box, Divider, IconButton, TextField, FormControl, Button  } from "@mui/material";
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+import { useState } from "react";
 
 const Post = ({ post }) => { 
     const { createdAt, description, likes, picturePath, Comments: comments, User: {username: authorUsername, picturePath: authorPicturePath } } = post; 
     const formattedDate = `${createdAt.slice(5, 7)}/${createdAt.slice(8,10)}/${createdAt.slice(2, 4)}`; 
+    const [newComment, setNewComment] = useState(''); 
+
+    const updateNewCommentTextfield = (event) => { 
+        setNewComment(event.target.value); 
+    };
 
     return (
         <Card variant="outlined"
@@ -84,7 +90,7 @@ const Post = ({ post }) => {
                 </Box>
 
                 <FormControl>
-                    <TextField />
+                    <TextField value={newComment} onChange={updateNewCommentTextfield}/>
                     <Button>POST</Button>
                 </FormControl>
             </Box>
