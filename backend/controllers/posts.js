@@ -1,4 +1,4 @@
-const { User, Follow, Post, Comment } = require('../db/models'); 
+const { User, Follow, Post, Comment, Like } = require('../db/models'); 
 
 
 /* READ CONTROLLERS */
@@ -45,8 +45,16 @@ const getFeedPosts = async (req, res, next) => {
 				model: User.scope("userProfile"),
 				attributes: ["id", "username", "picturePath"],
 			},
+			{
+				model: Like, 
+				attributes: ["id"], 
+				include: { 
+					model: User, 
+					attributes: ["firstName", "lastName", "picturePath"],
+				},
+			}
 		],
-		order: [["id", "DESC"], [Comment, "id", "ASC"]],
+		order: [["id", "DESC"], [Comment, "id", "ASC"], [Like, "id", "ASC"]],
 	}); 
 
     if (!posts) { 
@@ -91,8 +99,16 @@ const getUserPosts = async (req, res, next) => {
 				model: User.scope("userProfile"),
 				attributes: ["id", "username", "picturePath"],
 			},
+			{
+				model: Like,
+				attributes: ["id"],
+				include: {
+					model: User,
+					attributes: ["firstName", "lastName", "picturePath"],
+				},
+			},
 		],
-		order: [["id", "DESC"]],
+		order: [["id", "DESC"], [Comment, "id", "ASC"], [Like, "id", "ASC"]],
 	});
 
 	if (!posts) {
