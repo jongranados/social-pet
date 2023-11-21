@@ -46,7 +46,7 @@ const getFeedPosts = async (req, res, next) => {
 				attributes: ["id", "username", "picturePath"],
 			},
 		],
-		order: [["id", "DESC"]],
+		order: [["id", "DESC"], [Comment, "id", "ASC"]],
 	}); 
 
     if (!posts) { 
