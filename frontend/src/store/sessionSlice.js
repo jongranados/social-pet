@@ -159,6 +159,31 @@ export const getUserPosts = createAsyncThunk(
 	}
 ); 
 
+// new comment submission thunk
+export const postNewComment = createAsyncThunk(
+	"session/postNewComment",
+	async ({ userId, postId, description }, thunkAPI) => {
+
+		const url = `/posts/${postId}/comments`;
+		const options = {
+			method: "POST",
+			body: JSON.stringify({
+				userId,
+				description,
+			}),
+		};
+
+        try {
+			const response = await csrfFetch(url, options);
+			const data = await response.json();
+			return data;
+		} catch (errorResponse) {
+			const errorData = await errorResponse.json();
+			return thunkAPI.rejectWithValue(errorData.errors);
+		}
+	}
+);
+
 export const sessionSlice = createSlice({ 
     name: 'session', 
     initialState: initialState, 
