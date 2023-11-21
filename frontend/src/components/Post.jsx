@@ -113,7 +113,7 @@ const Post = ({ post }) => {
 
                 <FormControl>
                     <TextField value={newComment} onChange={updateNewCommentTextfield}/>
-                    <Button onClick={handleNewCommentPost}>POST</Button>
+                    <Button onClick={handleNewCommentPost} disabled={!newComment.length}>POST</Button>
                 </FormControl>
             </Box>
         </Card>
