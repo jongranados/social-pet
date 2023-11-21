@@ -170,8 +170,29 @@ const createComment = async (req, res, next) => {
 		return next(err);
 	}
 
+	let updatedPostComments = await Comment.findAll({
+		where: {
+			postId,
+		},
+		include: [
+			{
+				model: User.scope("userProfile"),
+				attributes: ["firstName", "lastName", "picturePath"],
+			},
+		],
+		order: [["id", "ASC"]],
+	});
+
+	if (!updatedPostComments) {
+		const err = new Error("Failed to get the updated comments for the post.");
+		err.status = 404;
+		err.title = "Failed to get the updated comments for the post.";
+		err.errors = ["Failed to get the updated comments for the post. Refresh this page to manually render."];
+		return next(err);
+	}
+
 	return res.json({
-		newComment,
+		updatedPostComments,
 	}); 
 }; 
 
