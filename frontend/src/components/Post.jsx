@@ -1,16 +1,18 @@
 import { Card, CardMedia, Typography, Box, Divider, IconButton, TextField, FormControl, Button  } from "@mui/material";
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+import Favorite from '@mui/icons-material/Favorite';
 import { useState } from "react";
 import { useDispatch,  useSelector } from 'react-redux'; 
 import * as sessionActions from '../store/sessionSlice'; 
 
 const Post = ({ post }) => { 
-    const { id: postId, createdAt, description, likes, picturePath, Comments, User: { username: authorUsername, picturePath: authorPicturePath } } = post; 
+    const { id: postId, createdAt, description, picturePath, Comments, Likes: likes, User: { username: authorUsername, picturePath: authorPicturePath } } = post; 
     const formattedDate = `${createdAt.slice(5, 7)}/${createdAt.slice(8,10)}/${createdAt.slice(2, 4)}`; 
     const user = useSelector(state => state.session.user);
     const dispatch = useDispatch(); 
     const [comments, setComments] = useState(Comments); 
     const [newComment, setNewComment] = useState(''); 
+    const isLiked = likes.some((like) => user.id === like.User.id); 
 
     const handleNewCommentPost = async() => { 
         // dispatch redux post-new-comment thunk
@@ -103,11 +105,11 @@ const Post = ({ post }) => {
                 <Divider />
                 <Box> 
                     <IconButton>
-                        <FavoriteBorder />
+                        {isLiked ? <Favorite /> : <FavoriteBorder />}
                     </IconButton>
 
                     <Typography>
-                        {`${likes} likes`}
+                        {`${likes.length} likes`}
                     </Typography>
                 </Box>
 
