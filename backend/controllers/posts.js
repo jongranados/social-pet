@@ -50,7 +50,7 @@ const getFeedPosts = async (req, res, next) => {
 				attributes: ["id"], 
 				include: { 
 					model: User, 
-					attributes: ["firstName", "lastName", "picturePath"],
+					attributes: ["id", "firstName", "lastName", "picturePath"],
 				},
 			}
 		],
@@ -104,7 +104,7 @@ const getUserPosts = async (req, res, next) => {
 				attributes: ["id"],
 				include: {
 					model: User,
-					attributes: ["firstName", "lastName", "picturePath"],
+					attributes: ["id", "firstName", "lastName", "picturePath"],
 				},
 			},
 		],
