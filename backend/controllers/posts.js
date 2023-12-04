@@ -167,50 +167,48 @@ const createPost = async (req, res, next) => {
     }); 
 }
 
-const createComment = async (req, res, next) => { 
-    const { postId } = req.params;
-
-    const { userId, description } = req.body;
-
-	const newComment = await Comment.create({
-		postId,
-		userId,
-		description,
+const deleteLike = async (req, res, next) => { 
+    const { postId, likeId } = req.params;
+	
+	const deletedLike = await Like.destroy({
+		where: { 
+			id: likeId,
+		}
 	});
 
-	if (!newComment) {
-		const err = new Error("Failed to post new comment.");
+	if (!deletedLike) {
+		const err = new Error("Failed to unlike post.");
 		err.status = 404;
-		err.title = "Failed to post new comment.";
-		err.errors = ["An error occurred while attempting to post your comment. Please try again."];
+		err.title = "Failed to unlike post.";
+		err.errors = ["An error occurred while attempting to unlike the post. Please try again."];
 		return next(err);
 	}
 
-	let updatedPostComments = await Comment.findAll({
+	let updatedPostLikes = await Like.findAll({
 		where: {
 			postId,
 		},
 		include: [
 			{
-				model: User.scope("userProfile"),
-				attributes: ["firstName", "lastName", "picturePath"],
+				model: User,
+				attributes: ["id", "firstName", "lastName", "picturePath"],
 			},
 		],
 		order: [["id", "ASC"]],
 	});
 
-	if (!updatedPostComments) {
-		const err = new Error("Failed to get the updated comments for the post.");
+	if (!updatedPostLikes) {
+		const err = new Error("Failed to get the updated likes for the post.");
 		err.status = 404;
-		err.title = "Failed to get the updated comments for the post.";
-		err.errors = ["Failed to get the updated comments for the post. Refresh this page to manually render."];
+		err.title = "Failed to get the updated likes for the post.";
+		err.errors = ["Failed to get the updated likes for the post. Refresh this page to manually render."];
 		return next(err);
 	}
 
 	return res.json({
-		updatedPostComments,
+		updatedPostLikes,
 	}); 
+
 }; 
 
-
-module.exports = { getFeedPosts, getUserPosts, createPost, createComment }; 
+module.exports = { getFeedPosts, getUserPosts, createPost, deleteLike }; 
