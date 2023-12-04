@@ -229,6 +229,16 @@ export const sessionSlice = createSlice({
         setFeedPosts(state, action) { 
             state.feedPosts = action.payload; 
         }, 
+        updateFeedPostLikes(state, action) { 
+            const { targetPostId, updatedPostLikes } = action.payload; 
+            for (let i = 0; i < state.feedPosts.length; i++) { 
+                const feedPost = state.feedPosts[i]; 
+                if (feedPost.id === targetPostId) { 
+                    feedPost.Likes = updatedPostLikes; 
+                    break; 
+                }
+            }
+        }
     },
 }); 
 
