@@ -184,6 +184,32 @@ export const postNewComment = createAsyncThunk(
 	}
 );
 
+// delete a record from the like resource
+export const deletePostLike = createAsyncThunk(
+	"session/deletePostLike",
+	async ({ postId, likeId }, thunkAPI) => {
+		const url = `posts/${postId}/likes/${likeId}`;
+		const options = {
+			method: "DELETE",
+		};
+
+		try {
+			const response = await csrfFetch(url, options);
+			const data = await response.json();
+            thunkAPI.dispatch(
+				updateFeedPostLikes({
+					targetPostId: postId,
+					updatedPostLikes: data.updatedPostLikes,
+				})
+			);
+			return data;
+		} catch (errorResponse) {
+			const errorData = await errorResponse.json();
+			return thunkAPI.rejectWithValue(errorData.errors);
+		}
+	}
+);
+
 export const sessionSlice = createSlice({ 
     name: 'session', 
     initialState: initialState, 
@@ -203,15 +229,11 @@ export const sessionSlice = createSlice({
         setFeedPosts(state, action) { 
             state.feedPosts = action.payload; 
         }, 
-        // // to-do
-        // setPost(state, action) { 
-            
-        // }
     },
 }); 
 
 // export session action creators
-export const { setMode, setUser, removeUser, setFollowing, setFeedPosts, } = sessionSlice.actions;
+export const { setMode, setUser, removeUser, setFollowing, setFeedPosts, updateFeedPostLikes } = sessionSlice.actions;
 
 // export session reducer
 export default sessionSlice.reducer; 
