@@ -12,8 +12,8 @@ const Post = ({ post }) => {
     const dispatch = useDispatch(); 
     const [comments, setComments] = useState(Comments); 
     const [newComment, setNewComment] = useState(''); 
-    const isLiked = likes.some((like) => user.id === like.User.id); 
-
+    const isLiked = likes.find((like) => user.id === like.User.id); 
+    
     const handleNewCommentPost = async() => { 
         // dispatch redux post-new-comment thunk
         await dispatch(sessionActions.postNewComment({ userId: user.id, postId, description: newComment }))
@@ -31,11 +31,34 @@ const Post = ({ post }) => {
             });
     }; 
 
+    const handleUpdateLikes = async() => { 
+        if (isLiked) { 
+            // dispatch redux delete-like thunk
+            await dispatch(sessionActions.deletePostLike({ postId, likeId: isLiked.id }))
+                // unwrap promise returned from delete-like thunk in order to handle failed requests at component level
+                .unwrap()
+                // handle errors returned from failed delete-like request
+                .catch(async backendValidationErrors => {
+                    alert(backendValidationErrors) 
+                });
+        } else { 
+            // dispatch redux post-new-like thunk
+            await dispatch(sessionActions.createPostLike({ postId, userId: user.id }))
+                // unwrap promise returned from post-new-like thunk in order to handle failed requests at component level
+                .unwrap()
+                // handle errors returned from failed post-new-like request
+                .catch(async backendValidationErrors => {
+                    alert(backendValidationErrors) 
+                });
+
+        }
+    }
+
     const updateNewCommentTextfield = (event) => { 
         setNewComment(event.target.value); 
     };
 
-    return (
+    return (       
         <Card variant="outlined"
         sx={{
             display: 'flex',
@@ -104,7 +127,7 @@ const Post = ({ post }) => {
 
                 <Divider />
                 <Box> 
-                    <IconButton>
+                    <IconButton onClick={handleUpdateLikes}>
                         {isLiked ? <Favorite /> : <FavoriteBorder />}
                     </IconButton>
 
