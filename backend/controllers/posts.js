@@ -47,7 +47,7 @@ const getFeedPosts = async (req, res, next) => {
 			},
 			{
 				model: Like, 
-				attributes: ["id"], 
+				attributes: ["id", "postId"], 
 				include: { 
 					model: User, 
 					attributes: ["id", "firstName", "lastName", "picturePath"],
@@ -101,7 +101,7 @@ const getUserPosts = async (req, res, next) => {
 			},
 			{
 				model: Like,
-				attributes: ["id"],
+				attributes: ["id", "postId"],
 				include: {
 					model: User,
 					attributes: ["id", "firstName", "lastName", "picturePath"],
