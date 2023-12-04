@@ -1,4 +1,4 @@
-const { User, Follow, Post, Comment } = require('../db/models'); 
+const { User, Follow, Post, Comment, Like } = require('../db/models'); 
 
 
 /* READ CONTROLLERS */
@@ -45,8 +45,16 @@ const getFeedPosts = async (req, res, next) => {
 				model: User.scope("userProfile"),
 				attributes: ["id", "username", "picturePath"],
 			},
+			{
+				model: Like, 
+				attributes: ["id", "postId"], 
+				include: { 
+					model: User, 
+					attributes: ["id", "firstName", "lastName", "picturePath"],
+				},
+			}
 		],
-		order: [["id", "DESC"], [Comment, "id", "ASC"]],
+		order: [["id", "DESC"], [Comment, "id", "ASC"], [Like, "id", "ASC"]],
 	}); 
 
     if (!posts) { 
@@ -91,8 +99,16 @@ const getUserPosts = async (req, res, next) => {
 				model: User.scope("userProfile"),
 				attributes: ["id", "username", "picturePath"],
 			},
+			{
+				model: Like,
+				attributes: ["id", "postId"],
+				include: {
+					model: User,
+					attributes: ["id", "firstName", "lastName", "picturePath"],
+				},
+			},
 		],
-		order: [["id", "DESC"]],
+		order: [["id", "DESC"], [Comment, "id", "ASC"], [Like, "id", "ASC"]],
 	});
 
 	if (!posts) {
@@ -196,5 +212,93 @@ const createComment = async (req, res, next) => {
 	}); 
 }; 
 
+const deleteLike = async (req, res, next) => { 
+    const { postId, likeId } = req.params;
+	
+	const deletedLike = await Like.destroy({
+		where: { 
+			id: likeId,
+		}
+	});
 
-module.exports = { getFeedPosts, getUserPosts, createPost, createComment }; 
+	if (!deletedLike) {
+		const err = new Error("Failed to unlike post.");
+		err.status = 404;
+		err.title = "Failed to unlike post.";
+		err.errors = ["An error occurred while attempting to unlike the post. Please try again."];
+		return next(err);
+	}
+
+	let updatedPostLikes = await Like.findAll({
+		where: {
+			postId,
+		},
+		include: [
+			{
+				model: User,
+				attributes: ["id", "firstName", "lastName", "picturePath"],
+			},
+		],
+		order: [["id", "ASC"]],
+	});
+
+	if (!updatedPostLikes) {
+		const err = new Error("Failed to get the updated likes for the post.");
+		err.status = 404;
+		err.title = "Failed to get the updated likes for the post.";
+		err.errors = ["Failed to get the updated likes for the post. Refresh this page to manually render."];
+		return next(err);
+	}
+
+	return res.json({
+		updatedPostLikes,
+	}); 
+
+}; 
+
+const createLike = async (req, res, next) => { 
+    const { postId } = req.params;
+
+    const { userId } = req.body;
+
+	const newLike = await Like.create({
+		postId,
+		userId,
+	});
+
+	if (!newLike) {
+		const err = new Error("Failed to post new like.");
+		err.status = 404;
+		err.title = "Failed to post new like.";
+		err.errors = ["An error occurred while attempting to like the post. Please try again."];
+		return next(err);
+	}
+
+	let updatedPostLikes = await Like.findAll({
+		where: {
+			postId,
+		},
+		include: [
+			{
+				model: User,
+				attributes: ["id", "firstName", "lastName", "picturePath"],
+			},
+		],
+		order: [["id", "ASC"]],
+	});
+
+	if (!updatedPostLikes) {
+		const err = new Error("Failed to get the updated likes for the post.");
+		err.status = 404;
+		err.title = "Failed to get the updated likes for the post.";
+		err.errors = ["Failed to get the updated likes for the post. Refresh this page to manually render."];
+		return next(err);
+	}
+
+	return res.json({
+		updatedPostLikes,
+	}); 
+}; 
+
+
+module.exports = { getFeedPosts, getUserPosts, createPost, createComment, deleteLike, createLike }; 

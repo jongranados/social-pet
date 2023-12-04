@@ -1,17 +1,19 @@
 import { Card, CardMedia, Typography, Box, Divider, IconButton, TextField, FormControl, Button  } from "@mui/material";
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+import Favorite from '@mui/icons-material/Favorite';
 import { useState } from "react";
 import { useDispatch,  useSelector } from 'react-redux'; 
 import * as sessionActions from '../store/sessionSlice'; 
 
 const Post = ({ post }) => { 
-    const { id: postId, createdAt, description, likes, picturePath, Comments, User: { username: authorUsername, picturePath: authorPicturePath } } = post; 
+    const { id: postId, createdAt, description, picturePath, Comments, Likes: likes, User: { username: authorUsername, picturePath: authorPicturePath } } = post; 
     const formattedDate = `${createdAt.slice(5, 7)}/${createdAt.slice(8,10)}/${createdAt.slice(2, 4)}`; 
     const user = useSelector(state => state.session.user);
     const dispatch = useDispatch(); 
     const [comments, setComments] = useState(Comments); 
     const [newComment, setNewComment] = useState(''); 
-
+    const isLiked = likes.find((like) => user.id === like.User.id); 
+    
     const handleNewCommentPost = async() => { 
         // dispatch redux post-new-comment thunk
         await dispatch(sessionActions.postNewComment({ userId: user.id, postId, description: newComment }))
@@ -29,11 +31,34 @@ const Post = ({ post }) => {
             });
     }; 
 
+    const handleUpdateLikes = async() => { 
+        if (isLiked) { 
+            // dispatch redux delete-like thunk
+            await dispatch(sessionActions.deletePostLike({ postId, likeId: isLiked.id }))
+                // unwrap promise returned from delete-like thunk in order to handle failed requests at component level
+                .unwrap()
+                // handle errors returned from failed delete-like request
+                .catch(async backendValidationErrors => {
+                    alert(backendValidationErrors) 
+                });
+        } else { 
+            // dispatch redux post-new-like thunk
+            await dispatch(sessionActions.createPostLike({ postId, userId: user.id }))
+                // unwrap promise returned from post-new-like thunk in order to handle failed requests at component level
+                .unwrap()
+                // handle errors returned from failed post-new-like request
+                .catch(async backendValidationErrors => {
+                    alert(backendValidationErrors) 
+                });
+
+        }
+    }
+
     const updateNewCommentTextfield = (event) => { 
         setNewComment(event.target.value); 
     };
 
-    return (
+    return (       
         <Card variant="outlined"
         sx={{
             display: 'flex',
@@ -102,12 +127,12 @@ const Post = ({ post }) => {
 
                 <Divider />
                 <Box> 
-                    <IconButton>
-                        <FavoriteBorder />
+                    <IconButton onClick={handleUpdateLikes}>
+                        {isLiked ? <Favorite /> : <FavoriteBorder />}
                     </IconButton>
 
                     <Typography>
-                        {`${likes} likes`}
+                        {`${likes.length} likes`}
                     </Typography>
                 </Box>
 
