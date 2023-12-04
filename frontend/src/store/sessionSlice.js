@@ -210,6 +210,35 @@ export const deletePostLike = createAsyncThunk(
 	}
 );
 
+// create a new record in the like resource
+export const createPostLike = createAsyncThunk(
+	"session/createPostLike",
+	async ({ userId, postId }, thunkAPI) => {
+		const url = `posts/${postId}/likes`;
+		const options = {
+			method: "POST",
+			body: JSON.stringify({
+				userId,
+			}),
+		};
+
+		try {
+			const response = await csrfFetch(url, options);
+			const data = await response.json();
+            thunkAPI.dispatch(
+				updateFeedPostLikes({
+					targetPostId: postId,
+					updatedPostLikes: data.updatedPostLikes,
+				})
+			); 
+			return data;
+		} catch (errorResponse) {
+			const errorData = await errorResponse.json();
+			return thunkAPI.rejectWithValue(errorData.errors);
+		}
+	}
+);
+
 export const sessionSlice = createSlice({ 
     name: 'session', 
     initialState: initialState, 
