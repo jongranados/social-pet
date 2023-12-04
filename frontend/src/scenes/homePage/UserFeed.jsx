@@ -41,7 +41,7 @@ const UserFeed = () => {
             }}
         
         >
-            {feedPosts.map((post) => <Post key={`post-${post.id}`} post={post} /> )}
+            {feedPosts.map((post) => <Post key={`post-${post.id}`} sessionUserId={user.id} post={post} /> )}
         </Box>
     )
 }
