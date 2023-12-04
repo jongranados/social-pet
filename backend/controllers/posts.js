@@ -211,4 +211,49 @@ const deleteLike = async (req, res, next) => {
 
 }; 
 
-module.exports = { getFeedPosts, getUserPosts, createPost, deleteLike }; 
+const createComment = async (req, res, next) => { 
+    const { postId } = req.params;
+
+    const { userId, description } = req.body;
+
+	const newComment = await Comment.create({
+		postId,
+		userId,
+		description,
+	});
+
+	if (!newComment) {
+		const err = new Error("Failed to post new comment.");
+		err.status = 404;
+		err.title = "Failed to post new comment.";
+		err.errors = ["An error occurred while attempting to post your comment. Please try again."];
+		return next(err);
+	}
+
+	let updatedPostComments = await Comment.findAll({
+		where: {
+			postId,
+		},
+		include: [
+			{
+				model: User.scope("userProfile"),
+				attributes: ["firstName", "lastName", "picturePath"],
+			},
+		],
+		order: [["id", "ASC"]],
+	});
+
+	if (!updatedPostComments) {
+		const err = new Error("Failed to get the updated comments for the post.");
+		err.status = 404;
+		err.title = "Failed to get the updated comments for the post.";
+		err.errors = ["Failed to get the updated comments for the post. Refresh this page to manually render."];
+		return next(err);
+	}
+
+	return res.json({
+		updatedPostComments,
+	}); 
+}; 
+
+module.exports = { getFeedPosts, getUserPosts, createPost, deleteLike, createComment }; 
