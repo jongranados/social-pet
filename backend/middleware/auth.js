@@ -5,7 +5,6 @@ const { User } = require('../db/models');
 
 // creates a JWT cookie and sets it on the res obj. called upon successful login or signup. 
 const setTokenCookie = (res, user) => { 
-    console.log(user); 
     const token = jwt.sign(
         { data: user.toSafeObject() }, 
         secret, 
