@@ -3,7 +3,6 @@ const express = require('express');
 const routes = require('./routes'); 
 const cors = require('cors');
 const csurf = require('csurf'); 
-const multer = require('multer'); 
 const helmet = require('helmet');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
@@ -18,6 +17,7 @@ const app = express();
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true })); 
 
 /* Security Middleware */
 if (!isProduction) {
@@ -39,20 +39,6 @@ app.use(
     }
   })
 );
-
-
-
-/* FILE STORAGE CONFIGURATION */
-const storage = multer.diskStorage({ 
-  destination: (req, file, cb) => { 
-    cb(null, 'public/assets'); 
-  }, 
-  filname: (req, file, cb) => { 
-    cb(null, file.originalname); 
-  }
-}); 
-
-const upload = multer({ storage }); 
 
 /* ROUTES */
 app.use(routes); 
