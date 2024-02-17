@@ -1,13 +1,15 @@
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 
-import { Box, Button, useMediaQuery, Typography, useTheme, TextField } from '@mui/material';
+import { Box, Button, useMediaQuery, Typography, useTheme, TextField, Input } from '@mui/material';
 
 import { Formik } from 'formik';
 import { initialSignupValues, signupValidationSchema } from 'validations';
 
 import * as sessionActions from '../../store/sessionSlice'
 
+import Dropzone from 'react-dropzone';
 
 const SignupForm = () => {
     const theme = useTheme();
@@ -15,8 +17,8 @@ const SignupForm = () => {
     const matchesMobileDevice = useMediaQuery('(max-width:600px)');
     const navigate = useNavigate(); 
     const dispatch = useDispatch(); 
+    const [ profileImagePreview, setProfileImagePreview ] = useState(); 
 
-    // submission handler passed to form via Formik's provided handleSubmit prop
     const handleFormSubmit = async (values) => {
         // package textual and binary user data as multipart FormData object
         const multipartFormData = new FormData();
@@ -49,7 +51,8 @@ const SignupForm = () => {
                 touched, 
                 handleBlur, 
                 handleChange, 
-                handleSubmit
+                handleSubmit,
+                setFieldValue,
             }) => (
                 <form onSubmit={handleSubmit}>
                     <Box
@@ -82,6 +85,59 @@ const SignupForm = () => {
                         helperText={touched.lastName && errors.lastName}
                         sx={{ gridColumn: 'span 1' }}
                     />
+
+                    <Box 
+                        sx={{ 
+                            display: 'flex', 
+                            flexDirection: 'column', 
+                            gridColumn: 'span 2',
+                        }}
+                    >
+                        <Dropzone 
+                            onDrop={(acceptedFiles) => { 
+                                const file = new FileReader(); 
+
+                                file.onload = async function() { 
+                                    setProfileImagePreview(file.result); 
+                                }
+
+                                file.readAsDataURL(acceptedFiles[0]); 
+                                
+                                setFieldValue('picture', acceptedFiles[0]); 
+                            }}
+                        >
+                            {({ getRootProps, getInputProps, isDragActive }) => (
+                                <>
+                                    <Box  
+                                        {...getRootProps()} 
+                                        sx={{
+                                            color: errors.picture && touched.picture ? theme.palette.error.main : "rgba(0, 0, 0, 0.6)",
+                                            border: errors.picture && touched.picture ? `1px dashed ${theme.palette.error.main}` : `1px dashed rgba(0,0,0,0.23)`,
+                                            paddingLeft: '16px', 
+                                            borderRadius: '5px', 
+                                            cursor: 'pointer'
+                                        }}
+                                    >
+                                        <Input  {...getInputProps()} />
+                                        {isDragActive ?
+                                            <p>Drop your profile picture here...</p> :
+                                            <p>Drag 'n' drop your profile picture here, or click to select it</p>
+                                        }
+                                        {Boolean(profileImagePreview) && !Boolean(errors.picture) && (
+                                            <Box>
+                                                <p>
+                                                    {values.picture.name}
+                                                </p>
+                                                <p>
+                                                    <img src={profileImagePreview} alt="Upload preview" height={'200px'}/>
+                                                </p>
+                                            </Box>
+                                        )}
+                                    </Box>
+                                </>
+                            )}
+                        </Dropzone>
+                    </Box>
 
                     <TextField
                         label='Username'
