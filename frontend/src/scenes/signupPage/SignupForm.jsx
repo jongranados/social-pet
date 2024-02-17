@@ -27,16 +27,15 @@ const SignupForm = () => {
         }
 
         // dispatch redux signup thunk upon form submission
-        const signupSuccessful = await dispatch(sessionActions.signup(multipartFormData))
+        await dispatch(sessionActions.signup(multipartFormData))
             // unwrap promise returned from signup thunk in order to handle failed signup request attempt at component level
             .unwrap()
+            // handle successful signup request by navigating home
+            .then(() => { 
+                navigate('/');  
+            })
             // handle errors returned from failed signup request attempt
             .catch(async backendValidationErrors => alert(backendValidationErrors));
-
-        // redirect home upon successful signup request attempt or reset form upon failed attempt
-        if (signupSuccessful) {
-            navigate('/home');
-        } 
     };
 
     return (
