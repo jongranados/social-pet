@@ -25,7 +25,6 @@ const login = async (req, res, next) => {
 
 /* LOGOUT CONTROLLER */
 const logout = async (req, res) => {
-	console.log("in logout controller");
 	res.clearCookie("token");
 	return res.json({ message: "success" });
 }; 
@@ -52,7 +51,7 @@ const signup = async (req, res) => {
     let profileViews = Math.floor(Math.random() * (20000 - 2000 + 1)) + 2000;
     let impressions = Math.floor((Math.random() * (0.8 - 0.3) + 0.3) * profileViews);
 
-    const newUser = await User.signup({
+    const user = await User.signup({
         firstName, 
         lastName, 
         username, 
@@ -68,10 +67,10 @@ const signup = async (req, res) => {
         impressions,
     }); 
 
-    await setTokenCookie(res, newUser); 
+    await setTokenCookie(res, user); 
 
     return res.json({ 
-        newUser
+        user
     }); 
 };
 
