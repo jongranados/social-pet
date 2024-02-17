@@ -17,38 +17,15 @@ const SignupForm = () => {
     const dispatch = useDispatch(); 
 
     // submission handler passed to form via Formik's provided handleSubmit prop
-    const handleFormSubmit = async (values, onSubmitProps) => {
-        console.log('in here')
-        console.log(values); 
-        // destructure submitted form values; Formik provides submission handler with submitted values via 'values' object
-        const { 
-            firstName,
-            lastName,
-            username,
-            email,
-            password,
-            // picturePath,
-            gotchaDate,
-            species,
-            breed,
-            location,
-            bio,    
-         } = values;
+    const handleFormSubmit = async (values) => {
+        // package textual and binary user data as multipart FormData object
+        const multipartFormData = new FormData();
+        for (let value in values) {
+            multipartFormData.append(value, values[value]); 
+        }
 
         // dispatch redux signup thunk upon form submission
-        const signupSuccessful = await dispatch(sessionActions.signup({ 
-            firstName,
-            lastName,
-            username,
-            email,
-            password,
-            picturePath: 'test',
-            gotchaDate,
-            species,
-            breed,
-            location,
-            bio,    
-         }))
+        const signupSuccessful = await dispatch(sessionActions.signup(multipartFormData))
             // unwrap promise returned from signup thunk in order to handle failed signup request attempt at component level
             .unwrap()
             // handle errors returned from failed signup request attempt
