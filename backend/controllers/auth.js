@@ -67,6 +67,14 @@ const signup = async (req, res) => {
         impressions,
     }); 
 
+    if (!user) {
+		const err = new Error("Signup failed.");
+		err.status = 401;
+		err.title = "Signup failed.";
+		err.errors = ["Please try signing up again."];
+		return next(err);
+	}
+
     await setTokenCookie(res, user); 
 
     return res.json({ 
