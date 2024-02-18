@@ -13,7 +13,7 @@ export const loginValidationSchema = yup.object().shape({
 export const initialLoginValues = { 
     credential: '',
     password: '',
-}
+}; 
 
 // validation schema for the signup form
 export const signupValidationSchema = yup.object().shape({ 
@@ -26,14 +26,19 @@ export const signupValidationSchema = yup.object().shape({
     username: yup
         .string()
         .min(4, 'Your username must be at least 4 characters long.')
-        .required('required'),
+        .required('A username is required.'),
     email: yup
         .string()
         .email('Your email must be a valid email.')
-        .required('required'),
-    picturePath: yup
-        .string()
-        .required('You must select a valid profile picture.'),
+        .required('Your email is required.'),
+    picture: yup
+        .mixed()
+        .test(
+            'fileFormat', 
+            'Unsupported file type. Please make sure your picture is a .jpg, .jpeg. or .png', 
+            (value) => value && supportedFormats.includes(value.type)    
+        )
+        .required('You must select a profile picture.'),
     gotchaDate: yup
         .string()
         .required('Your gotcha date is required.'),
@@ -66,7 +71,7 @@ export const initialSignupValues = {
     lastName: '',
     username: '',
     email: '',
-    picturePath: '',
+    picture: '',
     gotchaDate: '',
     species: '',
     breed: '', 
@@ -74,4 +79,10 @@ export const initialSignupValues = {
     bio: '',
     password: '',
     confirmPassword: '',
-}
+}; 
+
+const supportedFormats = [
+      'image/jpg',
+      'image/jpeg',
+      'image/png'
+]; 

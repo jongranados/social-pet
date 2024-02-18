@@ -81,7 +81,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING, 
       allowNull: false,  
       validate: {
-        len: [20, 256]
+        len: {
+						args: [1, 256],
+            msg: 'Bio must be between 1 and 256 characters long.'
+					},
       },
     },
     profileViews: { 

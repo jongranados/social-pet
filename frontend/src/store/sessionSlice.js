@@ -74,38 +74,12 @@ export const logout = createAsyncThunk(
 // signup thunk
 export const signup = createAsyncThunk(
     'session/signup', 
-    async (user, thunkAPI) => { 
-        const { 
-            firstName, 
-            lastName, 
-            username, 
-            email, 
-            password,
-            picturePath, 
-            gotchaDate,
-            species, 
-            breed, 
-            location, 
-            bio,          
-        } = user; 
-
+    async (multipartFormData, thunkAPI) => { 
         const url = '/auth/signup'; 
-        const options = { 
-            method: 'POST', 
-            body: JSON.stringify({
-                firstName, 
-                lastName, 
-                username, 
-                email, 
-                password,
-                picturePath, 
-                gotchaDate,
-                species, 
-                breed, 
-                location, 
-                bio, 
-            }),
-        };
+        const options = {
+			method: "POST",
+			body: multipartFormData,
+		};
 
         try { 
             const response = await csrfFetch(url, options); 

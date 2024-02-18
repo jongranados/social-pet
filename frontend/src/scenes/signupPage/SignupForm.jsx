@@ -1,63 +1,56 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-
-import { Box, Button, useMediaQuery, Typography, useTheme, TextField } from '@mui/material';
-
-import { Formik } from 'formik';
 import { initialSignupValues, signupValidationSchema } from 'validations';
-
 import * as sessionActions from '../../store/sessionSlice'
 
+import { Box, Button, useMediaQuery, Typography, useTheme, TextField, FormHelperText, Input } from '@mui/material';
+
+import { Formik } from 'formik';
+import Dropzone from 'react-dropzone';
+import Toastify from 'toastify-js';
+import 'toastify-js/src/toastify.css';
 
 const SignupForm = () => {
+    const navigate = useNavigate(); 
+    const dispatch = useDispatch(); 
     const theme = useTheme();
     const { palette } = theme;
     const matchesMobileDevice = useMediaQuery('(max-width:600px)');
-    const navigate = useNavigate(); 
-    const dispatch = useDispatch(); 
+    const [ profileImagePreview, setProfileImagePreview ] = useState(); 
 
-    // submission handler passed to form via Formik's provided handleSubmit prop
-    const handleFormSubmit = async (values, onSubmitProps) => {
-        console.log('in here')
-        console.log(values); 
-        // destructure submitted form values; Formik provides submission handler with submitted values via 'values' object
-        const { 
-            firstName,
-            lastName,
-            username,
-            email,
-            password,
-            // picturePath,
-            gotchaDate,
-            species,
-            breed,
-            location,
-            bio,    
-         } = values;
+    const handleFormSubmit = async (values) => {
+
+        // package textual and binary user data as multipart FormData object
+        const multipartFormData = new FormData();
+        for (let value in values) {
+            multipartFormData.append(value, values[value]); 
+        };
 
         // dispatch redux signup thunk upon form submission
-        const signupSuccessful = await dispatch(sessionActions.signup({ 
-            firstName,
-            lastName,
-            username,
-            email,
-            password,
-            picturePath: 'test',
-            gotchaDate,
-            species,
-            breed,
-            location,
-            bio,    
-         }))
-            // unwrap promise returned from signup thunk in order to handle failed signup request attempt at component level
+        await dispatch(sessionActions.signup(multipartFormData))
+            // unwrap promise returned from signup thunk in order to handle any failed signup request attempt at the component level
             .unwrap()
+            // handle successful signup request by navigating home
+            .then(() => { 
+                navigate('/');
+                
+                Toastify({
+                    text: `Welcome! 👋 I loaded a few sample accounts to your profile to demo \nsome of the existing functionality as I continue to develop the front-end. 😊`,
+                    position: 'center',
+                    gravity: 'top',
+                    duration: 10000,
+                }).showToast();
+            })
             // handle errors returned from failed signup request attempt
-            .catch(async backendValidationErrors => alert(backendValidationErrors));
-
-        // redirect home upon successful signup request attempt or reset form upon failed attempt
-        if (signupSuccessful) {
-            navigate('/home');
-        } 
+            .catch(async backendValidationErrors => {
+                Toastify({
+                    text: backendValidationErrors,
+                    position: 'center',
+                    gravity: 'top',
+                    duration: 3000,
+                }).showToast();
+            });
     };
 
     return (
@@ -65,6 +58,7 @@ const SignupForm = () => {
             onSubmit={handleFormSubmit}
             initialValues={initialSignupValues}
             validationSchema={signupValidationSchema} 
+            validateOnMount
         >
             {({ 
                 values,
@@ -72,7 +66,8 @@ const SignupForm = () => {
                 touched, 
                 handleBlur, 
                 handleChange, 
-                handleSubmit
+                handleSubmit,
+                setFieldValue,
             }) => (
                 <form onSubmit={handleSubmit}>
                     <Box
@@ -105,6 +100,69 @@ const SignupForm = () => {
                         helperText={touched.lastName && errors.lastName}
                         sx={{ gridColumn: 'span 1' }}
                     />
+
+                    <Box 
+                        sx={{ 
+                            display: 'flex', 
+                            flexDirection: 'column', 
+                            gridColumn: 'span 2',
+                        }}
+                    >
+                        <Dropzone 
+                            multiple={false}
+                            onDragLeave={() => { 
+                                touched.picture = true; 
+                            }}
+                            onFileDialogCancel={() => { 
+                                touched.picture = true;
+                            }}
+                            onDrop={(acceptedFiles) => { 
+                                const file = new FileReader(); 
+
+                                file.onload = async function() { 
+                                    setProfileImagePreview(file.result); 
+                                }
+
+                                file.readAsDataURL(acceptedFiles[0]); 
+                                
+                                setFieldValue('picture', acceptedFiles[0]); 
+
+                                touched.picture = true;
+                            }}
+                        >
+                            {({ getRootProps, getInputProps, isDragActive }) => (
+                                <>
+                                    <Box  
+                                        {...getRootProps()} 
+                                        sx={{
+                                            color: errors.picture && touched.picture ? theme.palette.error.main : "rgba(0, 0, 0, 0.6)",
+                                            border: errors.picture && touched.picture ? `1px dashed ${theme.palette.error.main}` : `1px dashed rgba(0,0,0,0.23)`,
+                                            paddingLeft: '16px', 
+                                            borderRadius: '5px', 
+                                            cursor: 'pointer'
+                                        }}
+                                    >
+                                        <Input  {...getInputProps()} />
+                                        {isDragActive ?
+                                            <p>Drop your profile picture here...</p> :
+                                            <p>Drag 'n' drop your profile picture here, or click to select it</p>
+                                        }
+                                        {Boolean(profileImagePreview) && !Boolean(errors.picture) && (
+                                            <Box>
+                                                <p>
+                                                    {values.picture.name}
+                                                </p>
+                                                <p>
+                                                    <img src={profileImagePreview} alt="Upload preview" height={'200px'}/>
+                                                </p>
+                                            </Box>
+                                        )}
+                                    </Box>
+                                    {Boolean(touched.picture) && Boolean(errors.picture) ? <FormHelperText error sx={{paddingLeft: '16px'}}>{errors.picture}</FormHelperText> : null}
+                                </>
+                            )}
+                        </Dropzone>
+                    </Box> 
 
                     <TextField
                         label='Username'
@@ -239,7 +297,6 @@ const SignupForm = () => {
             )}
         </Formik>
     )
-
 };
 
 export default SignupForm; 

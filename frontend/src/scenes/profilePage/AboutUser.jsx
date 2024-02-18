@@ -14,7 +14,7 @@ const AboutUser = ({ user }) => {
             > 
                 <CardMedia
                     component="img"
-                    src={`/${picturePath}.jpeg`}
+                    src={`/${picturePath}`}
                     sx={{
                         width: 250, 
                         height: 250, 

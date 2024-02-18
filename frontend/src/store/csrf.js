@@ -1,27 +1,33 @@
 import Cookies from 'js-cookie'; 
 
-// custom fetching function implemented to accommodate csrf-protected backend
-export async function csrfFetch(url, options = {}) { 
-    // set options.method to 'GET' if a method isn't explicitly referenced
-    options.method = options.method || 'GET'; 
+// custom fetching function implemented to appropriately make requests to csrf-protected backend
+export async function csrfFetch(url, options = {}) {
+	// persist the HTTP request method explicitly called by the invoking Redux thunk, or default to 'GET' if one wasn't provided
+	options.method = options.method || "GET";
 
-    // set options.headers to an empty object if headers weren't explicitly referenced
-    options.headers = options.headers || {};
+	// persist any headers explicitly called by the invoking Redux thunk, or default to an empty object if none were provided to prevent an unwanted 'undefined' assignment
+	options.headers = options.headers || {};
 
-    // set the 'XSRF-Token' the value of the 'XSRF-TOKEN' cookie for all non-GET requests
-    if (options.method.toUpperCase() !== 'GET') { 
-        options.headers['Content-Type'] = options.headers['Content-Type'] || 'application/json';
-        options.headers['XSRF-Token'] = Cookies.get('XSRF-TOKEN'); 
-    }; 
+	// all non-GET requests require additional measures to comply with our csrf-protected backend
+	if (options.method.toUpperCase() !== "GET") {
+		// per the Fetch API spec, the Content-Type header for any requests transmitting multipart form data should be set by the browser so that it can correctly determine and set the boundary expression used to delimit form fields
+		// for more information, see: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest_API/Using_FormData_Objects#sending_files_using_a_formdata_object
+		!(options.body instanceof FormData) &&
+			(options.headers["Content-Type"] =
+				options.headers["Content-Type"] || "application/json");
 
-    // finally, make the request using the global fetch method with these tailored options
-    const res = await window.fetch(url, options); 
+		// set XSRF-Token header used by the backend for stateless authentication
+		options.headers["XSRF-Token"] = Cookies.get("XSRF-TOKEN");
+	}
 
-    // if the response status code is 400 or above, throw an error with the response
-    if (res.status >= 400) throw res; 
+	// lastly, make the request using the global Fetch API using our custom options
+	const res = await window.fetch(url, options);
 
-    // if the response status code is under 400, return the response to the next promise in the chain
-    return res;
+	// handle bad requests
+	if (res.status >= 400) throw res;
+
+	// return the response of successful requests to the promise chain of the invoking Redux thunk
+	return res;
 }; 
 
 export function restoreCSRF() { 

@@ -63,12 +63,13 @@ const Post = ({ post }) => {
         sx={{
             display: 'flex',
             flexDirection: {
-            xs: 'column', // mobile
-            sm: 'row', // tablet and up
+                xs: 'column', // mobile
+                sm: 'row', // tablet and up
             },
             justifyContent: 'center', 
-            alignItems: 'center', 
+            alignItems: 'top', 
             width: 1, 
+            gap: 2
         }}
         >
             <CardMedia
@@ -77,20 +78,29 @@ const Post = ({ post }) => {
                 sx={{ 
                     width: 1/2, 
                     maxWidth: 'md',
+                    ratio: 1/1
                 }}
             />
             <Box>
-                <Box> 
+                <Box
+                    sx={{
+                        display: 'flex', 
+                        flexDirection: 'row', 
+                        mt: 2, 
+                        mb: 1, 
+                    }}
+                > 
                     <CardMedia
                         component="img"
-                        src={`/${authorPicturePath}.jpeg`}
+                        src={`/${authorPicturePath}`}
                         sx={{
                             width: 32, 
                             height: 32, 
+                            borderRadius: '50%'
                         }}
                     />
 
-                    <Typography>
+                    <Typography ml={1}>
                         { authorUsername }
                     </Typography>
                 </Box>
@@ -103,23 +113,31 @@ const Post = ({ post }) => {
                             { description }
                         </Typography>
 
-                        <Typography>
+                        <Typography fontSize={12} color={'gray'}>
                             { formattedDate }
                         </Typography>
                     </Box>
                     <Box>
                         {comments.map((comment) => {
                             return (
-                            <Box key={`comment-${comment.id}`}>
+                            <Box key={`comment-${comment.id}`}
+                                sx={{
+                                    my: 2, 
+                                    display: 'flex', 
+                                    flexDirection: 'row'
+                                }}
+
+                            >
                                 <a href={`/profile/${comment.userId}`}>
                                     <img
-                                    src={`/${comment.User.picturePath}.jpeg`}
+                                    src={`/${comment.User.picturePath}`}
                                     alt='profile'
                                     width='32'
+                                    height='32'
                                     />
                                 </a>
 
-                                <Typography>{comment.description}</Typography> 
+                                <Typography ml={1}>{comment.description}</Typography> 
                             </Box>)
                         })}
                     </Box>
