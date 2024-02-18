@@ -1,4 +1,4 @@
-const { User } = require('../db/models'); 
+const { User, Follow } = require('../db/models'); 
 const { setTokenCookie } = require("../middleware/auth");
 const bcrypt = require('bcrypt'); 
 
@@ -76,6 +76,23 @@ const signup = async (req, res) => {
 	}
 
     await setTokenCookie(res, user); 
+
+    // add a few existing accounts to new user's profile so that their feed isn't empty at signup
+    // this will be replaced by some sort of "accounts we recommend that you follow" algorithm 
+    let demoRelationships = [ 
+        { followerId: user.id, followeeId: 1 }, 
+        { followerId: user.id, followeeId: 2 }, 
+        { followerId: user.id, followeeId: 3 }, 
+        { followerId: user.id, followeeId: 4 }, 
+        { followerId: user.id, followeeId: 5 }, 
+        { followerId: user.id, followeeId: 6 }, 
+        { followerId: user.id, followeeId: 7 }, 
+        { followerId: user.id, followeeId: 8 }, 
+        { followerId: user.id, followeeId: 9 }, 
+        { followerId: user.id, followeeId: 10 }, 
+    ]; 
+
+    Follow.bulkCreate(demoRelationships); 
 
     return res.json({ 
         user
