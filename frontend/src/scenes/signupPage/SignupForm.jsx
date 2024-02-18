@@ -35,7 +35,14 @@ const SignupForm = () => {
             .unwrap()
             // handle successful signup request by navigating home
             .then(() => { 
-                navigate('/');  
+                navigate('/');
+                
+                Toastify({
+                    text: `Welcome! 👋 I loaded a few sample accounts to your profile to demo \nsome of the existing functionality as I continue to develop the front-end. 😊`,
+                    position: 'center',
+                    gravity: 'top',
+                    duration: 10000,
+                }).showToast();
             })
             // handle errors returned from failed signup request attempt
             .catch(async backendValidationErrors => {
