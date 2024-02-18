@@ -1,37 +1,35 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { useState } from 'react';
+import { initialSignupValues, signupValidationSchema } from 'validations';
+import * as sessionActions from '../../store/sessionSlice'
 
 import { Box, Button, useMediaQuery, Typography, useTheme, TextField, FormHelperText, Input } from '@mui/material';
 
 import { Formik } from 'formik';
-import { initialSignupValues, signupValidationSchema } from 'validations';
-
-import * as sessionActions from '../../store/sessionSlice'
-
 import Dropzone from 'react-dropzone';
-
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
 
 const SignupForm = () => {
+    const navigate = useNavigate(); 
+    const dispatch = useDispatch(); 
     const theme = useTheme();
     const { palette } = theme;
     const matchesMobileDevice = useMediaQuery('(max-width:600px)');
-    const navigate = useNavigate(); 
-    const dispatch = useDispatch(); 
     const [ profileImagePreview, setProfileImagePreview ] = useState(); 
 
     const handleFormSubmit = async (values) => {
+
         // package textual and binary user data as multipart FormData object
         const multipartFormData = new FormData();
         for (let value in values) {
             multipartFormData.append(value, values[value]); 
-        }
+        };
 
         // dispatch redux signup thunk upon form submission
         await dispatch(sessionActions.signup(multipartFormData))
-            // unwrap promise returned from signup thunk in order to handle failed signup request attempt at component level
+            // unwrap promise returned from signup thunk in order to handle any failed signup request attempt at the component level
             .unwrap()
             // handle successful signup request by navigating home
             .then(() => { 
@@ -299,7 +297,6 @@ const SignupForm = () => {
             )}
         </Formik>
     )
-
 };
 
 export default SignupForm; 
