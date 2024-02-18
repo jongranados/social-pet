@@ -83,7 +83,7 @@ const Post = ({ post }) => {
                 <Box> 
                     <CardMedia
                         component="img"
-                        src={`/${authorPicturePath}.jpeg`}
+                        src={`/${authorPicturePath}`}
                         sx={{
                             width: 32, 
                             height: 32, 
