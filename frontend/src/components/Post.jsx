@@ -113,7 +113,7 @@ const Post = ({ post }) => {
                             <Box key={`comment-${comment.id}`}>
                                 <a href={`/profile/${comment.userId}`}>
                                     <img
-                                    src={`/${comment.User.picturePath}.jpeg`}
+                                    src={`/${comment.User.picturePath}`}
                                     alt='profile'
                                     width='32'
                                     />

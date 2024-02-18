@@ -24,7 +24,7 @@ module.exports = {
         username: user.username, 
         email: `${user.firstName.toLowerCase() + user.lastName.toLowerCase()}@gmail.com`, 
         hashedPassword: bcrypt.hashSync(`password${index}`, 10), 
-        picturePath: `user-${index}`, 
+        picturePath: `user-${index}.jpeg`, 
         gotchaDate: user.gotchaData, 
         species: user.species, 
         breed: user.breed, 
