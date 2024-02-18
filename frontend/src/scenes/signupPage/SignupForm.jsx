@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 
-import { Box, Button, useMediaQuery, Typography, useTheme, TextField, Input } from '@mui/material';
+import { Box, Button, useMediaQuery, Typography, useTheme, TextField, FormHelperText, Input } from '@mui/material';
 
 import { Formik } from 'formik';
 import { initialSignupValues, signupValidationSchema } from 'validations';
@@ -43,6 +43,7 @@ const SignupForm = () => {
             onSubmit={handleFormSubmit}
             initialValues={initialSignupValues}
             validationSchema={signupValidationSchema} 
+            validateOnMount
         >
             {({ 
                 values,
@@ -93,6 +94,13 @@ const SignupForm = () => {
                         }}
                     >
                         <Dropzone 
+                            multiple={false}
+                            onDragLeave={() => { 
+                                touched.picture = true; 
+                            }}
+                            onFileDialogCancel={() => { 
+                                touched.picture = true;
+                            }}
                             onDrop={(acceptedFiles) => { 
                                 const file = new FileReader(); 
 
@@ -103,6 +111,8 @@ const SignupForm = () => {
                                 file.readAsDataURL(acceptedFiles[0]); 
                                 
                                 setFieldValue('picture', acceptedFiles[0]); 
+
+                                touched.picture = true;
                             }}
                         >
                             {({ getRootProps, getInputProps, isDragActive }) => (
@@ -133,10 +143,11 @@ const SignupForm = () => {
                                             </Box>
                                         )}
                                     </Box>
+                                    {Boolean(touched.picture) && Boolean(errors.picture) ? <FormHelperText error sx={{paddingLeft: '16px'}}>{errors.picture}</FormHelperText> : null}
                                 </>
                             )}
                         </Dropzone>
-                    </Box>
+                    </Box> 
 
                     <TextField
                         label='Username'
