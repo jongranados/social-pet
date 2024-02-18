@@ -11,6 +11,9 @@ import * as sessionActions from '../../store/sessionSlice'
 
 import Dropzone from 'react-dropzone';
 
+import Toastify from 'toastify-js';
+import 'toastify-js/src/toastify.css';
+
 const SignupForm = () => {
     const theme = useTheme();
     const { palette } = theme;
@@ -35,7 +38,14 @@ const SignupForm = () => {
                 navigate('/');  
             })
             // handle errors returned from failed signup request attempt
-            .catch(async backendValidationErrors => alert(backendValidationErrors));
+            .catch(async backendValidationErrors => {
+                Toastify({
+                    text: backendValidationErrors,
+                    position: 'center',
+                    gravity: 'top',
+                    duration: 3000,
+                }).showToast();
+            });
     };
 
     return (
