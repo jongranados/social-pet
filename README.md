@@ -1,6 +1,9 @@
 <a name="top"></a>
 
 # Social Pets 
+<div align='center'> 
+    <a href='https://social-pets.onrender.com/'> <img src='https://img.shields.io/badge/live demo-5C2D91?style=for-the-badge' alt='Live demo hyperlink' width='200px'/></a>
+</div>
 <details>
     <summary><b>Table of Contents</b></summary>
     <ol>
