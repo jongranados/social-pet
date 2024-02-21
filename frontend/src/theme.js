@@ -85,7 +85,7 @@ const lightPalette = {
         main: colors.grey[500],
         mediumMain: colors.grey[400],
         medium: colors.grey[300],
-        light: colors.grey[0],
+        light: colors.grey[100],
     },
     background: {
         default: colors.grey[10],

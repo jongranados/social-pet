@@ -6,14 +6,14 @@ const FormBanner = () => {
     return (
         <Box
             width='100%'
-            backgroundColor={theme.palette.background.alt}
+            backgroundColor={theme.palette.primary.main}
             padding='1rem 6%'
             textAlign='center'
         >
             <Typography
                 fontWeight='bold'
                 fontSize='32px'
-                color='primary'
+                color='white'
             >
                 Social Pets
             </Typography>
