@@ -125,7 +125,9 @@ const Post = ({ post }) => {
                         />
 
 
-                        <Box mx={2} border='2px solid green'>
+                        <Box mx={2} 
+                            // border='2px solid green'
+                        >
                             <Link href={`/profile/${user.id}`} color='inherit' sx={{ textDecoration: 'none', fontWeight: 'bold' }}>{ authorUsername }</Link>
                         </Box>    
 
