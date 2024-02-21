@@ -34,7 +34,7 @@ const UserFeed = () => {
                 p: { xs: 2, md: 10 }, 
                 display: 'flex', 
                 flexDirection: 'column',
-                alignItems: 'end', 
+                alignItems: 'center', 
                 gap: 3, 
             }}
         >
