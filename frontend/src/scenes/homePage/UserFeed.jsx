@@ -31,15 +31,12 @@ const UserFeed = () => {
         <Box
             sx={{
                 width: '100%',
-                p: 2, 
-                border: '1px solid red', 
+                p: { xs: 2, md: 10 }, 
                 display: 'flex', 
                 flexDirection: 'column',
-                alignItems: 'center', 
-                gap: 2, 
-                
+                alignItems: 'end', 
+                gap: 3, 
             }}
-        
         >
             {feedPosts.map((post) => <Post key={`post-${post.id}`} sessionUserId={user.id} post={post} /> )}
         </Box>

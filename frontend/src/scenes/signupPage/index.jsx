@@ -15,12 +15,15 @@ const SignupPage = () => {
                 padding='2rem'
                 margin='2rem auto'
                 borderRadius='1.5rem'
-                backgroundColor={theme.palette.background.alt}
+                backgroundColor='white'
+                border='1px solid lightGray'
             >
                 <Typography
                     fontWeight='500'
                     variant='h4'
                     sx={{ marginBottom: '1.5rem' }}
+                    color={theme.palette.primary.main}
+
                 >
                     Pets: unite! Humans: out of sight!
                 </Typography>

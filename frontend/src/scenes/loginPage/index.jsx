@@ -7,19 +7,29 @@ const LoginPage = () => {
     const matchesMobileDevice = useMediaQuery('(max-width: 1000px)'); 
     
     return (
-        <Box>
+        <Box 
+            sx={{
+                display: 'flex', 
+                flexDirection: 'column', 
+                height: 1,
+                
+            }}
+        
+        >
             <FormBanner />
             <Box
                 width={matchesMobileDevice ? '93%' : '50%'}
                 padding='2rem'
-                margin='2rem auto'
+                margin='10rem auto'
                 borderRadius='1.5rem'
-                backgroundColor={theme.palette.background.alt}
+                backgroundColor='white'
+                border='1px solid lightGray'    
             >
                 <Typography
                     fontWeight='500'
                     variant='h4'
                     sx={{ marginBottom: '1.5rem' }}
+                    color={theme.palette.primary.main}
                 >
                     Pets: unite! Humans: out of sight! 
                 </Typography>

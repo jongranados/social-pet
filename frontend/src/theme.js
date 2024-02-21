@@ -63,8 +63,8 @@ const darkPalette = {
         light: colors.grey[700],
     },
     background: {
-        default: colors.grey[900],
-        alt: colors.grey[800],
+        default: colors.grey[800],
+        alt: colors.grey[900],
     },
 }; 
 
@@ -85,11 +85,11 @@ const lightPalette = {
         main: colors.grey[500],
         mediumMain: colors.grey[400],
         medium: colors.grey[300],
-        light: colors.grey[0],
+        light: colors.grey[100],
     },
     background: {
         default: colors.grey[10],
-        alt: colors.grey[50],
+        alt: colors.grey[100],
     },
 }; 
 
