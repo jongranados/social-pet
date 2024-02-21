@@ -1,4 +1,4 @@
-import { Card, CardMedia, Typography, Box, Divider, IconButton, TextField, FormControl, Button  } from "@mui/material";
+import { Card, CardMedia, Typography, Box, Divider, IconButton, TextField, FormControl, Button, Link  } from "@mui/material";
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import Favorite from '@mui/icons-material/Favorite';
 import { useState } from "react";
@@ -50,7 +50,6 @@ const Post = ({ post }) => {
                 .catch(async backendValidationErrors => {
                     alert(backendValidationErrors) 
                 });
-
         }
     }
 
@@ -60,104 +59,205 @@ const Post = ({ post }) => {
 
     return (       
         <Card variant="outlined"
-        sx={{
-            display: 'flex',
-            flexDirection: {
-                xs: 'column', // mobile
-                sm: 'row', // tablet and up
-            },
-            justifyContent: 'center', 
-            alignItems: 'top', 
-            width: 1, 
-            gap: 2
-        }}
+            sx={{
+                display: 'flex',
+                flexDirection: { xs: 'column', md: 'row' },
+                justifyContent: 'start', 
+                alignItems: 'top', 
+                maxWidth: 'lg', 
+                width: 1, 
+                // border: '2px solid green',
+            }}
         >
-            <CardMedia
-                component="img"
-                src={`/${picturePath}.jpeg`}
-                sx={{ 
-                    width: 1/2, 
-                    maxWidth: 'md',
-                    ratio: 1/1
+            {/* left side of card */}
+            <Box
+                sx={{
+                    display: 'flex',
+                    width: 1, 
+                    aspectRatio: '1', 
+                    overflow: 'hidden', 
+                    // border: '5px solid cyan', 
                 }}
-            />
-            <Box>
+            > 
+                <CardMedia component="img" src={`/${picturePath}.jpeg`} />
+            </Box>
+            
+            {/* right side of card */}
+            <Box
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column', 
+                    justifyContent: 'space-between', 
+                    flexGrow: 1, 
+                    width: { xs: 1, md: 1/3 },                                        
+                    overflow: 'hidden', 
+                    // border: '5px solid pink',
+                }}
+            >
+                {/* container for post info and comments */}
                 <Box
-                    sx={{
+                    sx={{ 
                         display: 'flex', 
-                        flexDirection: 'row', 
-                        mt: 2, 
-                        mb: 1, 
+                        flexDirection: 'column', 
+                        flexGrow: 1, 
+                        maxHeight: 'auto', 
+                        overflow: 'hidden', 
+                        // border: '3px dashed magenta',
                     }}
-                > 
-                    <CardMedia
-                        component="img"
-                        src={`/${authorPicturePath}`}
+                >
+                    <Box
                         sx={{
-                            width: 32, 
-                            height: 32, 
-                            borderRadius: '50%'
+                            display: 'flex', 
+                            flexDirection: 'row', 
+                            p: 2, 
+                            // border: '3px solid black', 
                         }}
-                    />
+                    > 
+                        <CardMedia
+                            component="img"
+                            src={`/${authorPicturePath}`}
+                            sx={{
+                                width: 32, 
+                                height: 32, 
+                                borderRadius: '50%',
+                                // border: '1px solid orange'
+                            }}
+                        />
 
-                    <Typography ml={1}>
-                        { authorUsername }
-                    </Typography>
-                </Box>
 
-                <Divider />
+                        <Box mx={2} border='2px solid green'>
+                            <Link href={`/profile/${user.id}`} color='inherit' sx={{ textDecoration: 'none', fontWeight: 'bold' }}>{ authorUsername }</Link>
+                        </Box>    
 
-                <Box>
-                    <Box>
-                        <Typography>
-                            { description }
-                        </Typography>
-
-                        <Typography fontSize={12} color={'gray'}>
-                            { formattedDate }
-                        </Typography>
                     </Box>
-                    <Box>
+                    
+                    <Divider flexItem />
+
+                    {/* comments section */}
+                    <Box 
+                        sx={{
+                            display: 'flex', 
+                            flexDirection: 'column', 
+                            flexGrow: 1,
+                            overflowY: "auto", 
+                            height: '100%', 
+                            maxHeight: { xs: 250, md: 550 }, 
+                            gap: { xs: 1, md: 2}, 
+                            pt: 2, 
+                            // border: '3px solid black',
+                        }}
+                    >                        
+                    
+                        {/* <Divider /> */}
+
+                        <Box
+                            sx={{ 
+                                display: 'flex', 
+                                flexDirection: 'row', 
+                                px: 2,
+                                // border: '3px solid orange',                     
+                            }}
+                        >
+                            <Link href={`/profile/${user.id}`}> 
+                                <CardMedia
+                                    component="img"
+                                    src={`/${authorPicturePath}`}
+                                    sx={{
+                                        width: 32, 
+                                        height: 32, 
+                                        borderRadius: '50%',
+                                        // border: '1px solid orange'
+                                    }}
+                                />                  
+                            </Link>
+
+                            <Box 
+                                ml={2}
+                                sx={{
+                                    // border: '1px solid red'
+                                }}
+                            >
+                                <Typography >{ description }</Typography> 
+                                <Typography fontSize={12} color={'gray'}>Posted: { formattedDate }</Typography>
+                            </Box>
+                        </Box>
+
                         {comments.map((comment) => {
                             return (
-                            <Box key={`comment-${comment.id}`}
-                                sx={{
-                                    my: 2, 
-                                    display: 'flex', 
-                                    flexDirection: 'row'
-                                }}
+                                <Box key={`comment-${comment.id}`}
+                                    sx={{
+                                        display: 'flex', 
+                                        flexDirecion: 'row', 
+                                        px: 2, 
+                                        // border: '3px solid orange',  
+                                    }}
+                                >
+                                    <Link href={`/profile/${comment.userId}`}> 
+                                        <CardMedia
+                                            component="img"
+                                            src={`/${comment.User.picturePath}`}
+                                            sx={{
+                                                width: 32, 
+                                                height: 32, 
+                                                borderRadius: '50%',
+                                            }}
+                                        />                  
+                                    </Link>
 
-                            >
-                                <a href={`/profile/${comment.userId}`}>
-                                    <img
-                                    src={`/${comment.User.picturePath}`}
-                                    alt='profile'
-                                    width='32'
-                                    height='32'
-                                    />
-                                </a>
-
-                                <Typography ml={1}>{comment.description}</Typography> 
-                            </Box>)
+                                    <Typography ml={2}
+                                        sx={{ 
+                                            // border: '3px solid red', 
+                                        }}
+                                    >
+                                        {comment.description}
+                                    </Typography> 
+                                </Box>
+                            )
                         })}
                     </Box>
                 </Box>
+     
+                {/* container for post's interactive features */}
+                <Box
+                    sx={{ 
+                        // border: '3px dashed magenta', 
+                    }}
+                > 
+                    <Divider />
 
-                <Divider />
-                <Box> 
-                    <IconButton onClick={handleUpdateLikes}>
-                        {isLiked ? <Favorite /> : <FavoriteBorder />}
-                    </IconButton>
+                    <Box
+                        sx={{
+                            display: 'flex', 
+                            flexDirection: 'row',
+                            alignItems: 'center', 
+                            justifyContent: 'left', 
+                            gap: 1, 
+                            my: 1, 
+                            p: 0, 
+                            // border: '3px solid green', 
+                        }} 
+                    >
+                        <IconButton 
+                            onClick={handleUpdateLikes}
+                            sx={{ p: 0, ml: 1.7}}
+                        >
+                            {isLiked ? <Favorite sx={{ fontSize: '24px', color: 'red' }} /> : <FavoriteBorder sx={{ fontSize: '24px' }} />}
+                        </IconButton>
 
-                    <Typography>
-                        {`${likes.length} likes`}
-                    </Typography>
+                        <Typography>
+                            {`${likes.length} likes`}
+                        </Typography>
+                    </Box>
+
+                    <FormControl fullWidth 
+                        sx={{
+                            // border: '3px solid green'
+                        }}
+                    >
+                        <TextField value={newComment} sx={{ px: 2}} onChange={updateNewCommentTextfield}/>
+                        <Button onClick={handleNewCommentPost} disabled={!newComment.trim().length}>POST</Button>
+                    </FormControl>
                 </Box>
-
-                <FormControl>
-                    <TextField value={newComment} onChange={updateNewCommentTextfield}/>
-                    <Button onClick={handleNewCommentPost} disabled={!newComment.trim().length}>POST</Button>
-                </FormControl>
             </Box>
         </Card>
     )
